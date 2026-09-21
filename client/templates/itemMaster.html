@@ -6,16 +6,42 @@
 
 <!--    bootstrap linking codes -->
     <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
     <script src="../static/bootstrap-5.2/js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="../static/css/browser@4.js"></script>
 
 
     <!--   controller file linking code -->
     <script src="../static/controllerJS/itemMaster.js"></script>
 
 </head>
-<body>
-<h1 class="text-center bg-emerald-700">Item Master</h1>
+<body class="container-fluid">
+<h1 class="text-center bg-emerald-600 mt-2 p-4 rounded-2 text-white">Item Master</h1>
+
+
+
+<div class="p-2">
+<div class="row">
+    <div class="col-md-3">
+        <label class="form-label" for="selectItemCategory">Item Category <i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectItemCategory" style="height: 60px"></select>
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" for="textItemName">Item Name <i class="text-danger">*</i> </label>
+        <input type="text" id="textItemName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Name">
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" for="textItemShortName">Item Short Name <i class="text-danger">*</i> </label>
+        <input type="text" id="textItemShortName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Short Name">
+    </div>
+    <div class="col-md-3">
+        <label class="form-label" for="textPrice">Item Price <i class="text-danger">*</i> </label>
+        <input type="text" id="textPrice" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Price">
+    </div>
+</div>
+
+
+</div>
 </body>
 </html>

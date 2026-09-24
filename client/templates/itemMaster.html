@@ -12,36 +12,107 @@
     <script src="../static/css/browser@4.js"></script>
 
 
+
     <!--   controller file linking code -->
     <script src="../static/controllerJS/itemMaster.js"></script>
 
 </head>
 <body class="container-fluid">
-<h1 class="text-center bg-emerald-600 mt-2 p-4 rounded-2 text-white">Item Master</h1>
+<h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Item Master</h1>
 
 
-
+<!--form area start-->
 <div class="p-2">
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <label class="form-label" for="selectItemCategory">Item Category <i class="text-danger">*</i> </label>
         <select class="form-select" id="selectItemCategory" style="height: 60px"></select>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <label class="form-label" for="textItemName">Item Name <i class="text-danger">*</i> </label>
         <input type="text" id="textItemName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Name">
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <label class="form-label" for="textItemShortName">Item Short Name <i class="text-danger">*</i> </label>
         <input type="text" id="textItemShortName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Short Name">
     </div>
-    <div class="col-md-3">
-        <label class="form-label" for="textPrice">Item Price <i class="text-danger">*</i> </label>
-        <input type="text" id="textPrice" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Price">
+    <div class="col-md-2">
+        <label class="form-label" for="textCode">Item Code <i class="text-danger">*</i> </label>
+        <input type="text" id="textCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Code">
+    </div>
+
+
+    <div class="col-md-2">
+        <label class="form-label" for="selectItemSize">Item Size <i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectItemSize" style="height: 60px"></select>
+    </div>
+
+
+    <div class="col-md-2">
+        <label class="form-label" for="textNoOfPages">No of Pages <i class="text-danger">*</i> </label>
+        <input type="number" id="textNoOfPages" class="form-control fw-bold" style="height: 60px" placeholder="Enter No of pages">
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <label class="form-label" for="textBooksInPack">Books In Pack </label>
+        <input type="number" id="textBooksInPack" class="form-control fw-bold" style="height: 60px" placeholder="Books In Pack">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textPacksInBox">Packs In Box</label>
+        <input type="number" id="textPacksInBox" class="form-control fw-bold" style="height: 60px" placeholder="Enter Packs In Box">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textBarCode">Barcode <i class="text-danger">*</i> </label>
+        <input type="number" id="textBarCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Barcode">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textPrice">Price <i class="text-danger">*</i> </label>
+        <input type="number" id="textPrice" class="form-control fw-bold" style="height: 60px" placeholder="Enter Price">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textCost">Cost </label>
+        <input type="number" id="textCost" class="form-control fw-bold" style="height: 60px" placeholder="Enter Cost">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="selectItemStatus">Item Status <i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectItemStatus" style="height: 60px"></select>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <label class="form-label" for="textDescription">Description </label>
+        <input type="text" id="textDescription" class="form-control fw-bold" style="height: 80px" placeholder="Enter Cost">
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnReset" onclick="window.location.reload()" class="btn text-white" style="background-color: #dc2626">Reset</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnUpdate" onclick="" class="btn text-white" style="background-color: #f97316">Update</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnSave" onclick="" class="btn text-white" style="background-color: #065f46">Update</button>
     </div>
 </div>
 
 
 </div>
+<!--form area end-->
+
+
+
+
+
 </body>
 </html>

@@ -1,8 +1,5 @@
 <?php
 
-use config\Database;
-use models\ItemMaster;
-
 require_once "../config/database.php";
 require_once "../models/ItemMaster.php";
 

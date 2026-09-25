@@ -1,23 +1,19 @@
 <?php
 
-namespace models;
 require_once "../config/database.php";
 
 
-class ItemMaster
-{
+class ItemMaster {
     private $connection;
 
 
-    public function __construct($connection)
-    {
+    public function __construct($connection) {
         $this->connection = $connection;
     }
 
 
     // GET ALL ITEMS
-    public function getAll()
-    {
+    public function getAll() {
         $sql = "SELECT * FROM item_master ORDER BY id DESC";
 
         $statement = $this->connection->prepare($sql);
@@ -29,8 +25,7 @@ class ItemMaster
 
 
     // GET ITEM BY ID
-    public function getById($id)
-    {
+    public function getById($id) {
         $sql = "SELECT * FROM item_master WHERE id = :id";
 
         $statement = $this->connection->prepare($sql);
@@ -44,8 +39,7 @@ class ItemMaster
 
 
     // CREATE ITEM
-    public function create($data)
-    {
+    public function create($data) {
         $sql = "INSERT INTO item_master
         (
             item_master_name,
@@ -105,8 +99,7 @@ class ItemMaster
 
 
     // UPDATE ITEM
-    public function update($id, $data)
-    {
+    public function update($id, $data) {
         $sql = "UPDATE item_master SET
 
             item_master_name = :name,
@@ -150,8 +143,7 @@ class ItemMaster
 
 
     // DELETE ITEM
-    public function delete($id)
-    {
+    public function delete($id) {
         $sql = "DELETE FROM item_master WHERE id = :id";
 
         $statement = $this->connection->prepare($sql);

@@ -66,22 +66,31 @@ class ItemMasterController
     // CREATE ITEM
     public function create()
     {
-        $data = json_decode(
-            file_get_contents("php://input"),
-            true
-        );
+        try {
+            $data = json_decode(
+                file_get_contents("php://input"),
+                true
+            );
 
-        $id = $this->itemMaster->create($data);
+            $id = $this->itemMaster->create($data);
 
-        header("Content-Type: application/json");
+            header("Content-Type: application/json");
 
-        http_response_code(201);
+            http_response_code(201);
 
-        echo json_encode([
-            "success" => true,
-            "message" => "Item created successfully",
-            "id" => $id
-        ]);
+            echo json_encode([
+                "success" => true,
+                "message" => "Item created successfully",
+                "id" => $id
+            ]);
+
+        }catch (Throwable $error){
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "message" => $error->getMessage(),
+            ]);
+        }
     }
 
 

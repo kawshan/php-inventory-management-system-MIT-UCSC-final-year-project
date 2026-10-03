@@ -1,20 +1,21 @@
-import {getAllItemCategories} from "../services/itemCategoryService.js";
+// import {getAllItemSizes} from "../services/itemSizeService";
+// import {getAllItemStatus} from "../services/itemStatusService";
+// import {getAllItems} from "../services/itemMasterService";
 
-window.addEventListener('load',()=>{
+window.addEventListener('load', () => {
 
 
     refreshItemMasterForm();
-
+    refreshItemMasterTable();
 
 });
 
 
 
-let itemMaster = {};
 
-const refreshItemMasterForm = async ()=>{
+const refreshItemMasterForm = async () => {
 
-
+    itemMaster = {};
 
     const selectItemCategory = document.getElementById("selectItemCategory");
     const textItemName = document.getElementById("textItemName");
@@ -58,14 +59,131 @@ const refreshItemMasterForm = async ()=>{
     textDescription.value = "";
 
 
-        const itemCategoriesList = await getAllItemCategories();
-        console.log(itemCategoriesList);
-        itemCategoriesList.items.forEach(itemCategory=>{
-            const option = document.createElement("option")
-            option.value = itemCategory.id;
-            option.textContent=itemCategory.item_category_master_name;
-            selectItemCategory.appendChild(option);
-        })
+    // let dummySel = document.createElement("option");
+    // dummySel.value=null;
+    // dummySel.selected
+    // dummySel.textContent="Select an Option"
+    // selectItemCategory.appendChild(dummySel);
+    // selectItemSize.appendChild(dummySel);
+    // selectItemStatus.appendChild(dummySel);
+
+
+
+    const itemCategoriesList = await getAllItemCategories();
+    const itemSizeList = await getAllItemSizes();
+    const itemStatusesList = await getAllItemStatus();
+
+    generateSelectDropDown(selectItemCategory,itemCategoriesList,"items","item_category_master_name");
+    generateSelectDropDown(selectItemSize,itemSizeList,"item","item_size_name");
+    generateSelectDropDown(selectItemStatus,itemStatusesList,"status","item_master_status_name");
+
 
 }
+
+const refreshItemMasterTable = async () => {
+
+    const itemsList = await getAllItems();
+    console.log(itemsList)
+
+    const tableBody = document.getElementById("itemTableBody");
+
+    itemsList.data.forEach(item => {
+
+        const row = document.createElement("tr");
+
+        const idCell = document.createElement("td");
+        idCell.textContent = item.id;
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = item.item_master_nam;
+
+        const shortNameCell = document.createElement("td");
+        shortNameCell.textContent = item.item_master_short_name;
+
+        const priceCell = document.createElement("td");
+        priceCell.textContent = item.item_master_price;
+
+        const costCell = document.createElement("td");
+        costCell.textContent = item.item_master_cost;
+
+        const barcodeCell = document.createElement("td");
+        barcodeCell.textContent = item.item_master_barcode;
+
+        const actionCell = document.createElement("td");
+        actionCell.classList.add("flex", "justify-center", "items-center", "gap-2");
+
+
+        const refillButton = document.createElement("button");
+        refillButton.textContent="Refill"
+        refillButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        refillButton.onclick = ()=>{refillItemMaster(item)}
+
+
+        const printButton = document.createElement("button");
+        printButton.textContent="print"
+        printButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        printButton.onclick = ()=>{printItemMaster(item)}
+
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent="delete"
+        deleteButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        deleteButton.onclick = ()=>{deleteItemMaster(item)}
+
+
+        row.appendChild(idCell);
+        row.appendChild(nameCell);
+        row.appendChild(shortNameCell);
+        row.appendChild(priceCell);
+        row.appendChild(costCell);
+        row.appendChild(barcodeCell);
+
+        row.appendChild(actionCell);
+        actionCell.appendChild(refillButton);
+        actionCell.appendChild(printButton);
+        actionCell.appendChild(deleteButton);
+
+        tableBody.appendChild(row);
+    });
+};
+
+const refillItemMaster = (obj)=>{
+    console.log(obj)
+}
+
+
+const deleteItemMaster = (obj)=>{
+    console.log(obj)
+}
+
+
+const printItemMaster = (obj)=>{
+    console.log(obj)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

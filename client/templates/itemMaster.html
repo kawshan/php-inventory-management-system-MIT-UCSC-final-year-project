@@ -14,7 +14,12 @@
 
 
     <!--   controller file linking code -->
-    <script type="module" src="../static/controllerJS/itemMaster.js"></script>
+    <script src="../static/controllerJS/itemMaster.js"></script>
+    <script src="../static/services/itemCategoryService.js"></script>
+    <script src="../static/services/itemMasterService.js"></script>
+    <script src="../static/services/itemSizeService.js"></script>
+    <script src="../static/services/itemStatusService.js"></script>
+    <script src="../static/commonJS/dropDownGenerator.js"></script>
 
 </head>
 <body class="container-fluid">
@@ -26,7 +31,7 @@
 <div class="row">
     <div class="col-md-2">
         <label class="form-label" for="selectItemCategory">Item Category <i class="text-danger">*</i> </label>
-        <select class="form-select" id="selectItemCategory" style="height: 60px"></select>
+        <select class="form-select" id="selectItemCategory" style="height: 60px" onchange="itemMaster.item_category_master_id=this.value; this.style.border='1px solid green'; console.log(this.value) "></select>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textItemName">Item Name <i class="text-danger">*</i> </label>
@@ -94,15 +99,15 @@
 <div class="row mt-4">
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnReset" onclick="window.location.reload()" class="btn text-white" style="background-color: #dc2626">Reset</button>
+        <button type="button" id="btnReset" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnUpdate" onclick="" class="btn text-white" style="background-color: #f97316">Update</button>
+        <button type="button" id="btnUpdate" onclick="" class="btn text-white" style="background-color: #065f46">Update</button>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnSave" onclick="" class="btn text-white" style="background-color: #065f46">Update</button>
+        <button type="button" id="btnSave" onclick="" class="btn text-white" style="background-color: #065f46">Save</button>
     </div>
 </div>
 
@@ -110,7 +115,24 @@
 </div>
 <!--form area end-->
 
+<!--table area start-->
+<table class="table table-bordered table-responsive">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Item name</th>
+        <th>Item Short name</th>
+        <th>Item Price</th>
+        <th>Item Cost</th>
+        <th>Barcode</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody id="itemTableBody">
 
+    </tbody>
+</table>
+<!--table area end-->
 
 
 

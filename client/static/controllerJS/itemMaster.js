@@ -75,12 +75,12 @@ const refreshItemMasterTable = async () => {
     const tableBody = document.getElementById("itemTableBody");
     tableBody.innerHTML=""
 
-    itemsList.data.forEach(item => {
+    itemsList.data.forEach((item,index) => {
 
         const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
-        idCell.textContent = item.id;
+        idCell.textContent = index+1;
 
         const nameCell = document.createElement("td");
         nameCell.textContent = item.item_master_name;
@@ -140,6 +140,13 @@ const refreshItemMasterTable = async () => {
         tableBody.appendChild(row);
     });
 
+    // why we need to destroy? cuz datatable gives already initialized warning..
+    if (DataTable.isDataTable("#tableItemMaster")) {
+        new DataTable("#tableItemMaster").destroy();
+    }
+
+
+
     // new DataTable("#tableItemMaster");
     new DataTable('#tableItemMaster', {
         layout: {
@@ -151,7 +158,26 @@ const refreshItemMasterTable = async () => {
 };
 
 const refillItemMaster = (obj) => {
-    console.log(obj)
+    console.log(obj);
+
+    itemMaster = JSON.parse(JSON.stringify(obj));
+    oldItemMaster = JSON.parse(JSON.stringify(obj));
+
+
+    textItemName.value = itemMaster.item_master_name;
+    textItemShortName.value = itemMaster.item_master_short_name;
+    textCode.value = itemMaster.item_master_code;
+    textNoOfPages.value = itemMaster.item_master_no_of_pages;
+    textBooksInPack.value = itemMaster.item_master_books_in_pack;
+    textPacksInBox.value = itemMaster.item_master_books_in_box;
+    textBarCode.value = itemMaster.item_master_code;
+    textPrice.value = itemMaster.item_master_price;
+    textCost.value = itemMaster.item_master_cost;
+    textDescription.value = itemMaster.item_master_description;
+
+    selectItemCategory.value = itemMaster.item_category_master_id;
+    selectItemSize.value = itemMaster.item_size_id;
+    selectItemStatus.value = itemMaster.item_master_status_id;
 }
 
 
@@ -211,7 +237,12 @@ const saveItemMaster = async () => {
     const errors = checkErrors();
 
     if (errors !== "") {
-        alert(`You Have Following Errors\n${errors}`);
+        Swal.fire({
+            icon: "error",
+            title: "You Have Following Errors",
+            text: `${errors}`
+        });
+
         return;
     }
 
@@ -226,7 +257,7 @@ Status ${itemMaster.item_master_status_id}
 Size ${itemMaster.item_size_id}`);
 
     if (!userConfirm) {
-        alert("Operation Cancelled by User");
+        Swal.fire("Operation Cancelled By User");
         return;
     }
 
@@ -244,6 +275,94 @@ Size ${itemMaster.item_size_id}`);
         alert(`Something Went Wrong: ${error.message}`);
     }
 };
+
+
+
+
+
+
+const checkUpdatesItemMaster = ()=>{
+
+    let updates = ""
+
+    if (oldItemMaster.item_master_name !== itemMaster.item_master_name){
+        updates+="Name is Updated \n"
+    }
+
+    if (oldItemMaster.item_master_price !== itemMaster.item_master_price){
+        updates +="Price is Updated \n"
+    }
+
+    if (oldItemMaster.item_master_cost !== itemMaster.item_master_cost){
+        updates+="Cost is updated \n"
+    }
+
+    if (oldItemMaster.item_master_barcode !== itemMaster.item_master_barcode){
+        updates+="Barcode is updated \n"
+    }
+    if (oldItemMaster.item_master_key !== itemMaster.item_master_key){
+        updates+="Key is updated \n"
+    }
+
+    if (oldItemMaster.item_master_code !== itemMaster.item_master_code){
+        updates+="Code is updated \n"
+    }
+
+    if (oldItemMaster.item_master_short_name !== itemMaster.item_master_short_name){
+        updates+="Short Name is Updated \n"
+    }
+
+    if (oldItemMaster.item_master_description !== itemMaster.item_master_description){
+        updates+="Description is Updated \n"
+    }
+
+    if (oldItemMaster.item_master_no_of_pages !== itemMaster.item_master_no_of_pages){
+        updates+="No of Pages Updated \n"
+    }
+    if (oldItemMaster.item_master_books_in_pack !== itemMaster.item_master_books_in_pack){
+        updates+="Books in Pack Updated \n"
+    }
+    if (oldItemMaster.item_master_books_in_box !== itemMaster.item_master_books_in_box){
+        updates+="Books in Box Updated \n"
+    }
+    if (oldItemMaster.item_category_master_id !== itemMaster.item_category_master_id){
+        updates+="Category is Updated \n"
+    }
+    if (oldItemMaster.item_master_status_id !== itemMaster.item_master_status_id){
+        updates+="Status is Updated \n"
+    }
+    if (oldItemMaster.item_size_id !== itemMaster.item_size_id){
+        updates+="Size is Updated \n"
+    }
+    return updates;
+}
+
+
+
+const updateItemMaster = async ()=>{
+    const updates = checkUpdatesItemMaster();
+
+    if (updates!==""){
+        const userConfirm = confirm(`Are You Sure to Proceed with Following Changes \n ${updates}`);
+        if (userConfirm){
+            console.log(itemMaster.id)
+            const updateServerResponse =await updateItemService(itemMaster.id,itemMaster);
+            if (updateServerResponse.success){
+                alert("Update Success");
+                await refreshItemMasterForm();
+                await refreshItemMasterTable();
+            }else {
+                alert(`Something Went Wrong: ${updateServerResponse.message}`);
+            }
+        }else {
+            alert("User Cancelled the Operation");
+        }
+    }else {
+        alert("nothing to Update")
+    }
+}
+
+
 
 
 

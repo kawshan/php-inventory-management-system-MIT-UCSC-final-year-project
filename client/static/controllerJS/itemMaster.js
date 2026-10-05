@@ -66,17 +66,17 @@ const refreshItemMasterForm = async () => {
 const refreshItemMasterTable = async () => {
 
     const itemsList = await getAllItems();
-    console.log(itemsList)
+    console.log(itemsList);
 
     const tableBody = document.getElementById("itemTableBody");
-    tableBody.innerHTML=""
+    tableBody.innerHTML = ""
 
-    itemsList.data.forEach((item,index) => {
+    itemsList.data.forEach((item, index) => {
 
         const row = document.createElement("tr");
 
         const idCell = document.createElement("td");
-        idCell.textContent = index+1;
+        idCell.textContent = index + 1;
 
         const nameCell = document.createElement("td");
         nameCell.textContent = item.item_master_name;
@@ -137,10 +137,9 @@ const refreshItemMasterTable = async () => {
     });
 
     // why we need to destroy? cuz datatable gives already initialized warning..
-    if (DataTable.isDataTable("#tableItemMaster")) {
-        new DataTable("#tableItemMaster").destroy();
-    }
-
+    // if (DataTable.isDataTable("#tableItemMaster")) {
+    //     DataTable.get("#tableItemMaster").destroy();
+    // }
 
 
     // new DataTable("#tableItemMaster");
@@ -178,11 +177,8 @@ const refillItemMaster = (obj) => {
 
 
 const deleteItemMaster = async (obj) => {
-    console.log("Delete",obj);
-
-    const userConfirm = await Swal.fire({
-        title: "Are you sure?",
-        text: `Are You Sure To delete Following Data
+    console.log("Delete", obj);
+    const userConfirm = confirm(`Are You Sure To delete Following Data
 Name is ${obj.item_master_name}
 Short Name is ${obj.item_master_short_name}
 Price is ${obj.item_master_price}
@@ -190,45 +186,19 @@ Barcode is ${obj.item_master_barcode}
 Number of Pages ${obj.item_master_no_of_pages}
 Category ${obj.item_category_master_id}
 Status ${obj.item_master_status_id}
-Size ${obj.item_size_id}`,
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes Delete It",
-        cancelButtonText: "Cancel"
-    });
+Size ${obj.item_size_id}`)
+    if (userConfirm) {
 
-    if (userConfirm){
-
-        const deleteServerResponse =await deleteItemService(obj.id);
-        if (deleteServerResponse.success){
-            const userConfirm = await Swal.fire({
-                title: "",
-                text: `Delete Success`,
-                icon: "info",
-                showCancelButton: false,
-                confirmButtonText: "OK!",
-                cancelButtonText: "Cancel"
-            });
-            if (userConfirm){
-                refreshItemMasterForm();
-                refreshItemMasterTable();
-            }
-        }else {
-             await Swal.fire({
-                title: "",
-                text: `Delete Unsuccessful ${deleteServerResponse.message}`,
-                icon: "error",
-                showCancelButton: false,
-                confirmButtonText: "OK!",
-                cancelButtonText: "Cancel"
-            });
-
-
-
-
+        const deleteServerResponse = await deleteItemService(obj.id);
+        if (deleteServerResponse.success) {
+            alert(`Delete Success`);
+            await refreshItemMasterTable();
+            await refreshItemMasterForm();
+        } else {
+            alert(`Delete Unsuccessful ${deleteServerResponse.message}`)
         }
-    }else {
-        Swal.fire("Operation Cancelled By User");
+    } else {
+        alert("Operation Cancelled By User")
 
     }
 }
@@ -293,9 +263,7 @@ const saveItemMaster = async () => {
 
         return;
     }
-    const userConfirm = await Swal.fire({
-        title: "Are you sure?",
-        text: `Are You Sure To Add Following Data
+    const userConfirm = confirm(`Are You Sure To Add Following Data
 Name is ${itemMaster.item_master_name}
 Short Name is ${itemMaster.item_master_short_name}
 Price is ${itemMaster.item_master_price}
@@ -303,14 +271,9 @@ Barcode is ${itemMaster.item_master_barcode}
 Number of Pages ${itemMaster.item_master_no_of_pages}
 Category ${itemMaster.item_category_master_id}
 Status ${itemMaster.item_master_status_id}
-Size ${itemMaster.item_size_id}`,
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes, save it",
-        cancelButtonText: "Cancel"
-    });
+Size ${itemMaster.item_size_id}`)
     if (!userConfirm) {
-        Swal.fire("Operation Cancelled By User");
+        alert("Operation Cancelled By User")
         return;
     }
 
@@ -318,18 +281,9 @@ Size ${itemMaster.item_size_id}`,
         const serverResponse = await createItemService(itemMaster);
 
         if (serverResponse.success) {
-            const userConfirm = await Swal.fire({
-                title: "",
-                text: `Save Success`,
-                icon: "info",
-                showCancelButton: false,
-                confirmButtonText: "OK!",
-                cancelButtonText: "Cancel"
-            });
-            if (userConfirm){
+                alert("Save Success")
                 refreshItemMasterForm();
                 refreshItemMasterTable();
-            }
         } else {
             alert(`Something Went Wrong: ${serverResponse.message}`);
         }
@@ -339,87 +293,82 @@ Size ${itemMaster.item_size_id}`,
 };
 
 
-
-
-
-
-const checkUpdatesItemMaster = ()=>{
+const checkUpdatesItemMaster = () => {
 
     let updates = ""
 
-    if (oldItemMaster.item_master_name !== itemMaster.item_master_name){
-        updates+="Name is Updated \n"
+    if (oldItemMaster.item_master_name !== itemMaster.item_master_name) {
+        updates += "Name is Updated \n"
     }
 
-    if (oldItemMaster.item_master_price !== itemMaster.item_master_price){
-        updates +="Price is Updated \n"
+    if (oldItemMaster.item_master_price !== itemMaster.item_master_price) {
+        updates += "Price is Updated \n"
     }
 
-    if (oldItemMaster.item_master_cost !== itemMaster.item_master_cost){
-        updates+="Cost is updated \n"
+    if (oldItemMaster.item_master_cost !== itemMaster.item_master_cost) {
+        updates += "Cost is updated \n"
     }
 
-    if (oldItemMaster.item_master_barcode !== itemMaster.item_master_barcode){
-        updates+="Barcode is updated \n"
+    if (oldItemMaster.item_master_barcode !== itemMaster.item_master_barcode) {
+        updates += "Barcode is updated \n"
     }
-    if (oldItemMaster.item_master_key !== itemMaster.item_master_key){
-        updates+="Key is updated \n"
-    }
-
-    if (oldItemMaster.item_master_code !== itemMaster.item_master_code){
-        updates+="Code is updated \n"
+    if (oldItemMaster.item_master_key !== itemMaster.item_master_key) {
+        updates += "Key is updated \n"
     }
 
-    if (oldItemMaster.item_master_short_name !== itemMaster.item_master_short_name){
-        updates+="Short Name is Updated \n"
+    if (oldItemMaster.item_master_code !== itemMaster.item_master_code) {
+        updates += "Code is updated \n"
     }
 
-    if (oldItemMaster.item_master_description !== itemMaster.item_master_description){
-        updates+="Description is Updated \n"
+    if (oldItemMaster.item_master_short_name !== itemMaster.item_master_short_name) {
+        updates += "Short Name is Updated \n"
     }
 
-    if (oldItemMaster.item_master_no_of_pages !== itemMaster.item_master_no_of_pages){
-        updates+="No of Pages Updated \n"
+    if (oldItemMaster.item_master_description !== itemMaster.item_master_description) {
+        updates += "Description is Updated \n"
     }
-    if (oldItemMaster.item_master_books_in_pack !== itemMaster.item_master_books_in_pack){
-        updates+="Books in Pack Updated \n"
+
+    if (oldItemMaster.item_master_no_of_pages !== itemMaster.item_master_no_of_pages) {
+        updates += "No of Pages Updated \n"
     }
-    if (oldItemMaster.item_master_books_in_box !== itemMaster.item_master_books_in_box){
-        updates+="Books in Box Updated \n"
+    if (oldItemMaster.item_master_books_in_pack !== itemMaster.item_master_books_in_pack) {
+        updates += "Books in Pack Updated \n"
     }
-    if (oldItemMaster.item_category_master_id !== itemMaster.item_category_master_id){
-        updates+="Category is Updated \n"
+    if (oldItemMaster.item_master_books_in_box !== itemMaster.item_master_books_in_box) {
+        updates += "Books in Box Updated \n"
     }
-    if (oldItemMaster.item_master_status_id !== itemMaster.item_master_status_id){
-        updates+="Status is Updated \n"
+    if (oldItemMaster.item_category_master_id !== itemMaster.item_category_master_id) {
+        updates += "Category is Updated \n"
     }
-    if (oldItemMaster.item_size_id !== itemMaster.item_size_id){
-        updates+="Size is Updated \n"
+    if (oldItemMaster.item_master_status_id !== itemMaster.item_master_status_id) {
+        updates += "Status is Updated \n"
+    }
+    if (oldItemMaster.item_size_id !== itemMaster.item_size_id) {
+        updates += "Size is Updated \n"
     }
     return updates;
 }
 
 
-
-const updateItemMaster = async ()=>{
+const updateItemMaster = async () => {
     const updates = checkUpdatesItemMaster();
 
-    if (updates!==""){
-        const userConfirm = confirm(`Are You Sure to Proceed with Following Changes \n ${updates}`);
-        if (userConfirm){
+    if (updates !== "") {
+        const userConfirm = confirm(`Are You Sure to Proceed with Following Changes ${updates}`)
+        if (userConfirm) {
             console.log(itemMaster.id)
-            const updateServerResponse =await updateItemService(itemMaster.id,itemMaster);
-            if (updateServerResponse.success){
-                alert("Update Success");
-                await refreshItemMasterForm();
-                await refreshItemMasterTable();
-            }else {
+            const updateServerResponse = await updateItemService(itemMaster.id, itemMaster);
+            if (updateServerResponse.success) {
+                alert(`Update Success`);
+                    await refreshItemMasterTable();
+                    await refreshItemMasterForm();
+            } else {
                 alert(`Something Went Wrong: ${updateServerResponse.message}`);
             }
-        }else {
-            alert("User Cancelled the Operation");
+        } else {
+            alert("User Cancelled The Operation?")
         }
-    }else {
-        alert("nothing to Update")
+    } else {
+        alert("Nothing To Update?")
     }
 }

@@ -1,7 +1,3 @@
-// import {getAllItemSizes} from "../services/itemSizeService";
-// import {getAllItemStatus} from "../services/itemStatusService";
-// import {getAllItems} from "../services/itemMasterService";
-
 window.addEventListener('load', () => {
 
 
@@ -181,8 +177,60 @@ const refillItemMaster = (obj) => {
 }
 
 
-const deleteItemMaster = (obj) => {
-    console.log(obj)
+const deleteItemMaster = async (obj) => {
+    console.log("Delete",obj);
+
+    const userConfirm = await Swal.fire({
+        title: "Are you sure?",
+        text: `Are You Sure To delete Following Data
+Name is ${obj.item_master_name}
+Short Name is ${obj.item_master_short_name}
+Price is ${obj.item_master_price}
+Barcode is ${obj.item_master_barcode}
+Number of Pages ${obj.item_master_no_of_pages}
+Category ${obj.item_category_master_id}
+Status ${obj.item_master_status_id}
+Size ${obj.item_size_id}`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes Delete It",
+        cancelButtonText: "Cancel"
+    });
+
+    if (userConfirm){
+
+        const deleteServerResponse =await deleteItemService(obj.id);
+        if (deleteServerResponse.success){
+            const userConfirm = await Swal.fire({
+                title: "",
+                text: `Delete Success`,
+                icon: "info",
+                showCancelButton: false,
+                confirmButtonText: "OK!",
+                cancelButtonText: "Cancel"
+            });
+            if (userConfirm){
+                refreshItemMasterForm();
+                refreshItemMasterTable();
+            }
+        }else {
+             await Swal.fire({
+                title: "",
+                text: `Delete Unsuccessful ${deleteServerResponse.message}`,
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonText: "OK!",
+                cancelButtonText: "Cancel"
+            });
+
+
+
+
+        }
+    }else {
+        Swal.fire("Operation Cancelled By User");
+
+    }
 }
 
 
@@ -245,8 +293,9 @@ const saveItemMaster = async () => {
 
         return;
     }
-
-    const userConfirm = confirm(`Are You Sure To Add Following Data
+    const userConfirm = await Swal.fire({
+        title: "Are you sure?",
+        text: `Are You Sure To Add Following Data
 Name is ${itemMaster.item_master_name}
 Short Name is ${itemMaster.item_master_short_name}
 Price is ${itemMaster.item_master_price}
@@ -254,8 +303,12 @@ Barcode is ${itemMaster.item_master_barcode}
 Number of Pages ${itemMaster.item_master_no_of_pages}
 Category ${itemMaster.item_category_master_id}
 Status ${itemMaster.item_master_status_id}
-Size ${itemMaster.item_size_id}`);
-
+Size ${itemMaster.item_size_id}`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes, save it",
+        cancelButtonText: "Cancel"
+    });
     if (!userConfirm) {
         Swal.fire("Operation Cancelled By User");
         return;
@@ -265,9 +318,18 @@ Size ${itemMaster.item_size_id}`);
         const serverResponse = await createItemService(itemMaster);
 
         if (serverResponse.success) {
-            Swal.fire("Save Success");
-            refreshItemMasterForm();
-            refreshItemMasterTable();
+            const userConfirm = await Swal.fire({
+                title: "",
+                text: `Save Success`,
+                icon: "info",
+                showCancelButton: false,
+                confirmButtonText: "OK!",
+                cancelButtonText: "Cancel"
+            });
+            if (userConfirm){
+                refreshItemMasterForm();
+                refreshItemMasterTable();
+            }
         } else {
             alert(`Something Went Wrong: ${serverResponse.message}`);
         }
@@ -361,24 +423,3 @@ const updateItemMaster = async ()=>{
         alert("nothing to Update")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

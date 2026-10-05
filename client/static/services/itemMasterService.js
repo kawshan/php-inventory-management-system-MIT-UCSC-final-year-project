@@ -40,7 +40,19 @@ async function updateItemService(id, data) {
 }
 
 
+async function deleteItemService(id){
+    let baseURL = "http://localhost/project-mit/viru/server/controller/ItemMasterController.php";
+    const response = await fetch(`${baseURL}?method=delete&id=${encodeURIComponent(id)}`,
+        {
+            method:"DELETE",
+        });
 
+        const result = await response.json();
+        if (!response.ok || !result.success){
+            throw new Error(result.message || "Failed to Delete Item")
+        }
+        return result;
+}
 
 
 

@@ -41,11 +41,84 @@
     <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
     <script src="../static/validators/textValidator.js"></script>
+    <script src="../static/validators/dropdownValidator.js"></script>
 
 
 
 </head>
-<body>
+<body class="container-fluid">
+<h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Item Category Master</h1>
+
+<!--form area start-->
+<div class="p-2">
+    <div class="row">
+        <div class="col-md-3">
+            <label class="form-label" for="texCategoryName">Category Name <i class="text-danger">*</i> </label>
+            <input type="text" id="texCategoryName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Name" onkeyup="textValidator(this,'^[A-Z\\s a-z]{2,50}$','itemCategoryMaster','item_category_master_name')" required>
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Category Name</div>
+        </div>
+
+
+        <div class="col-md-3">
+            <label class="form-label" for="texCategoryCode">Category Code <i class="text-danger">*</i> </label>
+            <input type="text" id="texCategoryCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Code" onkeyup="textValidator(this,'^[A-Z\\s a-z]{2,50}$','itemCategoryMaster','item_category_master_code')" required>
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Category Code</div>
+        </div>
+
+
+        <div class="col-md-3">
+            <label class="form-label" for="selectCategoryStatus">Category Status <i class="text-danger">*</i> </label>
+            <select class="form-select" id="selectCategoryStatus" style="height: 60px" onchange="dropdownValidator(this,'itemCategoryMaster','item_category_master_status')"></select>
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row mt-4">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <button type="button" id="btnReset" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <button type="button" id="btnSave" onclick="saveItemMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
+        </div>
+    </div>
+
+
+</div>
+<!--form area end-->
+
+
+
+<!--table area start-->
+<div class="mt-5">
+<table class="table table-bordered table-responsive display" id="tableItemCategoryMaster" >
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Category name</th>
+        <th>Category Code</th>
+        <th>Added Date</th>
+        <th>Status</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody id="itemTableBody">
+
+    </tbody>
+</table>
+</div>
+<!--table area end-->
+
+
 
 </body>
 </html>

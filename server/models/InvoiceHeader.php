@@ -20,18 +20,21 @@ class InvoiceHeader {
             $sql = "insert into invoice_header(
                            invoice_header_created_date,
                            invoice_header_discount_percentage, 
-                           invoice_status_invoice_status_id) 
+                           invoice_status_invoice_status_id,
+                           location_master_id) 
                         values (
                                 :created_date,
                                 :discount_percentage,
-                                :status_id
+                                :status_id,
+                                :location_id
                         )";
 
             $statement = $this->connection->prepare($sql);
             $statement->execute([
                 ":created_date" => $data["invoice_header_created_date"],
                 ":discount_percentage" => $data["invoice_header_discount_percentage"] ?? null,
-                ":status_id" => $data["invoice_status_invoice_status_id"]
+                ":status_id" => $data["invoice_status_invoice_status_id"],
+                ":location_id" => $data["location_master_id"]
             ]);
 
             $invoiceHeaderId = $this->connection->lastInsertId();
@@ -71,4 +74,19 @@ values (
             throw $error;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

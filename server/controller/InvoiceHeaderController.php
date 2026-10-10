@@ -58,9 +58,6 @@ switch ($method) {
                 "message" => "Method not allowed."
             ]);
             break;
-
-
-
 }
 
 

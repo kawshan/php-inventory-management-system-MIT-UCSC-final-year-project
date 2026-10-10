@@ -68,7 +68,10 @@
 
         <div class="col-md-3">
             <label class="form-label" for="selectCategoryStatus">Category Status <i class="text-danger">*</i> </label>
-            <select class="form-select" id="selectCategoryStatus" style="height: 60px" onchange="dropdownValidator(this,'itemCategoryMaster','item_category_master_status')"></select>
+            <select class="form-select" id="selectCategoryStatus" style="height: 60px" onchange="dropdownValidator(this,'itemCategoryMaster','item_category_master_status')">
+                <option value="1">Active</option>
+                <option value="0">In-active</option>
+            </select>
             <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
         </div>
 

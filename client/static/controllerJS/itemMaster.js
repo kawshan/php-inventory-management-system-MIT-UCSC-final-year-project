@@ -215,35 +215,51 @@ const checkErrors = () => {
 
     if (itemMaster.item_master_name == null) {
         errors += "Name Cannot Be Empty \n"
+        textItemName.classList.add("is-invalid");
+        textItemName.style.border="1px solid red";
     }
 
     if (itemMaster.item_master_short_name == null) {
         errors += "Short Name Cannot Be Empty \n"
+        textItemShortName.classList.add("is-invalid");
+        textItemShortName.style.border="1px solid red";
     }
 
     if (itemMaster.item_master_price == null) {
         errors += "Price Cannot Be Empty \n"
+        textPrice.classList.add("is-invalid");
+        textPrice.style.border="1px solid red";
     }
 
     if (itemMaster.item_master_barcode == null) {
         errors += "Barcode Cannot Be Empty \n"
+        textBarCode.classList.add("is-invalid");
+        textBarCode.style.border="1px solid red";
     }
 
     if (itemMaster.item_master_no_of_pages == null) {
         errors += "No of Pages Cannot Be Empty \n"
+        textNoOfPages.classList.add("is-invalid");
+        textNoOfPages.style.border="1px solid red";
     }
 
     if (itemMaster.item_category_master_id == null) {
         errors += "Category Cannot Be Empty \n"
+        selectItemCategory.classList.add("is-invalid");
+        selectItemCategory.style.border="1px solid red";
     }
 
 
     if (itemMaster.item_master_status_id == null) {
         errors += "Status Cannot Be Empty \n"
+        selectItemStatus.classList.add("is-invalid");
+        selectItemStatus.style.border="1px solid red";
     }
 
     if (itemMaster.item_size_id == null) {
         errors += "Size Cannot Be Empty \n"
+        selectItemSize.classList.add("is-invalid");
+        selectItemSize.style.border="1px solid red";
     }
 
 

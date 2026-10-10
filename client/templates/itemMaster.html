@@ -40,6 +40,7 @@
 <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
     <script src="../static/validators/textValidator.js"></script>
+    <script src="../static/validators/dropdownValidator.js"></script>
 
 
 
@@ -53,31 +54,38 @@
 <div class="row">
     <div class="col-md-2">
         <label class="form-label" for="selectItemCategory">Item Category <i class="text-danger">*</i> </label>
-        <select class="form-select" id="selectItemCategory" style="height: 60px" onchange="itemMaster.item_category_master_id=this.value; this.style.border='1px solid green'; console.log(this.value) "></select>
+        <select class="form-select" id="selectItemCategory" style="height: 60px" onchange="dropdownValidator(this,'itemMaster','item_category_master_id')"></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textItemName">Item Name <i class="text-danger">*</i> </label>
-        <input type="text" id="textItemName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Name" onkeyup="textValidator(this,'','itemMaster','item_master_name')">
+        <input type="text" id="textItemName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Name" onkeyup="textValidator(this,'','itemMaster','item_master_name')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Item Name</div>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textItemShortName">Item Short Name <i class="text-danger">*</i> </label>
-        <input type="text" id="textItemShortName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Short Name" onkeyup="textValidator(this,'','itemMaster','item_master_short_name')">
+        <input type="text" id="textItemShortName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Short Name" onkeyup="textValidator(this,'','itemMaster','item_master_short_name')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Item Short Name</div>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textCode">Item Code <i class="text-danger">*</i> </label>
-        <input type="text" id="textCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Code" onkeyup="textValidator(this,'','itemMaster','item_master_code')">
+        <input type="text" id="textCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Code" onkeyup="textValidator(this,'','itemMaster','item_master_code')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Item Code</div>
     </div>
 
 
     <div class="col-md-2">
         <label class="form-label" for="selectItemSize">Item Size <i class="text-danger">*</i> </label>
-        <select class="form-select" id="selectItemSize" style="height: 60px" onchange="itemMaster.item_size_id=this.value; this.style.border='1px solid green'; console.log(this.value) "></select>
+        <select class="form-select" id="selectItemSize" style="height: 60px" onchange="dropdownValidator(this,'itemMaster','item_size_iditem_size_id')"></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
     </div>
 
 
     <div class="col-md-2">
         <label class="form-label" for="textNoOfPages">No of Pages <i class="text-danger">*</i> </label>
         <input type="number" id="textNoOfPages" class="form-control fw-bold" style="height: 60px" placeholder="Enter No of pages" onkeyup="textValidator(this,'','itemMaster','item_master_no_of_pages')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter Number Of Pages</div>
+
     </div>
 
 
@@ -94,11 +102,13 @@
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textBarCode">Barcode <i class="text-danger">*</i> </label>
-        <input type="number" id="textBarCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Barcode" onkeyup="textValidator(this,'','itemMaster','item_master_barcode')">
+        <input type="number" id="textBarCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Barcode" onkeyup="textValidator(this,'','itemMaster','item_master_barcode')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Enter Valid Barcode</div>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textPrice">Price <i class="text-danger">*</i> </label>
-        <input type="number" id="textPrice" class="form-control fw-bold" style="height: 60px" placeholder="Enter Price" onkeyup="textValidator(this,'','itemMaster','item_master_price')">
+        <input type="number" id="textPrice" class="form-control fw-bold" style="height: 60px" placeholder="Enter Price" onkeyup="textValidator(this,'','itemMaster','item_master_price')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Enter Valid Price</div>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textCost">Cost </label>
@@ -106,7 +116,9 @@
     </div>
     <div class="col-md-2">
         <label class="form-label" for="selectItemStatus">Item Status <i class="text-danger">*</i> </label>
-        <select class="form-select" id="selectItemStatus" style="height: 60px" onchange="itemMaster.item_master_status_id=this.value; this.style.border='1px solid green'; console.log(this.value) "></select>
+        <select class="form-select" id="selectItemStatus" style="height: 60px" onchange="dropdownValidator(this,'itemMaster','item_master_status_id')"></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+
     </div>
 </div>
 

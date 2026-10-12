@@ -33,9 +33,9 @@ class ItemCategoryMaster {
     $statement->execute([
         ":name"=>$data["item_category_master_name"],
         ":code"=>$data["item_category_master_code"],
-        ":date"=>$data["item_category_master_added_date"],
-        ":modify_date"=>$data["item_category_master_modify_date"],
-        ":delete_date"=>$data["item_category_master_delete_date"],
+        ":date"=>$data["item_category_master_added_date"] ?? null,
+        ":modify_date"=>$data["item_category_master_modify_date"] ?? null,
+        ":delete_date"=>$data["item_category_master_delete_date"] ?? null,
         ":status"=>$data["item_category_master_status"]
     ]);
     return $this->connection->lastInsertId();
@@ -56,16 +56,16 @@ class ItemCategoryMaster {
         return $statement->execute([
             ":name"=>$data["item_category_master_name"],
             ":code"=>$data["item_category_master_code"],
-            ":date"=>$data["item_category_master_added_date"],
-            ":modify_date"=>$data["item_category_master_modify_date"],
-            ":delete_date"=>$data["item_category_master_delete_date"],
+            ":date"=>$data["item_category_master_added_date"] ?? null,
+            ":modify_date"=>$data["item_category_master_modify_date"] ?? null,
+            ":delete_date"=>$data["item_category_master_delete_date"] ?? null,
             ":status"=>$data["item_category_master_status"],
             ":id"=>$id
         ]);
     }
 
     public function deleteItemCategory($id) {
-        $sql = "delete from item_category_master where id = :id";
+        $sql = "update item_category_master set item_category_master_status = 0 where id= :id";
         $statement = $this->connection->prepare($sql);
         return $statement->execute([":id" => $id]);
     }

@@ -34,12 +34,12 @@
 
     <!--    service files link-->
     <script src="../static/services/itemCategoryService.js"></script>
-    <script src="../static/services/itemMasterService.js"></script>
     <script src="../static/services/itemSizeService.js"></script>
     <script src="../static/services/itemStatusService.js"></script>
 
     <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
+    <script src="../static/commonJS/localDateGetter.js"></script>
     <script src="../static/validators/textValidator.js"></script>
     <script src="../static/validators/dropdownValidator.js"></script>
 
@@ -61,7 +61,7 @@
 
         <div class="col-md-3">
             <label class="form-label" for="texCategoryCode">Category Code <i class="text-danger">*</i> </label>
-            <input type="text" id="texCategoryCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Code" onkeyup="textValidator(this,'^[A-Z\\s a-z]{2,50}$','itemCategoryMaster','item_category_master_code')" required>
+            <input type="text" id="texCategoryCode" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Code" onkeyup="textValidator(this,'^[0-9]{4}$','itemCategoryMaster','item_category_master_code')" required>
             <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Category Code</div>
         </div>
 
@@ -87,11 +87,11 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-            <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
+            <button type="button" id="btnUpdate" onclick="updateItemCategoryMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-            <button type="button" id="btnSave" onclick="saveItemMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
+            <button type="button" id="btnSave" onclick="saveItemMasterCategory()" class="btn text-white" style="background-color: #065f46">Save</button>
         </div>
     </div>
 
@@ -103,7 +103,7 @@
 
 <!--table area start-->
 <div class="mt-5">
-<table class="table table-bordered table-responsive display" id="tableItemCategoryMaster" >
+<table class="table table-bordered" id="tableItemCategoryMaster" >
     <thead>
     <tr>
         <th>#</th>

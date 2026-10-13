@@ -67,8 +67,22 @@
         <div>
           <label class="form-label" for="textDate">Date</label>
           <input type="date" id="textDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_created_date')">
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Item Name</div>
+          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Date</div>
         </div>
+
+
+      <div>
+        <label class="form-label" for="textPoNumber">Customer PO No</label>
+        <input type="text" id="textPoNumber" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_po_number')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid PO No</div>
+      </div>
+
+
+      <div>
+        <label class="form-label" for="textDispatchNumber">Dispatch No</label>
+        <input type="text" id="textDispatchNumber" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_dispatch_number')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Dispatch No</div>
+      </div>
 
       <div>
         <label class="form-label" for="selectStatus">Invoice Status<i class="text-danger">*</i> </label>

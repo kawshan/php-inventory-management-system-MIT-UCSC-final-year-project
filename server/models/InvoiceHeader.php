@@ -21,12 +21,20 @@ class InvoiceHeader {
                            invoice_header_created_date,
                            invoice_header_discount_percentage, 
                            invoice_status_invoice_status_id,
-                           location_master_id) 
+                           location_master_id,
+                           invoice_header_code,
+                           invoice_header_po_number,
+                           invoice_header_dispatch_number,
+                           payment_type_id) 
                         values (
                                 :created_date,
                                 :discount_percentage,
                                 :status_id,
-                                :location_id
+                                :location_id,
+                                :header_code,
+                                :po_number,
+                                :dispatch_number,
+                                :payment_type_id
                         )";
 
             $statement = $this->connection->prepare($sql);
@@ -34,7 +42,11 @@ class InvoiceHeader {
                 ":created_date" => $data["invoice_header_created_date"],
                 ":discount_percentage" => $data["invoice_header_discount_percentage"] ?? null,
                 ":status_id" => $data["invoice_status_invoice_status_id"],
-                ":location_id" => $data["location_master_id"]
+                ":location_id" => $data["location_master_id"],
+                ":header_code" => $data["invoice_header_code"] ?? null,
+                ":po_number" => $data["invoice_header_po_number"] ?? null,
+                ":dispatch_number" => $data["invoice_header_dispatch_number"] ?? null,
+                ":payment_type_id" => $data["payment_type_id"] ?? null
             ]);
 
             $invoiceHeaderId = $this->connection->lastInsertId();
@@ -86,7 +98,11 @@ values (
                 invoice_header_created_date = :created_date,
                 invoice_header_discount_percentage = :discount_percentage,
                 invoice_status_invoice_status_id = :status_id,
-                location_master_id = :location_id
+                location_master_id = :location_id,
+                invoice_header_code = :header_code,
+                invoice_header_po_number = :po_number,
+                invoice_header_dispatch_number = :dispatch_number,
+                payment_type_id = :payment_type_id
                 where invoice_header_id = :invoice_id";
 
             $statement = $this->connection->prepare($sql);
@@ -95,6 +111,10 @@ values (
                 ":discount_percentage" => $data["invoice_header_discount_percentage"] ?? null,
                 ":status_id" => $data["invoice_status_invoice_status_id"],
                 ":location_id" => $data["location_master_id"],
+                ":header_code" => $data["invoice_header_code"] ?? null,
+                ":po_number" => $data["invoice_header_po_number"] ?? null,
+                ":dispatch_number" => $data["invoice_header_dispatch_number"] ?? null,
+                ":payment_type_id" => $data["payment_type_id"] ?? null,
                 ":invoice_id" => $id
             ]);
 

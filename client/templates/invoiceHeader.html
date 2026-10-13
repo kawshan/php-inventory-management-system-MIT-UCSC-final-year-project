@@ -84,6 +84,27 @@
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Dispatch No</div>
       </div>
 
+
+      <div>
+        <label class="form-label" for="textInvoiceValue">Invoice Value</label>
+        <input type="number" disabled id="textInvoiceValue" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_invoice_amount')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Invoice Amount</div>
+      </div>
+
+      <div>
+        <label class="form-label" for="textPayedAmount">Payed Amount</label>
+        <input type="number" disabled id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Payed Amount</div>
+      </div>
+
+
+      <div>
+        <label class="form-label" for="textBalanceAmount">Balance Amount</label>
+        <input type="number" disabled id="textBalanceAmount" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_balance_amount')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Balance Amount</div>
+      </div>
+
+
       <div>
         <label class="form-label" for="selectStatus">Invoice Status<i class="text-danger">*</i> </label>
         <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','invoice_status_invoice_status_id')" required></select>

@@ -25,7 +25,11 @@ class InvoiceHeader {
                            invoice_header_code,
                            invoice_header_po_number,
                            invoice_header_dispatch_number,
-                           payment_type_id) 
+                           payment_type_id,
+                           invoice_header_payed_amount,
+                           invoice_header_invoice_amount,
+                           invoice_header_balance_amount
+                           ) 
                         values (
                                 :created_date,
                                 :discount_percentage,
@@ -34,7 +38,11 @@ class InvoiceHeader {
                                 :header_code,
                                 :po_number,
                                 :dispatch_number,
-                                :payment_type_id
+                                :payment_type_id,
+                                :payed_amount,
+                                :invoice_amount,
+                                :balance_amount
+                                
                         )";
 
             $statement = $this->connection->prepare($sql);
@@ -46,7 +54,10 @@ class InvoiceHeader {
                 ":header_code" => $data["invoice_header_code"] ?? null,
                 ":po_number" => $data["invoice_header_po_number"] ?? null,
                 ":dispatch_number" => $data["invoice_header_dispatch_number"] ?? null,
-                ":payment_type_id" => $data["payment_type_id"] ?? null
+                ":payment_type_id" => $data["payment_type_id"] ?? null,
+                ":payed_amount" => $data["invoice_header_payed_amount"] ?? null,
+                ":invoice_amount" => $data["invoice_header_invoice_amount"] ?? null,
+                ":balance_amount" => $data["invoice_header_balance_amount"] ?? null
             ]);
 
             $invoiceHeaderId = $this->connection->lastInsertId();
@@ -102,7 +113,10 @@ values (
                 invoice_header_code = :header_code,
                 invoice_header_po_number = :po_number,
                 invoice_header_dispatch_number = :dispatch_number,
-                payment_type_id = :payment_type_id
+                payment_type_id = :payment_type_id,
+                invoice_header_payed_amount = :payed_amount,
+                invoice_header_invoice_amount = :invoice_amount,
+                invoice_header_balance_amount = :balance_amount
                 where invoice_header_id = :invoice_id";
 
             $statement = $this->connection->prepare($sql);
@@ -115,6 +129,9 @@ values (
                 ":po_number" => $data["invoice_header_po_number"] ?? null,
                 ":dispatch_number" => $data["invoice_header_dispatch_number"] ?? null,
                 ":payment_type_id" => $data["payment_type_id"] ?? null,
+                ":payed_amount" => $data["invoice_header_payed_amount"] ?? null,
+                ":invoice_amount" => $data["invoice_header_invoice_amount"] ?? null,
+                ":balance_amount" => $data["invoice_header_balance_amount"] ?? null,
                 ":invoice_id" => $id
             ]);
 
@@ -177,13 +194,4 @@ values (
             throw $error;
         }
     }
-
-
-
-
-
-
-
-
-
 }

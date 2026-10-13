@@ -42,81 +42,169 @@
 
 
 </head>
-<body class="container-fluid">
+<body class="container-fluid" style="font-family: Verdana">
 <h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Invoice Master</h1>
 
 <div class="p-2">
   <div class="row">
 
-    <div class="col-md-3">
-      <label class="form-label" for="selectBranchName">Branch Name<i class="text-danger">*</i> </label>
-      <select class="form-select" id="selectBranchName" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','location_master_id')" required></select>
-      <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
-    </div>
-
-
-    <div class="col-md-3">
-      <label class="form-label" for="textDiscountPercentage">Discount Percentage % </label>
-      <input type="text" id="textDiscountPercentage" class="form-control fw-bold" style="height: 60px" placeholder="Enter Discount Percentage" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_discount_percentage')">
-      <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Item Percentage</div>
-    </div>
-    <div class="col-md-3"></div>
-
-
-    <div class="col-md-3">
-        <div>
-          <label class="form-label" for="textDate">Date</label>
-          <input type="date" id="textDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_created_date')">
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Date</div>
+    <!-- Left Side Area (Branch Name, Discount %, and a Wide Input/Textarea below them) -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="selectBranchName">Branch Name<i class="text-danger">*</i> </label>
+          <select class="form-select" id="selectBranchName" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','location_master_id')" required></select>
+          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
         </div>
 
+        <div class="col-md-6 mb-3">
+          <label class="form-label" for="textDiscountPercentage">Discount Percentage % </label>
+          <input type="text" id="textDiscountPercentage" class="form-control fw-bold" style="height: 60px" placeholder="Enter Discount Percentage" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_discount_percentage')">
+          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Item Percentage</div>
+        </div>
+      </div>
 
-      <div>
+
+
+
+      <!-- item area section start -->
+      <div class="row rounded-4" style="background-color: #f0fdf4">
+        <!--   item form area start     -->
+        <div class="row mb-3">
+          <h4><u>Add Items here</u></h4>
+
+
+          <div class="col-2">
+          <label class="form-label" for="selectItem">Item<i class="text-danger">*</i> </label>
+          <select class="form-select" id="selectItem" onchange="" required></select>
+          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+          </div>
+
+
+          <div class="col-2">
+            <label class="form-label" for="textQuantity">Quantity</label>
+            <input type="text" id="textQuantity" class="form-control fw-bold" onchange="">
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Quantity</div>
+          </div>
+
+          <div class="col-2">
+            <label class="form-label" for="textRate">Rate</label>
+            <input type="text" id="textRate" class="form-control fw-bold" onchange="">
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Rate</div>
+          </div>
+
+
+          <div class="col-2">
+            <label class="form-label" for="textDiscountedAmount">Discounted Amount</label>
+            <input type="text" id="textDiscountedAmount" class="form-control fw-bold" onchange="">
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Discount Amount</div>
+          </div>
+
+
+          <div class="col-2">
+            <label class="form-label" for="textValue">Value</label>
+            <input type="text" id="textValue" class="form-control fw-bold" onchange="">
+            <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Value</div>
+          </div>
+
+
+          <div class="col-2 mt-4">
+            <button type="button" id="btnUpdateInner" onclick="" class="btn text-white" style="background-color: #16a34a">Update</button>
+            <button type="button" id="btnSaveInner" onclick="" class="btn text-white" style="background-color: #16a34a">Save</button>
+          </div>
+        </div>
+        <!--   item form area end     -->
+
+
+        <!--   item table area start     -->
+        <div class="relative overflow-x-auto bg-emerald-200 shadow-xs rounded-base border border-default">
+          <table class="w-full text-sm text-left rtl:text-right text-body">
+            <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+            <tr>
+              <th scope="col" class="px-6 py-3 font-medium">Item Name</th>
+              <th scope="col" class="px-6 py-3 font-medium">Quantity</th>
+              <th scope="col" class="px-6 py-3 font-medium">Rate</th>
+              <th scope="col" class="px-6 py-3 font-medium">Discount</th>
+              <th scope="col" class="px-6 py-3 font-medium">Value</th>
+              <th scope="col" class="px-6 py-3 font-medium">Actions</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+
+            </tbody>
+          </table>
+        </div>
+        <!--   item table area end     -->
+
+
+
+
+
+      </div>
+      <!-- item area section end-->
+
+    </div>
+
+
+
+    <!-- Right Side Column (All your existing right-side fields) -->
+    <div class="col-md-3">
+      <div class="mb-3">
+        <label class="form-label" for="textDate">Date</label>
+        <input type="date" id="textDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_created_date')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Date</div>
+      </div>
+
+      <div class="mb-3">
         <label class="form-label" for="textPoNumber">Customer PO No</label>
         <input type="text" id="textPoNumber" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_po_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid PO No</div>
       </div>
 
-
-      <div>
+      <div class="mb-3">
         <label class="form-label" for="textDispatchNumber">Dispatch No</label>
         <input type="text" id="textDispatchNumber" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_dispatch_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Dispatch No</div>
       </div>
 
-
-      <div>
+      <div class="mb-3">
         <label class="form-label" for="textInvoiceValue">Invoice Value</label>
         <input type="number" disabled id="textInvoiceValue" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_invoice_amount')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Invoice Amount</div>
       </div>
 
-      <div>
+      <div class="mb-3">
         <label class="form-label" for="textPayedAmount">Payed Amount</label>
         <input type="number" disabled id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Payed Amount</div>
       </div>
 
-
-      <div>
+      <div class="mb-3">
         <label class="form-label" for="textBalanceAmount">Balance Amount</label>
         <input type="number" disabled id="textBalanceAmount" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_balance_amount')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Balance Amount</div>
       </div>
 
-
-      <div>
+      <div class="mb-3">
         <label class="form-label" for="selectStatus">Invoice Status<i class="text-danger">*</i> </label>
         <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','invoice_status_invoice_status_id')" required></select>
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
       </div>
 
-    </div>
 
+      <div class="flex justify-between">
+        <button type="button" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
+        <button type="button" id="btnUpdate" onclick="" class="btn text-white" style="background-color: #065f46">Update</button>
+        <button type="button" id="btnSave" onclick="" class="btn text-white" style="background-color: #065f46">Save</button>
+      </div>
+
+
+    </div>
 
   </div>
 </div>
-
 
 </body>
 </html>

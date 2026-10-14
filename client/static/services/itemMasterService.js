@@ -1,5 +1,5 @@
 async function getAllItems() {
-    let baseURL = "http://localhost/project-mit/viru/server/controller/ItemMasterController.php";
+    let baseURL = "../../server/controller/ItemMasterController.php";
     const response = await fetch(
         `${baseURL}?method=findAll`
     );
@@ -10,7 +10,7 @@ async function getAllItems() {
 }
 
 async function createItemService(data) {
-    let baseURL = "http://localhost/project-mit/viru/server/controller/ItemMasterController.php";
+    let baseURL = "../../server/controller/ItemMasterController.php";
     const response = await fetch(`${baseURL}?method=create`,
         {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)});
 
@@ -25,7 +25,7 @@ async function createItemService(data) {
 
 
 async function updateItemService(id, data) {
-    let baseURL = "http://localhost/project-mit/viru/server/controller/ItemMasterController.php";
+    let baseURL = "../../server/controller/ItemMasterController.php";
     const response = await fetch(`${baseURL}?method=update&id=${encodeURIComponent(id)}`,
         {
             method: "PUT",
@@ -41,7 +41,7 @@ async function updateItemService(id, data) {
 
 
 async function deleteItemService(id){
-    let baseURL = "http://localhost/project-mit/viru/server/controller/ItemMasterController.php";
+    let baseURL = "../../server/controller/ItemMasterController.php";
     const response = await fetch(`${baseURL}?method=delete&id=${encodeURIComponent(id)}`,
         {
             method:"DELETE",

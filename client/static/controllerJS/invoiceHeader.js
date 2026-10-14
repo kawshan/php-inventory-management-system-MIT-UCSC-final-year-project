@@ -1,10 +1,15 @@
 window.addEventListener('load', () => {
 
+    refreshInvoiceMasterForm();
+
+
+//     inner refreshes
+    refreshInvoiceInnerForm();
 
 });
 
 
-const refreshInvoiceMasterForm = () => {
+const refreshInvoiceMasterForm = async () => {
 
     invoiceHeaderMaster = new Object();
 
@@ -27,15 +32,92 @@ const refreshInvoiceMasterForm = () => {
     textPayedAmount.value="";
     textBalanceAmount.value="";
 
-    selectBranchName
-    selectStatus
+    branchersList = await getAllLocationService();
+    generateSelectDropDown(selectBranchName,branchersList,'locations','location_master_name');
+
+    statuesList = await getAllInvoiceStatuesService();
+    generateSelectDropDown(selectStatus,statuesList,'status','name')
 
 
-
-
+    //need to implement payment type dynamic
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// inner table functions are start from here
+const refreshInvoiceInnerForm = async ()=>{
+
+    items = new Object();
+
+    selectItem.style.border="1px solid #ced4da";
+    textQuantity.style.border="1px solid #ced4da";
+    textRate.style.border="1px solid #ced4da";
+    textDiscountedAmount.style.border="1px solid #ced4da";
+    textValue.style.border="1px solid #ced4da";
+
+
+    itemsList = await getAllItems();
+    generateSelectDropDown(selectItem,itemsList,'data','item_master_name')
+
+    textQuantity.value="";
+    textRate.value="";
+    textDiscountedAmount.value="";
+    textValue.value="";
+}
+
+
+
 
 
 

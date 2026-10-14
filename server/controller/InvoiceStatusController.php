@@ -39,7 +39,7 @@ $method = $_GET["method"] ?? "";
 
 
 switch ($method) {
-    case "getAllInvoiceStatuesList":
+    case "getAllInvoiceStatusesList":
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $controller->getAllInvoiceStatusesList();
         }

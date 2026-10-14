@@ -136,11 +136,6 @@ const refreshItemMasterTable = async () => {
         tableBody.appendChild(row);
     });
 
-    // why we need to destroy? cuz datatable gives already initialized warning..
-    // if (DataTable.isDataTable("#tableItemMaster")) {
-    //     DataTable.get("#tableItemMaster").destroy();
-    // }
-
 
     // new DataTable("#tableItemMaster");
     new DataTable('#tableItemMaster', {

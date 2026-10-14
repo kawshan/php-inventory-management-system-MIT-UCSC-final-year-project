@@ -119,10 +119,11 @@
 
 
         <!--   item table area start     -->
-        <div class="relative overflow-x-auto bg-emerald-200 shadow-xs rounded-base border border-default">
-          <table class="w-full text-sm text-left rtl:text-right text-body">
-            <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+        <div class="relative overflow-x-auto shadow-xs rounded-base border border-default">
+          <table class="w-full text-sm text-left rtl:text-right text-body" id="innerItemTable">
+            <thead class="text-sm text-body bg-green-200 border-b rounded-base border-default">
             <tr>
+              <th scope="col" class="px-6 py-3 font-medium">#</th>
               <th scope="col" class="px-6 py-3 font-medium">Item Name</th>
               <th scope="col" class="px-6 py-3 font-medium">Quantity</th>
               <th scope="col" class="px-6 py-3 font-medium">Rate</th>
@@ -132,7 +133,7 @@
 
             </tr>
             </thead>
-            <tbody>
+            <tbody id="innerTableTbody">
 
 
             </tbody>

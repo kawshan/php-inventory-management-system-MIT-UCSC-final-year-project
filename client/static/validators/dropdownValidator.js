@@ -12,3 +12,21 @@ function dropdownValidator(fieldId,objectName,propertyName){
         console.log('invalid');
     }
 }
+
+
+
+
+function dropdownValidatorWTtoolTip(fieldId,objectName,propertyName){
+    window[objectName][propertyName] = fieldId.value !== "" ? fieldId.value : null;
+    if (fieldId.value !== ""){
+        fieldId.style.border="1px solid green"
+        console.log('valid')
+    }else {
+        fieldId.style.border="1px solid red";
+        console.log('invalid');
+    }
+}
+
+
+
+

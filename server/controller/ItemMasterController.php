@@ -125,7 +125,22 @@ class ItemMasterController
             "message" => "Item deleted successfully"
         ]);
     }
+
+
+    public function getName($id) {
+        $result = $this->itemMaster->getNameById($id);
+        header("Content-Type: application/json");
+        echo json_encode([
+            "success" => true,
+            "data" => $result
+        ]);
+    }
+
+
 }
+
+
+
 
 
 $controller = new ItemMasterController($itemMaster);
@@ -217,6 +232,10 @@ switch ($method) {
             $controller->delete($_GET["id"]);
         }
 
+        break;
+
+    case "getName":
+        $controller->getName($_GET["id"]);
         break;
 
 

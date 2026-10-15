@@ -47,6 +47,16 @@ const refreshInvoiceMasterForm = async () => {
 }
 
 
+
+
+
+
+
+
+
+
+
+
 // inner table functions are start from here
 const refreshInvoiceInnerForm = async () => {
 
@@ -92,7 +102,7 @@ const refreshInvoiceInnerTable = () => {
         idCell.classList.add("py-2")
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.item_master_id;
+        nameCell.textContent = item.itemName;
 
         const priceCell = document.createElement("td");
         priceCell.textContent = item.invoice_header_has_item_price;
@@ -109,12 +119,6 @@ const refreshInvoiceInnerTable = () => {
         const actionCell = document.createElement("td");
         actionCell.classList.add("flex", "justify-center", "items-center", "gap-2");
 
-        const refillButton = document.createElement("button");
-        refillButton.textContent = "Refill"
-        refillButton.classList.add("bg-emerald-600", "text-white", "px-3", "py-2", "rounded");
-        refillButton.onclick = () => {
-            refillInnerForm(item)
-        }
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "delete"
@@ -131,7 +135,7 @@ const refreshInvoiceInnerTable = () => {
         row.appendChild(valueCell);
 
         row.appendChild(actionCell);
-        actionCell.appendChild(refillButton);
+        // actionCell.appendChild(refillButton);
         actionCell.appendChild(deleteButton);
         tableBody.appendChild(row);
 
@@ -143,33 +147,36 @@ const refreshInvoiceInnerTable = () => {
 }
 
 
-const refillInnerForm = (obj)=>{
 
-    invoiceItem = JSON.parse(JSON.stringify(obj))
-    oldInvoiceItem = JSON.parse(JSON.stringify(obj))
+const deleteInnerRow = (obj) => {
 
+    const userConfirm = confirm("Are You Sure to Remove Current Item");
 
-    selectItem.value = obj.item_master_id
-    textQuantity.value = obj.invoice_header_has_item_quantity
-    textRate.value = obj.invoice_header_has_item_price
-    textDiscountedAmount.value = obj.invoice_header_has_item_discount_amount
-    textValue.value = obj.invoice_header_has_item_value
+    if (userConfirm) {
 
+        let extIndex = invoiceHeaderMaster.items
+            .map(item => item.item_master_id)
+            .indexOf(obj.item_master_id);
 
-}
+        if (extIndex !== -1) {
 
+            // Subtract the deleted item's value
+            runningInvoiceValue -= Number(
+                invoiceHeaderMaster.items[extIndex].invoice_header_has_item_value
+            );
 
-const deleteInnerRow = (obj)=>{
-    const userConfirm = confirm(`Are You Sure to Remove Current Item`)
-    if (userConfirm){
-        let extIndex = invoiceHeaderMaster.items.map(item=>item.item_master_id).indexOf(obj.item_master_id);
-        if (extIndex !== -1){
-            invoiceHeaderMaster.items.splice(extIndex,1);
-            alert(`item removed successfully`);
+            // Remove the item from the array
+            invoiceHeaderMaster.items.splice(extIndex, 1);
+
+            // Update the invoice total input
+            textInvoiceValue.value = runningInvoiceValue.toFixed(2);
+
+            alert("Item removed successfully");
+
             refreshInvoiceInnerTable();
         }
     }
-}
+};
 
 
 
@@ -178,28 +185,35 @@ const deleteInnerRow = (obj)=>{
 const checkInnerFormErrors = ()=>{
     let errors ="";
 
+
     if (invoiceItem.item_master_id == null){
-        errors+="Item Cannot Be Empty";
+        errors+="Item Cannot Be Empty \n";
+        selectItem.classList.add("is-invalid");
+        selectItem.style.border="1px solid red";
+    }
+
+    if (invoiceItem.item_master_id == null){
+        errors+="Item Cannot Be Empty \n";
         selectItem.classList.add("is-invalid");
         selectItem.style.border="1px solid red";
     }
 
     if (invoiceItem.invoice_header_has_item_quantity == null){
-        errors+="Quantity Cannot Be Empty";
+        errors+="Quantity Cannot Be Empty \n";
         textQuantity.classList.add("is-invalid");
         textQuantity.style.border="1px solid red";
     }
 
 
     if (invoiceItem.invoice_header_has_item_price == null){
-        errors+="Rate Cannot Be Empty";
+        errors+="Rate Cannot Be Empty \n";
         textRate.classList.add("is-invalid");
         textRate.style.border="1px solid red";
     }
 
 
     if (invoiceItem.invoice_header_has_item_value == null){
-        errors+="Value Cannot Be Empty";
+        errors+="Value Cannot Be Empty \n";
         textValue.classList.add("is-invalid");
         textValue.style.border="1px solid red";
     }
@@ -210,52 +224,39 @@ const checkInnerFormErrors = ()=>{
 
 
 
-const buttonInnerAdd =async ()=>{
-    let errors = checkInnerFormErrors();
-    if (errors==""){
-        const userConfirm = confirm(`Are You Sure?`)
-        if (userConfirm){
-            invoiceHeaderMaster.items.push(invoiceItem);
-            alert(`Item Added Successfully`);
-            refreshInvoiceInnerTable();
-            await refreshInvoiceInnerForm()
-        }else {
-            alert(`User Cancelled the operation`)
-        }
-    }else {
-        alert(`You Have Following Errors ${errors}`);
-    }
-}
 
 
 
-const innerUpdate = async () => {
+const buttonInnerAdd = async () => {
+
     let errors = checkInnerFormErrors();
 
-    if (errors === "") {
-        let userConfirm = confirm(`
-            Are You Sure To Update Following
-
-            Item : ${invoiceItem.item_name || invoiceItem.item_master_id}
-            Qty  : ${invoiceItem.invoice_header_has_item_quantity}
-        `);
+    if (errors == "") {
+        const userConfirm = confirm("Are You Sure?");
 
         if (userConfirm) {
-            let extIndex = invoiceHeaderMaster.items
-                .map(item => item.item_master_id)
-                .indexOf(oldInvoiceItem.item_master_id);
 
-            if (extIndex !== -1) {
-                invoiceHeaderMaster.items[extIndex] = JSON.parse(JSON.stringify(invoiceItem));
+            invoiceHeaderMaster.items.push(invoiceItem);
 
-                alert("Item Updated Successfully");
+            alert("Item Added Successfully");
 
-                await refreshInvoiceInnerForm();
-            } else {
-                alert("Error: Item not found in the invoice list.");
-            }
+            // Calculate the total of all invoice items
+            runningInvoiceValue = invoiceHeaderMaster.items.reduce(
+                (total, item) => total + Number(item.invoice_header_has_item_value || 0),
+                0
+            );
+
+            textInvoiceValue.value = runningInvoiceValue.toFixed(2);
+
+            refreshInvoiceInnerTable();
+
+            await refreshInvoiceInnerForm();
+
+        } else {
+            alert("User Cancelled the operation");
         }
     } else {
-        alert(`You Have Following Errors\n${errors}`);
+        alert(`You Have Following Errors ${errors}`);
     }
-}
+};
+

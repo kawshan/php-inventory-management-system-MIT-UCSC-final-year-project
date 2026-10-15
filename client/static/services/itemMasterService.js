@@ -55,7 +55,12 @@ async function deleteItemService(id){
 }
 
 
+async function getItemNameByID(id){
+    let baseURL = "../../server/controller/ItemMasterController.php";
+    const response = await fetch(`${baseURL}?method=getName&id=${encodeURIComponent(id)}`);
+    return await response.json();
 
+}
 
 
 

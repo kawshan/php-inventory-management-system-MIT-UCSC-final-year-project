@@ -152,6 +152,19 @@ class ItemMaster {
             ":id" => $id
         ]);
     }
+
+
+    public function getNameById($id) {
+        $sql = "SELECT item_master_name FROM item_master WHERE id = :id";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([":id" => $id]);
+
+        // Use fetchColumn() to get just the name string directly,
+        // or fetch(PDO::FETCH_ASSOC) if you want an array
+        return $statement->fetchColumn();
+    }
+
+
 }
 
 ?>

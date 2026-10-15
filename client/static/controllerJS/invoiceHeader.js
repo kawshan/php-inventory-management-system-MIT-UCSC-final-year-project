@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
 
 
 //     inner refreshes
-    refreshInvoiceInnerForm();
+
     refreshInvoiceInnerTable();
 });
 
@@ -12,6 +12,8 @@ window.addEventListener('load', () => {
 const refreshInvoiceMasterForm = async () => {
 
     invoiceHeaderMaster = new Object();
+    oldInvoiceHeaderMaster = null
+    invoiceHeaderMaster.items = new Array();
 
     selectBranchName.style.border = "1px solid #ced4da";
     textDiscountPercentage.style.border = "1px solid #ced4da";
@@ -41,14 +43,15 @@ const refreshInvoiceMasterForm = async () => {
 
     //need to implement payment type dynamic
 
-
+    await refreshInvoiceInnerForm();
 }
 
 
 // inner table functions are start from here
 const refreshInvoiceInnerForm = async () => {
 
-    items = new Object();
+    invoiceItem = new Object();
+    oldInvoiceItem = null
 
     selectItem.style.border = "1px solid #ced4da";
     textQuantity.style.border = "1px solid #ced4da";
@@ -57,46 +60,29 @@ const refreshInvoiceInnerForm = async () => {
     textValue.style.border = "1px solid #ced4da";
 
 
+    selectItem.value = "";
+    selectItem.innerHTML="";
     itemsList = await getAllItems();
     generateSelectDropDown(selectItem, itemsList, 'data', 'item_master_name')
+
 
     textQuantity.value = "";
     textRate.value = "";
     textDiscountedAmount.value = "";
     textValue.value = "";
+
+    refreshInvoiceInnerTable();
+
 }
 
 
 const refreshInvoiceInnerTable = () => {
 
 
-    let items = [
-        {
-            id: 1,
-            invoice_header_invoice_header_id: 1,
-            item_master_id: 101,
-            item_name: "Wireless Mouse", // Helpful extra field for your UI table
-            invoice_header_has_item_price: 500.00,
-            invoice_header_has_item_quantity: 2,
-            invoice_header_has_item_discount_amount: 0.00,
-            invoice_header_has_item_value: 1000.00
-        },
-        {
-            id: 2,
-            invoice_header_invoice_header_id: 1,
-            item_master_id: 102,
-            item_name: "Mechanical Keyboard", // Helpful extra field for your UI table
-            invoice_header_has_item_price: 500.00,
-            invoice_header_has_item_quantity: 1,
-            invoice_header_has_item_discount_amount: 0.00,
-            invoice_header_has_item_value: 500.00
-        }
-    ]
-
     const tableBody = document.getElementById("innerTableTbody");
     tableBody.innerHTML = ""
 
-    items.forEach((item, index) => {
+    invoiceHeaderMaster.items.forEach((item, index) => {
 
 
         const row = document.createElement("tr")
@@ -106,7 +92,7 @@ const refreshInvoiceInnerTable = () => {
         idCell.classList.add("py-2")
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.item_name;
+        nameCell.textContent = item.item_master_id;
 
         const priceCell = document.createElement("td");
         priceCell.textContent = item.invoice_header_has_item_price;
@@ -134,7 +120,7 @@ const refreshInvoiceInnerTable = () => {
         deleteButton.textContent = "delete"
         deleteButton.classList.add("bg-emerald-600", "text-white", "px-3", "py-2", "rounded");
         deleteButton.onclick = () => {
-            deleteInnerItem(item)
+            deleteInnerRow(item)
         }
 
         row.appendChild(idCell);
@@ -157,4 +143,119 @@ const refreshInvoiceInnerTable = () => {
 }
 
 
+const refillInnerForm = (obj)=>{
 
+    invoiceItem = JSON.parse(JSON.stringify(obj))
+    oldInvoiceItem = JSON.parse(JSON.stringify(obj))
+
+
+    selectItem.value = obj.item_master_id
+    textQuantity.value = obj.invoice_header_has_item_quantity
+    textRate.value = obj.invoice_header_has_item_price
+    textDiscountedAmount.value = obj.invoice_header_has_item_discount_amount
+    textValue.value = obj.invoice_header_has_item_value
+
+
+}
+
+
+const deleteInnerRow = (obj)=>{
+    const userConfirm = confirm(`Are You Sure to Remove Current Item`)
+    if (userConfirm){
+        let extIndex = invoiceHeaderMaster.items.map(item=>item.item_master_id).indexOf(obj.item_master_id);
+        if (extIndex !== -1){
+            invoiceHeaderMaster.items.splice(extIndex,1);
+            alert(`item removed successfully`);
+            refreshInvoiceInnerTable();
+        }
+    }
+}
+
+
+
+
+
+const checkInnerFormErrors = ()=>{
+    let errors ="";
+
+    if (invoiceItem.item_master_id == null){
+        errors+="Item Cannot Be Empty";
+        selectItem.classList.add("is-invalid");
+        selectItem.style.border="1px solid red";
+    }
+
+    if (invoiceItem.invoice_header_has_item_quantity == null){
+        errors+="Quantity Cannot Be Empty";
+        textQuantity.classList.add("is-invalid");
+        textQuantity.style.border="1px solid red";
+    }
+
+
+    if (invoiceItem.invoice_header_has_item_price == null){
+        errors+="Rate Cannot Be Empty";
+        textRate.classList.add("is-invalid");
+        textRate.style.border="1px solid red";
+    }
+
+
+    if (invoiceItem.invoice_header_has_item_value == null){
+        errors+="Value Cannot Be Empty";
+        textValue.classList.add("is-invalid");
+        textValue.style.border="1px solid red";
+    }
+
+
+    return errors;
+}
+
+
+
+const buttonInnerAdd =async ()=>{
+    let errors = checkInnerFormErrors();
+    if (errors==""){
+        const userConfirm = confirm(`Are You Sure?`)
+        if (userConfirm){
+            invoiceHeaderMaster.items.push(invoiceItem);
+            alert(`Item Added Successfully`);
+            refreshInvoiceInnerTable();
+            await refreshInvoiceInnerForm()
+        }else {
+            alert(`User Cancelled the operation`)
+        }
+    }else {
+        alert(`You Have Following Errors ${errors}`);
+    }
+}
+
+
+
+const innerUpdate = async () => {
+    let errors = checkInnerFormErrors();
+
+    if (errors === "") {
+        let userConfirm = confirm(`
+            Are You Sure To Update Following
+
+            Item : ${invoiceItem.item_name || invoiceItem.item_master_id}
+            Qty  : ${invoiceItem.invoice_header_has_item_quantity}
+        `);
+
+        if (userConfirm) {
+            let extIndex = invoiceHeaderMaster.items
+                .map(item => item.item_master_id)
+                .indexOf(oldInvoiceItem.item_master_id);
+
+            if (extIndex !== -1) {
+                invoiceHeaderMaster.items[extIndex] = JSON.parse(JSON.stringify(invoiceItem));
+
+                alert("Item Updated Successfully");
+
+                await refreshInvoiceInnerForm();
+            } else {
+                alert("Error: Item not found in the invoice list.");
+            }
+        }
+    } else {
+        alert(`You Have Following Errors\n${errors}`);
+    }
+}

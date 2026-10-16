@@ -11,6 +11,8 @@ window.addEventListener('load', () => {
 
 const refreshInvoiceMasterForm = async () => {
 
+    runningInvoiceValue = 0;
+
     invoiceHeaderMaster = new Object();
     oldInvoiceHeaderMaster = null
     invoiceHeaderMaster.items = new Array();
@@ -38,19 +40,111 @@ const refreshInvoiceMasterForm = async () => {
     generateSelectDropDown(selectBranchName, branchersList, 'locations', 'location_master_name');
 
     statuesList = await getAllInvoiceStatuesService();
-    generateSelectDropDown(selectStatus, statuesList, 'status', 'name')
+    generateSelectDropDown(selectStatus, statuesList, 'status', 'name');
 
 
     //need to implement payment type dynamic
+    paymentTypeList = await getAllPaymentTypeService();
+    generateSelectDropDown(selectPaymentType, paymentTypeList, 'paymentTypes', 'payment_type_name')
+
+
 
     await refreshInvoiceInnerForm();
 }
 
 
+const refreshInvoiceMasterTable = async ()=>{
+
+}
+
+
+const checkErrors = ()=>{
+    let errors = ""
+
+    if (invoiceHeaderMaster.invoice_status_invoice_status_id == null){
+        errors+="Status Cannot Be Empty \n";
+        selectStatus.classList.add("is-invalid");
+        selectStatus.style.border="1px solid red";
+    }
+
+
+    if (invoiceHeaderMaster.location_master_id == null){
+        errors+="Branch Name Cannot be Empty \n";
+        selectBranchName.classList.add("is-invalid");
+        selectBranchName.style.border="1px solid red";
+    }
+
+
+    if (invoiceHeaderMaster.payment_type_id == null){
+        errors+="Payment Cannot be Empty \n";
+        selectPaymentType.classList.add("is-invalid");
+        selectPaymentType.style.border="1px solid red";
+    }
+
+    if (invoiceHeaderMaster.invoice_header_payed_amount == null){
+        errors+="Payed Amount Cannot be Empty \n";
+        textPayedAmount.classList.add("is-invalid");
+        textPayedAmount.style.border="1px solid red";
+    }
+
+
+    if (invoiceHeaderMaster.invoice_header_invoice_amount == null){
+        errors+="Invoice Amount Cannot be Empty \n";
+        textInvoiceValue.classList.add("is-invalid");
+        textInvoiceValue.style.border="1px solid red";
+    }
+
+
+    if (invoiceHeaderMaster.invoice_header_balance_amount == null){
+        errors+="Balance Amount Cannot be Empty \n";
+        textBalanceAmount.classList.add("is-invalid");
+        textBalanceAmount.style.border="1px solid red";
+    }
+    return errors;
+}
+
+
+
+const saveInvoiceHeader  = async ()=>{
+    const errors = checkErrors();
+    if (errors==""){
+        const userConfirm = confirm(`Are You Sure to Add Following Information
+Branch Code is ${invoiceHeaderMaster.location_master_id}
+Status is ${invoiceHeaderMaster.invoice_status_invoice_status_id}
+Payment Type is ${invoiceHeaderMaster.payment_type_id}
+Invoice Amount is ${invoiceHeaderMaster.invoice_header_invoice_amount}
+Payment Amount is ${invoiceHeaderMaster.invoice_header_payed_amount}
+Balance Amount is ${invoiceHeaderMaster.invoice_header_balance_amount}`);
+
+        if (userConfirm){
+
+            try {
+                const serverResponse  = await createInvoiceService(invoiceHeaderMaster);
+                if (serverResponse.success){
+                    alert(`Save Success`);
+                    setTimeout(()=>{
+                        window.location.reload();
+                    },500)
+                }
+            }catch (error){
+                console.error("INVOICE SAVE ERROR",error)
+                alert(error.message);
+            }
 
 
 
 
+        }else {
+            alert(`User Cancelled the Operation`)
+        }
+
+
+    }else {
+        alert(`You Have following Errors ${errors}`);
+    }
+
+
+}
 
 
 
@@ -102,7 +196,7 @@ const refreshInvoiceInnerTable = () => {
         idCell.classList.add("py-2")
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.itemName;
+        nameCell.textContent = item.item_master_id;
 
         const priceCell = document.createElement("td");
         priceCell.textContent = item.invoice_header_has_item_price;
@@ -161,9 +255,10 @@ const deleteInnerRow = (obj) => {
         if (extIndex !== -1) {
 
             // Subtract the deleted item's value
-            runningInvoiceValue -= Number(
-                invoiceHeaderMaster.items[extIndex].invoice_header_has_item_value
-            );
+            runningInvoiceValue -= Number(invoiceHeaderMaster.items[extIndex].invoice_header_has_item_value);
+            invoiceHeaderMaster.invoice_header_invoice_amount = runningInvoiceValue;
+            textInvoiceValue.style.border=`1px solid green`;
+            textInvoiceValue.classList.add('is-valid');
 
             // Remove the item from the array
             invoiceHeaderMaster.items.splice(extIndex, 1);
@@ -185,12 +280,6 @@ const deleteInnerRow = (obj) => {
 const checkInnerFormErrors = ()=>{
     let errors ="";
 
-
-    if (invoiceItem.item_master_id == null){
-        errors+="Item Cannot Be Empty \n";
-        selectItem.classList.add("is-invalid");
-        selectItem.style.border="1px solid red";
-    }
 
     if (invoiceItem.item_master_id == null){
         errors+="Item Cannot Be Empty \n";
@@ -241,12 +330,12 @@ const buttonInnerAdd = async () => {
             alert("Item Added Successfully");
 
             // Calculate the total of all invoice items
-            runningInvoiceValue = invoiceHeaderMaster.items.reduce(
-                (total, item) => total + Number(item.invoice_header_has_item_value || 0),
-                0
-            );
+            runningInvoiceValue = invoiceHeaderMaster.items.reduce((total, item) => total + Number(item.invoice_header_has_item_value || 0),0);
 
             textInvoiceValue.value = runningInvoiceValue.toFixed(2);
+            invoiceHeaderMaster.invoice_header_invoice_amount = runningInvoiceValue;
+            textInvoiceValue.style.border=`1px solid green`;
+            textInvoiceValue.classList.add('is-valid');
 
             refreshInvoiceInnerTable();
 

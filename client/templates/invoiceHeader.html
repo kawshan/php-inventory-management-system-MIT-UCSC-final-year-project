@@ -36,6 +36,7 @@
   <script src="../static/services/invoiceHeaderService.js"></script>
   <script src="../static/services/locationMasterService.js"></script>
   <script src="../static/services/invoiceStatusService.js"></script>
+  <script src="../static/services/paymentTypeService.js"></script>
 
   <!--    helping files link-->
   <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -55,9 +56,9 @@
       <div class="row">
         <div class="col-md-6 mb-3">
           <label class="form-label" for="selectBranchName">Branch Name<i class="text-danger">*</i> </label>
-          <select class="form-select" id="selectBranchName" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','location_master_id')" required></select>
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
-        </div>
+        <select class="form-select" id="selectBranchName" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','location_master_id')" required></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+      </div>
 
         <div class="col-md-6 mb-3">
           <label class="form-label" for="textDiscountPercentage">Discount Percentage % </label>
@@ -157,31 +158,38 @@
 
       <div class="mb-3">
         <label class="form-label" for="textPoNumber">Customer PO No</label>
-        <input type="text" id="textPoNumber" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_po_number')">
+        <input type="text" id="textPoNumber" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_po_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid PO No</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="textDispatchNumber">Dispatch No</label>
-        <input type="text" id="textDispatchNumber" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_dispatch_number')">
+        <input type="text" id="textDispatchNumber" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_dispatch_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Dispatch No</div>
+      </div>
+
+
+      <div class="mb-3">
+        <label class="form-label" for="selectPaymentType">Payment Type<i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectPaymentType" style="height: 60px" onchange="dropdownValidator(this,'invoiceHeaderMaster','payment_type_id')" required></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="textInvoiceValue">Invoice Value</label>
-        <input type="number" disabled id="textInvoiceValue" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_invoice_amount')">
+        <input type="number" id="textInvoiceValue" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_invoice_amount')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Invoice Amount</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="textPayedAmount">Payed Amount</label>
-        <input type="number"  id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount')">
+        <input type="number"  id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Payed Amount</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="textBalanceAmount">Balance Amount</label>
-        <input type="number" disabled id="textBalanceAmount" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','invoiceHeaderMaster','invoice_header_balance_amount')">
+        <input type="number" id="textBalanceAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_balance_amount')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Balance Amount</div>
       </div>
 
@@ -195,7 +203,7 @@
       <div class="flex justify-between">
         <button type="button" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
         <button type="button" id="btnUpdate" onclick="" class="btn text-white" style="background-color: #065f46">Update</button>
-        <button type="button" id="btnSave" onclick="" class="btn text-white" style="background-color: #065f46">Save</button>
+        <button type="button" id="btnSave" onclick="saveInvoiceHeader()" class="btn text-white" style="background-color: #065f46">Save</button>
       </div>
 
 

@@ -1,7 +1,7 @@
 window.addEventListener('load', () => {
 
     refreshInvoiceMasterForm();
-
+    refreshInvoiceMasterTable();
 
 //     inner refreshes
 
@@ -54,6 +54,48 @@ const refreshInvoiceMasterForm = async () => {
 
 
 const refreshInvoiceMasterTable = async ()=>{
+let invoiceList = await getAllInvoiceService();
+    console.log("invoices",invoiceList);
+
+    const tableBody = document.getElementById("invoiceMasterTableTbody");
+    tableBody.innerHTML="";
+
+
+    invoiceList.forEach((item,index)=>{
+        const row = document.createElement("tr")
+
+        const idCell = document.createElement("td");
+        idCell.textContent = index+1;
+
+        const createdDate = document.createElement("td")
+        createdDate.textContent=item.invoice_header_created_date;
+
+        const invoiceStatus = document.createElement("td");
+        invoiceStatus.textContent = item.invoice_status_invoice_status_id == 1 ? "Active" : "Inactive";
+
+
+
+
+
+
+        row.appendChild(idCell);
+        row.appendChild(createdDate);
+        row.appendChild(invoiceStatus);
+
+
+        tableBody.appendChild(row);
+
+            });
+
+
+    new DataTable('#invoiceMasterTable', {
+        layout: {
+            topStart: {
+                buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+            }
+        }
+    });
+
 
 }
 

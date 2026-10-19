@@ -11,3 +11,23 @@ async function createInvoiceService(data){
     }
 return result;
 }
+
+
+
+async function getAllInvoiceService(){
+    let baseURL = "../../server/controller/InvoiceHeaderController.php";
+    const response = await fetch(`${baseURL}?method=findAll`);
+    if (!response.ok){
+        throw new Error("Failed to get invoices")
+    }else {
+        return await response.json();
+    }
+
+
+
+}
+
+
+
+
+

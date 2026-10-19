@@ -49,6 +49,8 @@
 <h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Invoice Master</h1>
 
 <div class="p-2">
+
+
   <div class="row">
 
     <!-- Left Side Area (Branch Name, Discount %, and a Wide Input/Textarea below them) -->
@@ -209,6 +211,26 @@
     </div>
 
   </div>
+
+
+<!--  invoice master table start-->
+  <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
+    <table class="w-full text-sm text-left rtl:text-right text-body" id="invoiceMasterTable">
+      <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
+      <tr>
+        <th scope="col" class="px-6 py-3 font-medium">#</th>
+        <th scope="col" class="px-6 py-3 font-medium">Created Date</th>
+        <th scope="col" class="px-6 py-3 font-medium">Invoice Status</th>
+
+      </tr>
+      </thead>
+      <tbody id="invoiceMasterTableTbody">
+
+      </tbody>
+    </table>
+  </div>
+<!--  invoice master table end-->
+
 </div>
 
 </body>

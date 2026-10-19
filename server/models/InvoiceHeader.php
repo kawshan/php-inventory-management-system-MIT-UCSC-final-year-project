@@ -44,7 +44,10 @@ ih.invoice_header_id,
 
                 im.item_master_name,
                 im.item_master_code,
-                im.item_master_short_name
+                im.item_master_short_name,
+                
+                lm.id AS location_id,
+                lm.location_master_name AS location_name
 
 from invoice_header as ih
 
@@ -60,8 +63,11 @@ on ih.invoice_header_id = ihi.invoice_header_invoice_header_id
 left join item_master im
 on ihi.item_master_id = im.id
 
+left join location_master lm
+on ih.location_master_id = lm.id
+
 where ih.invoice_status_invoice_status_id=1
-order by ih.invoice_header_id desc";
+order by ih.invoice_header_id desc;";
        $statement =$this->connection->prepare($sql);
        $statement->execute();
 
@@ -83,6 +89,7 @@ order by ih.invoice_header_id desc";
                    "invoice_header_po_number" => $row['invoice_header_po_number'],
                    "invoice_header_dispatch_number" => $row['invoice_header_dispatch_number'],
                    "payment_type_id" => $row['payment_type_id'],
+                   "location_master_name" => $row['location_name'],
                    "invoice_header_payed_amount" => $row['invoice_header_payed_amount'],
                    "invoice_header_invoice_amount" => $row['invoice_header_invoice_amount'],
                    "invoice_header_balance_amount" => $row['invoice_header_balance_amount'],
@@ -94,6 +101,12 @@ order by ih.invoice_header_id desc";
                        "id" => $row['payment_type_id'],
                        "name" => $row['payment_type_name']
                    ],
+
+                   "locations"=>[
+                       "id" => $row['location_id'],
+                       "name" => $row['location_name']
+                   ],
+
                    "items"=>[]
                ];
            }

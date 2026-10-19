@@ -73,14 +73,70 @@ let invoiceList = await getAllInvoiceService();
         const invoiceStatus = document.createElement("td");
         invoiceStatus.textContent = item.invoice_status_invoice_status_id == 1 ? "Active" : "Inactive";
 
+        const locationName = document.createElement("td");
+        locationName.textContent=item.locations.name;
+
+        const paymentType = document.createElement("td");
+        paymentType.textContent=item.payment_type.name;
+
+        const itemNames = document.createElement("td");
+
+        itemNames.innerHTML = item.items
+            .map(innerItem => `<p>${innerItem.item_master_name}</p>`)
+            .join("");
 
 
+        const invoiceValue = document.createElement("td");
+        invoiceValue.textContent=item.invoice_header_invoice_amount;
+
+        const payedValue = document.createElement("td");
+        payedValue.textContent=item.invoice_header_payed_amount;
+
+        const balanceValue = document.createElement("td");
+        balanceValue.textContent=item.invoice_header_balance_amount
+
+        const actionCell = document.createElement("td");
+        actionCell.classList.add("flex", "justify-center", "items-center", "gap-2");
+
+        const refillButton = document.createElement("button");
+        refillButton.textContent = "Refill"
+        refillButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        refillButton.onclick = () => {
+            refillInvoiceMaster(item)
+        }
+
+
+        const printButton = document.createElement("button");
+        printButton.textContent = "print"
+        printButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        printButton.onclick = () => {
+            printInvoiceMaster(item)
+        }
+
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "delete"
+        deleteButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        deleteButton.onclick = () => {
+            deleteInvoiceMaster(item)
+        }
 
 
 
         row.appendChild(idCell);
         row.appendChild(createdDate);
+        row.appendChild(locationName);
+        row.appendChild(paymentType);
+        row.appendChild(itemNames);
+        row.appendChild(invoiceValue);
+        row.appendChild(payedValue);
+        row.appendChild(balanceValue);
         row.appendChild(invoiceStatus);
+
+        row.appendChild(actionCell);
+        actionCell.appendChild(refillButton);
+        actionCell.appendChild(printButton);
+        actionCell.appendChild(deleteButton);
 
 
         tableBody.appendChild(row);
@@ -187,6 +243,42 @@ Balance Amount is ${invoiceHeaderMaster.invoice_header_balance_amount}`);
 
 
 }
+
+
+
+const refillInvoiceMaster =(obj)=>{
+    invoiceHeaderMaster = JSON.parse(JSON.stringify(obj))
+    oldInvoiceHeaderMaster = JSON.parse(JSON.stringify(obj))
+
+    selectBranchName.value = invoiceHeaderMaster.locations.id
+    textDiscountPercentage.value = invoiceHeaderMaster.invoice_header_discount_percentage
+    textDate.value = invoiceHeaderMaster.invoice_header_created_date
+    textPoNumber.value = invoiceHeaderMaster.invoice_header_po_number
+    textDispatchNumber.value = invoiceHeaderMaster.invoice_header_dispatch_number
+    textInvoiceValue.value = invoiceHeaderMaster.invoice_header_invoice_amount
+    textPayedAmount.value = invoiceHeaderMaster.invoice_header_payed_amount
+    textBalanceAmount.value = invoiceHeaderMaster.invoice_header_balance_amount
+    selectStatus.value = invoiceHeaderMaster.status.id
+    selectPaymentType.value = invoiceHeaderMaster.payment_type.id
+
+
+
+}
+
+const deleteInvoiceMaster = (obj)=>{
+
+}
+
+
+const printInvoiceMaster = (obj)=>{
+
+}
+
+
+
+
+
+
 
 
 

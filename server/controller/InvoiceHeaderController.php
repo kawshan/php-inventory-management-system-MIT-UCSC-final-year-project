@@ -16,6 +16,18 @@ class InvoiceHeaderController {
     }
 
 
+
+
+public function findAll() {
+    try {
+        $items = $this->invoiceHeader->findAll();
+        header("Content-type: application/json");
+        http_response_code(200);
+        echo json_encode($items);
+    }catch (Throwable $error){
+        echo $error;
+    }
+}
     public function create() {
         try {
             $data = json_decode(file_get_contents("php://input"),true);
@@ -47,6 +59,10 @@ switch ($method) {
         if ($_SERVER["REQUEST_METHOD"]=="POST"){
             $controller->create();
         }
+        break;
+
+    case "findAll":
+        $controller->findAll();
         break;
 
 

@@ -196,7 +196,7 @@ const refreshInvoiceInnerTable = () => {
         idCell.classList.add("py-2")
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.item_master_id;
+        nameCell.textContent = item.itemName;
 
         const priceCell = document.createElement("td");
         priceCell.textContent = item.invoice_header_has_item_price;
@@ -348,4 +348,41 @@ const buttonInnerAdd = async () => {
         alert(`You Have Following Errors ${errors}`);
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// helping js funcions
+function getInnerText(field){
+const selectedText = field.options[field.selectedIndex].text;
+    console.log(selectedText);
+    invoiceItem.itemName= selectedText;
+}
+
+
+
+
+function getBalance(fieldName){
+    let invoiceValue = Number(textInvoiceValue.value);
+    let payedValue = Number(fieldName.value);
+
+    let balanceAmount = payedValue-invoiceValue;
+    invoiceHeaderMaster.invoice_header_balance_amount = balanceAmount.toFixed(2);
+    textBalanceAmount.value=invoiceHeaderMaster.invoice_header_balance_amount
+    textBalanceAmount.style.border=`1px solid green`;
+    textBalanceAmount.classList.add('is-valid');
+
+}
+
+
+
 

@@ -79,7 +79,7 @@
 
           <div class="col-2">
           <label class="form-label" for="selectItem">Item<i class="text-danger">*</i> </label>
-          <select class="form-select" id="selectItem" onchange="dropdownValidatorWTtoolTip(this,'invoiceItem','item_master_id');" required></select>
+          <select class="form-select" id="selectItem" onchange="dropdownValidatorWTtoolTip(this,'invoiceItem','item_master_id'); getInnerText(this)" required></select>
           </div>
 
 
@@ -107,7 +107,6 @@
 
 
           <div class="col-2 mt-4">
-<!--            <button type="button" id="btnUpdateInner" onclick="innerUpdate()" class="btn text-white" style="background-color: #16a34a">Update</button>-->
             <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="btn text-white" style="background-color: #16a34a">Add</button>
           </div>
         </div>
@@ -183,13 +182,13 @@
 
       <div class="mb-3">
         <label class="form-label" for="textPayedAmount">Payed Amount</label>
-        <input type="number"  id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount')">
+        <input type="number"  id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount'); getBalance(this)">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Payed Amount</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="textBalanceAmount">Balance Amount</label>
-        <input type="number" id="textBalanceAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_balance_amount')">
+        <input type="number" id="textBalanceAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_balance_amount'); ">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Balance Amount</div>
       </div>
 

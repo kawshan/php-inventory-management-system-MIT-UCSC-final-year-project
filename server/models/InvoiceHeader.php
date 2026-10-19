@@ -10,6 +10,114 @@ class InvoiceHeader {
         $this->connection = $connection;
     }
 
+
+    public function findAll() {
+        $sql = "select
+
+ih.invoice_header_id,
+                ih.invoice_header_created_date,
+                ih.invoice_header_modify_date,
+                ih.invoice_header_delete_date,
+                ih.invoice_header_discount_percentage,
+                ih.invoice_status_invoice_status_id,
+                ih.location_master_id,
+                ih.invoice_header_code,
+                ih.invoice_header_po_number,
+                ih.invoice_header_dispatch_number,
+                ih.payment_type_id,
+                ih.invoice_header_payed_amount,
+                ih.invoice_header_invoice_amount,
+                ih.invoice_header_balance_amount,
+
+                ist.id AS status_id,
+                ist.name AS status_name,
+
+                pt.id AS payment_type_id,
+                pt.payment_type_name,
+
+                ihi.id AS invoice_item_id,
+                ihi.item_master_id,
+                ihi.invoice_header_has_item_price,
+                ihi.invoice_header_has_item_quantity,
+                ihi.invoice_header_has_item_discount_amount,
+                ihi.invoice_header_has_item_value,
+
+                im.item_master_name,
+                im.item_master_code,
+                im.item_master_short_name
+
+from invoice_header as ih
+
+left join invoice_status ist
+on ih.invoice_status_invoice_status_id = ist.id
+
+left join payment_type pt
+on ih.payment_type_id = pt.id
+
+left join invoice_header_has_item ihi
+on ih.invoice_header_id = ihi.invoice_header_invoice_header_id
+
+left join item_master im
+on ihi.item_master_id = im.id
+
+where ih.invoice_status_invoice_status_id=1
+order by ih.invoice_header_id desc";
+       $statement =$this->connection->prepare($sql);
+       $statement->execute();
+
+       $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+       $invoices = [];
+
+       foreach ($rows as $row) {
+           $invoiceId = $row['invoice_header_id'];
+           if (!isset($invoices[$invoiceId])) {
+               $invoices[$invoiceId] = [
+                   "invoice_header_id" => $row['invoice_header_id'],
+                   "invoice_header_created_date" => $row['invoice_header_created_date'],
+                   "invoice_header_modify_date" => $row['invoice_header_modify_date'],
+                   "invoice_header_delete_date" => $row['invoice_header_delete_date'],
+                   "invoice_header_discount_percentage" => $row['invoice_header_discount_percentage'],
+                   "invoice_status_invoice_status_id" => $row['invoice_status_invoice_status_id'],
+                   "location_master_id" => $row['location_master_id'],
+                   "invoice_header_code" => $row['invoice_header_code'],
+                   "invoice_header_po_number" => $row['invoice_header_po_number'],
+                   "invoice_header_dispatch_number" => $row['invoice_header_dispatch_number'],
+                   "payment_type_id" => $row['payment_type_id'],
+                   "invoice_header_payed_amount" => $row['invoice_header_payed_amount'],
+                   "invoice_header_invoice_amount" => $row['invoice_header_invoice_amount'],
+                   "invoice_header_balance_amount" => $row['invoice_header_balance_amount'],
+                   "status" => [
+                       "id" => $row['status_id'],
+                       "name" => $row['status_name']
+                   ],
+                   "payment_type"=>[
+                       "id" => $row['payment_type_id'],
+                       "name" => $row['payment_type_name']
+                   ],
+                   "items"=>[]
+               ];
+           }
+
+           //add invoice item
+           if ($row["invoice_item_id"] !== null){
+               $invoices[$invoiceId]["items"][] = [
+                   "invoice_item_id" => $row["invoice_item_id"],
+                   "item_master_id" => $row["item_master_id"],
+                   "item_master_name" => $row["item_master_name"],
+                   "item_master_code" => $row["item_master_code"],
+                   "item_master_short_name" => $row["item_master_short_name"],
+                   "invoice_header_has_item_price" => $row["invoice_header_has_item_price"],
+                   "invoice_header_has_item_quantity" => $row["invoice_header_has_item_quantity"],
+                   "invoice_header_has_item_discount_amount" => $row["invoice_header_has_item_discount_amount"],
+                   "invoice_header_has_item_value" => $row["invoice_header_has_item_value"],
+               ];
+           }
+       }
+//convert associative array to normal indexed array
+        return array_values($invoices);
+    }
+
+
     public function create($data) {
         try {
 
@@ -78,20 +186,20 @@ values (
         :value
 )";
 
-    $statement = $this->connection->prepare($sql);
-    foreach ($data["items"] as $item) {
-        $statement->execute([
-            ":invoice_header_id" => $invoiceHeaderId,
-            ":item_master_id" => $item["item_master_id"],
-            ":price" => $item["invoice_header_has_item_price"],
-            ":quantity" => $item["invoice_header_has_item_quantity"] ?? 0,
-            ":discount_amount" => $item["invoice_header_has_item_discount_amount"] ?? 0,
-            ":value" => $item["invoice_header_has_item_value"] ?? 0
-        ]);
-    }
+            $statement = $this->connection->prepare($sql);
+            foreach ($data["items"] as $item) {
+                $statement->execute([
+                    ":invoice_header_id" => $invoiceHeaderId,
+                    ":item_master_id" => $item["item_master_id"],
+                    ":price" => $item["invoice_header_has_item_price"],
+                    ":quantity" => $item["invoice_header_has_item_quantity"] ?? 0,
+                    ":discount_amount" => $item["invoice_header_has_item_discount_amount"] ?? 0,
+                    ":value" => $item["invoice_header_has_item_value"] ?? 0
+                ]);
+            }
 
-    $this->connection->commit();
-    return $invoiceHeaderId;
+            $this->connection->commit();
+            return $invoiceHeaderId;
         } catch (Throwable $error) {
             $this->connection->rollback();
             throw $error;
@@ -183,14 +291,14 @@ values (
 
     public function delete($id) {
         try {
-            $sql="update invoice_header set invoice_status_invoice_status_id = :status_id where invoice_header_id = :invoice_id";
+            $sql = "update invoice_header set invoice_status_invoice_status_id = :status_id where invoice_header_id = :invoice_id";
             $statement = $this->connection->prepare($sql);
             $statement->execute([
                 ":status_id" => 2,
                 ":invoice_id" => $id
             ]);
             return $id;
-        }catch (Throwable $error) {
+        } catch (Throwable $error) {
             throw $error;
         }
     }

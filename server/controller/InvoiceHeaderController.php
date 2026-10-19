@@ -47,6 +47,27 @@ public function findAll() {
             ]);
         }
     }
+
+
+    public function update($id) {}
+
+
+
+    public function delete($id) {
+        $this->invoiceHeader->delete($id);
+        header("Content-Type: application/json");
+        http_response_code(200);
+        echo json_encode([
+            "success" => true,
+            "message" => "Invoice deleted successfully."
+        ]);
+    }
+
+
+
+
+
+
 }
 
 
@@ -64,6 +85,14 @@ switch ($method) {
     case "findAll":
         $controller->findAll();
         break;
+
+    case "update":
+        break;
+
+
+        case "delete":
+            $controller->delete($_GET["id"]);
+            break;
 
 
         default:

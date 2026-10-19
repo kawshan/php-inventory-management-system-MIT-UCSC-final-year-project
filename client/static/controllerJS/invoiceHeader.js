@@ -265,7 +265,22 @@ const refillInvoiceMaster =(obj)=>{
 
 }
 
-const deleteInvoiceMaster = (obj)=>{
+const deleteInvoiceMaster = async (obj)=>{
+    console.log(obj)
+const userConfirm = confirm(`are you sure to delete following invoice 
+Invoice Number ${obj.invoice_header_id}`)
+    if (userConfirm){
+        const serverResponse = await deleteInvoiceService(obj.invoice_header_id);
+        if (serverResponse.success){
+            alert(`Delete Success`)
+            setTimeout(()=>{
+                window.location.reload();
+            },500)
+        }else {
+            alert(`Something Went Wrong ${serverResponse.message}`);
+        }
+    }
+
 
 }
 

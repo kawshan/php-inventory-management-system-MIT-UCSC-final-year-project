@@ -82,7 +82,7 @@ let invoiceList = await getAllInvoiceService();
         const itemNames = document.createElement("td");
 
         itemNames.innerHTML = item.items
-            .map(innerItem => `<p>${innerItem.item_master_name}</p>`)
+            .map(innerItem => `<li>${innerItem.item_master_name}</li>`)
             .join("");
 
 
@@ -310,6 +310,32 @@ const checkUpdatesInvoiceMaster = ()=>{
         updates+="Balance is Changed \n"
     }
 
+    if (invoiceHeaderMaster.items.length !== oldInvoiceHeaderMaster.items.length){
+        updates+="Items are Changed \n"
+    }else {
+
+        for (let element of invoiceHeaderMaster.items){
+            let extIndex = oldInvoiceHeaderMaster.items.map(item=> item.item_master_id).indexOf(element.item_master_id);
+            // -1 is a special value returned by JavaScript's .indexOf() when the item cannot be found.
+            if (extIndex === -1){
+                updates +="Items are Changed \n";
+                break;
+            }
+
+            const oldItem = oldInvoiceHeaderMaster.items[extIndex];
+            if (
+                oldItem.invoice_header_has_item_price !== element.invoice_header_has_item_price ||
+                oldItem.invoice_header_has_item_quantity !== element.invoice_header_has_item_quantity ||
+                oldItem.invoice_header_has_item_discount_amount !== element.invoice_header_has_item_discount_amount ||
+                oldItem.invoice_header_has_item_value !== element.invoice_header_has_item_value
+            ){
+                updates+="Items Are Changed \n"
+                break;
+            }
+        }
+    }
+
+
 
     return updates;
 }
@@ -430,10 +456,10 @@ const refreshInvoiceInnerTable = () => {
 
         const idCell = document.createElement("td");
         idCell.textContent = index + 1;
-        idCell.classList.add("py-2")
+        idCell.classList.add("py-2");
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.itemName;
+        nameCell.textContent = item.itemName || item.item_master_id;
 
         const priceCell = document.createElement("td");
         priceCell.textContent = item.invoice_header_has_item_price;

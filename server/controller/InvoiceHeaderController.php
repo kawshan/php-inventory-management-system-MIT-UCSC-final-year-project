@@ -49,7 +49,18 @@ public function findAll() {
     }
 
 
-    public function update($id) {}
+    public function update($id) {
+
+        $data= json_decode(file_get_contents("php://input"),true);
+        $result = $this->invoiceHeader->update($id,$data);
+        header("Content-Type: application/json");
+        http_response_code(200);
+        echo json_encode([
+            "success" => true,
+            "message" => "Invoice updated successfully.",
+        ]);
+
+    }
 
 
 
@@ -87,6 +98,17 @@ switch ($method) {
         break;
 
     case "update":
+        if ($_SERVER["REQUEST_METHOD"]=="PUT"){
+            if (!isset($_GET["id"])){
+                http_response_code(400);
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Id is required."
+                ]);
+                exit;
+            }
+            $controller->update($_GET["id"]);
+        }
         break;
 
 

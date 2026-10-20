@@ -238,7 +238,7 @@ Balance Amount is ${invoiceHeaderMaster.invoice_header_balance_amount}`);
 
 
     }else {
-        alert(`You Have following Errors ${errors}`);
+        alert(`You Have following Errors \n ${errors}`);
     }
 
 
@@ -261,9 +261,97 @@ const refillInvoiceMaster =(obj)=>{
     selectStatus.value = invoiceHeaderMaster.status.id
     selectPaymentType.value = invoiceHeaderMaster.payment_type.id
 
+    refreshInvoiceInnerTable();
+
+}
+
+
+const checkUpdatesInvoiceMaster = ()=>{
+
+    let updates = ""
+
+    if (oldInvoiceHeaderMaster.invoice_header_created_date !== invoiceHeaderMaster.invoice_header_created_date){
+        updates+="Date is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_header_discount_percentage !== invoiceHeaderMaster.invoice_header_discount_percentage){
+        updates+="Discount is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_status_invoice_status_id !== invoiceHeaderMaster.invoice_status_invoice_status_id){
+        updates+="Status is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.location_master_id !== invoiceHeaderMaster.location_master_id){
+        updates+="Location is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_header_po_number !== invoiceHeaderMaster.invoice_header_po_number){
+        updates+="Po number is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_header_dispatch_number !== invoiceHeaderMaster.invoice_header_dispatch_number){
+        updates+="Dispatch is changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.payment_type_id !== invoiceHeaderMaster.payment_type_id){
+        updates+="Payment Type is changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_header_payed_amount !== invoiceHeaderMaster.invoice_header_payed_amount){
+        updates+="Payed Amount is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_header_invoice_amount !== invoiceHeaderMaster.invoice_header_invoice_amount){
+        updates+="Invoice Amount is Changed \n"
+    }
+
+    if (oldInvoiceHeaderMaster.invoice_header_balance_amount !== invoiceHeaderMaster.invoice_header_balance_amount){
+        updates+="Balance is Changed \n"
+    }
+
+
+    return updates;
+}
+
+
+
+const updateInvoiceHeader = async ()=>{
+
+    const updates = checkUpdatesInvoiceMaster();
+    if (updates!=""){
+        const userConfirm = confirm(`Are You Sure to Change those Values \n ${updates}`);
+        if (userConfirm){
+            const serverResponse = await updateInvoiceHeaderService(invoiceHeaderMaster.invoice_header_id,invoiceHeaderMaster);
+            if (serverResponse.success){
+                alert("update success")
+                setTimeout(()=>{
+                    window.location.reload();
+                },500);
+            }
+        }
+    }else {
+        alert("Nothing to Update")
+    }
+
+
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const deleteInvoiceMaster = async (obj)=>{
     console.log(obj)

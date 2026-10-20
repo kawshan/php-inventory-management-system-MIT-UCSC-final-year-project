@@ -39,5 +39,21 @@ async function deleteInvoiceService(id) {
     return result;
 }
 
+async function updateInvoiceHeaderService(id,data){
+    let baseURL = "../../server/controller/InvoiceHeaderController.php";
+    const response = await fetch(`${baseURL}?method=update&id=${encodeURIComponent(id)}`,
+        {
+            method:"PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        })
+    const result =await response.json();
+    if (!response.ok || !result.success){
+        throw new Error(result.message || "Failed to Update Invoice")
+    }
+    return result;
 
+
+
+}
 

@@ -157,13 +157,13 @@
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Date</div>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 d-none">
         <label class="form-label" for="textPoNumber">Customer PO No</label>
         <input type="text" id="textPoNumber" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_po_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid PO No</div>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-3 d-none">
         <label class="form-label" for="textDispatchNumber">Dispatch No</label>
         <input type="text" id="textDispatchNumber" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_dispatch_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Dispatch No</div>
@@ -203,7 +203,7 @@
 
       <div class="flex justify-between">
         <button type="button" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
-        <button type="button" id="btnUpdate" onclick="" class="btn text-white" style="background-color: #065f46">Update</button>
+        <button type="button" id="btnUpdate" onclick="updateInvoiceHeader()" class="btn text-white" style="background-color: #065f46">Update</button>
         <button type="button" id="btnSave" onclick="saveInvoiceHeader()" class="btn text-white" style="background-color: #065f46">Save</button>
       </div>
 

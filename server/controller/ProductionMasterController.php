@@ -81,6 +81,7 @@ $method = $_GET['method'] ?? "";
 
 switch ($method) {
     case "findAll":
+        $controller->findAll();
         break;
 
     case "create":

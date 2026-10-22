@@ -492,7 +492,6 @@ const refreshInvoiceInnerTable = () => {
         row.appendChild(valueCell);
 
         row.appendChild(actionCell);
-        // actionCell.appendChild(refillButton);
         actionCell.appendChild(deleteButton);
         tableBody.appendChild(row);
 

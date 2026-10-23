@@ -12,7 +12,9 @@ class ProductionMaster {
 
 
     public function findAll() {
-        $sql = "select
+        $sql = "
+        
+        select
 
     pm.id as production_master_id,
     pm.production_master_date,
@@ -30,7 +32,30 @@ class ProductionMaster {
     pmi.item_master_id,
     pmi.production_master_has_item_quantity,
     pmi.production_master_has_item_description,
-    pmi.production_master_has_item_item_name
+    pmi.production_master_has_item_item_name,
+
+    im.id as item_master_id,
+    im.item_master_name,
+    im.item_master_price,
+    im.item_master_cost,
+    im.item_master_barcode,
+    im.item_master_key,
+    im.item_master_code,
+    im.item_master_short_name,
+    im.item_master_description,
+    im.item_master_no_of_pages,
+    im.item_master_books_in_pack,
+    im.item_master_books_in_box,
+    im.item_category_master_id,
+    im.item_size_id,
+
+    icm.id as item_category_id,
+    icm.item_category_master_name,
+    icm.item_category_master_code,
+    icm.item_category_master_added_date,
+    icm.item_category_master_modify_date,
+    icm.item_category_master_delete_date,
+    icm.item_category_master_status
 
 
 from production_master as pm
@@ -38,48 +63,79 @@ from production_master as pm
 left join production_master_has_item_master pmi
 on pm.id = pmi.production_master_id
 
+left join item_master im
+on pmi.item_master_id = im.id
+
+left join item_category_master icm
+on im.item_category_master_id = icm.id
+
 where pm.production_master_status=1
-order by pm.id desc";
+order by pm.id desc;
+        
+        
+        ";
 
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        $productions =[];
+        $productions = [];
 
 // Have I already created this production? If not, create it. Regardless, add this row's item to that production.
 
         foreach ($rows as $row) {
-        $productionId = $row['production_master_id'];
-        if (!isset($productions[$productionId])) {
-            $productions[$productionId] = [
-                "production_master_id" => $row['production_master_id'],
-                "production_master_date" => $row['production_master_date'],
-                "production_master_code" => $row['production_master_code'],
-                "production_master_added_user" => $row['production_master_added_user'],
-                "production_master_modify_user" => $row['production_master_modify_user'],
-                "production_master_delete_user" => $row['production_master_delete_user'],
-                "production_master_added_date_time" => $row['production_master_added_date_time'],
-                "production_master_modify_date_time" => $row['production_master_modify_date_time'],
-                "production_master_delete_date_time" => $row['production_master_delete_date_time'],
-                "production_master_status" => $row['production_master_status'],
+            $productionId = $row['production_master_id'];
+            if (!isset($productions[$productionId])) {
+                $productions[$productionId] = [
+                    "production_master_id" => $row['production_master_id'],
+                    "production_master_date" => $row['production_master_date'],
+                    "production_master_code" => $row['production_master_code'],
+                    "production_master_added_user" => $row['production_master_added_user'],
+                    "production_master_modify_user" => $row['production_master_modify_user'],
+                    "production_master_delete_user" => $row['production_master_delete_user'],
+                    "production_master_added_date_time" => $row['production_master_added_date_time'],
+                    "production_master_modify_date_time" => $row['production_master_modify_date_time'],
+                    "production_master_delete_date_time" => $row['production_master_delete_date_time'],
+                    "production_master_status" => $row['production_master_status'],
 
-                "items"=>[]
-            ];
-        }
+                    "items" => [],
+                    "item_masters"=>[]
+                ];
+            }
 
-        if ($row["production_item_id"] !== null){
-            $productions[$productionId]["items"][] = [
-                "production_item_id" => $row["production_item_id"],
+            if ($row["production_item_id"] !== null) {
+                $productions[$productionId]["items"][] = [
+                    "production_item_id" => $row["production_item_id"],
+                    "item_master_id" => $row["item_master_id"],
+                    "production_master_has_item_quantity" => $row["production_master_has_item_quantity"],
+                    "production_master_has_item_description" => $row["production_master_has_item_description"],
+                    "production_master_has_item_item_name" => $row["item_master_name"],
+                ];
+            }
+
+
+            $productions[$productionId]["item_masters"][]=[
                 "item_master_id" => $row["item_master_id"],
-                "production_master_has_item_quantity" => $row["production_master_has_item_quantity"],
-                "production_master_has_item_description" => $row["production_master_has_item_description"],
-                "production_master_has_item_item_name" => $row["production_master_has_item_item_name"],
+                "item_master_name" => $row["item_master_name"],
+                "item_master_price" => $row["item_master_price"],
+                "item_master_cost" => $row["item_master_cost"],
+                "item_master_barcode" => $row["item_master_barcode"],
+                "item_master_key" => $row["item_master_key"],
+                "item_master_code" => $row["item_master_code"],
+                "item_master_short_name" => $row["item_master_short_name"],
+                "item_master_description" => $row["item_master_description"],
+                "item_master_no_of_pages" => $row["item_master_no_of_pages"],
+                "item_master_books_in_pack" => $row["item_master_books_in_pack"],
+                "item_master_books_in_box" => $row["item_master_books_in_box"],
+                "item_category_master_id" => $row["item_category_master_id"],
+                "item_size_id" => $row["item_size_id"]
             ];
-        }
+
+
+
 
         }
 
-return array_values($productions);
+        return array_values($productions);
 
     }
 

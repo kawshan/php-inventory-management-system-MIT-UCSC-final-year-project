@@ -50,8 +50,8 @@ const refreshProductionMasterTable = async ()=>{
 
         const itemNames = document.createElement("td");
 
-        itemNames.innerHTML = item.items
-            .map(innerItem => `<span >${innerItem.item_master_id}</span>`)
+        itemNames.innerHTML = item.item_masters
+            .map(innerItem => `<li >${innerItem.item_master_name}</li>`)
             .join("");
 
 
@@ -301,7 +301,7 @@ const refreshProductionInnerTable = async ()=>{
         idCell.classList.add("py-2");
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.item_master_id;
+        nameCell.textContent = item.production_master_has_item_item_name;
 
         const quantityCell = document.createElement("td");
         quantityCell.textContent = item.production_master_has_item_quantity;
@@ -376,6 +376,7 @@ const checkInnerFormErrors = ()=>{
 
 
 const buttonInnerAdd = async ()=>{
+    productionItem.production_master_has_item_item_name =selectItem.options[selectItem.selectedIndex].text
     let errors = checkInnerFormErrors();
     if (errors==""){
         const userConfirm = confirm(`Are You Sure to add`)

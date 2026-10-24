@@ -545,27 +545,23 @@ const checkInnerFormErrors = ()=>{
 
     if (invoiceItem.item_master_id == null){
         errors+="Item Cannot Be Empty \n";
-        selectItem.classList.add("is-invalid");
         selectItem.style.border="1px solid red";
     }
 
     if (invoiceItem.invoice_header_has_item_quantity == null){
         errors+="Quantity Cannot Be Empty \n";
-        textQuantity.classList.add("is-invalid");
         textQuantity.style.border="1px solid red";
     }
 
 
     if (invoiceItem.invoice_header_has_item_price == null){
         errors+="Rate Cannot Be Empty \n";
-        textRate.classList.add("is-invalid");
         textRate.style.border="1px solid red";
     }
 
 
     if (invoiceItem.invoice_header_has_item_value == null){
         errors+="Value Cannot Be Empty \n";
-        textValue.classList.add("is-invalid");
         textValue.style.border="1px solid red";
     }
 

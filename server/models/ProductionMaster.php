@@ -143,6 +143,12 @@ order by pm.id desc;
         try {
 
             $this->connection->beginTransaction();
+
+            $getNextCodeSql = "select concat('PRO',lpad(coalesce(max(substring(production_master_code,4))+1,1),4,'0')) AS production_code from production_master";
+            $getNextCodeResult = $this->connection->prepare($getNextCodeSql);
+            $getNextCodeResult->execute();
+            $productionCode = $getNextCodeResult->fetchColumn();
+
             $sql = "insert into production_master(
             production_master_date,
             production_master_code,
@@ -167,11 +173,11 @@ order by pm.id desc;
             $statement = $this->connection->prepare($sql);
             $statement->execute([
                 "production_date" => $data["production_master_date"] ?? null,
-                "production_code" => $data["production_master_code"] ?? null,
+                "production_code" => $productionCode,
                 "added_user" => $data["production_master_added_user"] ?? null,
                 "modified_user" => $data["production_master_modify_user"] ?? null,
                 "delete_user" => $data["production_master_delete_user"] ?? null,
-                "added_date_time" => $data["production_master_added_date_time"] ?? null,
+                "added_date_time" => date("Y-m-d H:i:s"),
                 "modify_date_time" => $data["production_master_modify_date_time"] ?? null,
                 "delete_date_time" => $data["production_master_delete_date_time"] ?? null,
                 "status" => $data["production_master_status"] ?? null
@@ -229,7 +235,7 @@ order by pm.id desc;
                 ":modify_user" => $data["production_master_modify_user"] ?? null,
                 ":delete_user" => $data["production_master_delete_user"] ?? null,
                 ":added_date_time" => $data["production_master_added_date_time"] ?? null,
-                ":modify_date_time" => $data["production_master_modify_date_time"] ?? null,
+                ":modify_date_time" => date("Y-m-d H:i:s"),
                 ":delete_date_time" => $data["production_master_delete_date_time"] ?? null,
                 ":status" => $data["production_master_status"] ?? null,
                 ":id" => $id

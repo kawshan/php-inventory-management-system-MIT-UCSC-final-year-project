@@ -138,6 +138,17 @@ order by ih.invoice_header_id desc;";
             $this->connection->beginTransaction();
             //create invoice header
 
+            $getNextCodeSql = "SELECT CONCAT('INV',LPAD(COALESCE(MAX(SUBSTRING(invoice_header_code, 4)) + 1, 1),4,'0')) AS invoice_code FROM invoice_header";
+            $getNextCodeResult = $this->connection->prepare($getNextCodeSql);
+            $getNextCodeResult->execute();
+
+            $invoiceCode = $getNextCodeResult->fetchColumn();
+
+
+
+
+
+
             $sql = "insert into invoice_header(
                            invoice_header_created_date,
                            invoice_header_discount_percentage, 
@@ -172,7 +183,7 @@ order by ih.invoice_header_id desc;";
                 ":discount_percentage" => $data["invoice_header_discount_percentage"] ?? null,
                 ":status_id" => $data["invoice_status_invoice_status_id"],
                 ":location_id" => $data["location_master_id"],
-                ":header_code" => $data["invoice_header_code"] ?? null,
+                ":header_code" => $invoiceCode,
                 ":po_number" => $data["invoice_header_po_number"] ?? null,
                 ":dispatch_number" => $data["invoice_header_dispatch_number"] ?? null,
                 ":payment_type_id" => $data["payment_type_id"] ?? null,

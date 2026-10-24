@@ -291,8 +291,10 @@ const refreshProductionInnerForm = async ()=>{
         if (selectedItem) {
             productionItem.item_master_id = selectedItem.id;
             productionItem.production_master_has_item_item_name = selectedItem.item_master_short_name
+            textItem.style.border="1px solid green";
         } else {
             productionItem.item_master_id = null;
+            textItem.style.border="1px solid red";
         }
 
     });
@@ -381,13 +383,11 @@ const checkInnerFormErrors = ()=>{
 
     if (productionItem.item_master_id == null){
         errors+="Item Cannot be Empty \n"
-        selectItem.classList.add("is-invalid");
         selectItem.style.border="1px solid red";
     }
 
     if (productionItem.production_master_has_item_quantity == null){
         errors+=`Quantity Cannot Be Empty \n`
-        textQuantity.classList.add("is-invalid");
         textQuantity.style.border="1px solid red";
     }
 

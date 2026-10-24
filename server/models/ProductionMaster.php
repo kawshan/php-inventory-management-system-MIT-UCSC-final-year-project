@@ -32,7 +32,6 @@ class ProductionMaster {
     pmi.item_master_id,
     pmi.production_master_has_item_quantity,
     pmi.production_master_has_item_description,
-    pmi.production_master_has_item_item_name,
 
     im.id as item_master_id,
     im.item_master_name,
@@ -182,14 +181,14 @@ order by pm.id desc;
             (production_master_id,
             item_master_id,
             production_master_has_item_quantity,
-            production_master_has_item_description,
-            production_master_has_item_item_name)
+            production_master_has_item_description
+            )
             values(
             :production_header_id,
             :item_master_id,
             :item_quantity,
-            :item_description,
-            :item_name)";
+            :item_description
+            )";
 
             $statement = $this->connection->prepare($sql);
             foreach ($data["items"] as $item) {
@@ -198,7 +197,6 @@ order by pm.id desc;
                     ":item_master_id" => $item["item_master_id"],
                     ":item_quantity" => $item["production_master_has_item_quantity"],
                     ":item_description" => $item["production_master_has_item_description"] ?? null,
-                    ":item_name" => $item["production_master_has_item_item_name"] ?? null
                 ]);
             }
             $this->connection->commit();
@@ -250,14 +248,14 @@ order by pm.id desc;
 production_master_id, 
 item_master_id, 
 production_master_has_item_quantity,
-production_master_has_item_description, 
-production_master_has_item_item_name) values 
+production_master_has_item_description
+) values 
 (
  :production_master_id,
  :item_master_id,
  :item_quantity,
- :item_description,
- :item_name)";
+ :item_description
+ )";
 
             $statement = $this->connection->prepare($sql);
             foreach ($data["items"] as $item) {
@@ -266,7 +264,6 @@ production_master_has_item_item_name) values
                     ":item_master_id" => $item["item_master_id"],
                     ":item_quantity" => $item["production_master_has_item_quantity"],
                     ":item_description" => $item["production_master_has_item_description"] ?? null,
-                    ":item_name" => $item["production_master_has_item_item_name"] ?? null
                 ]);
             }
             $this->connection->commit();

@@ -274,15 +274,38 @@ const refreshProductionInnerForm = async ()=>{
     textQuantity.value="";
     textDescription.value="";
 
-    selectItem.value = "";
-    selectItem.innerHTML="";
+
     itemsList = await getAllItems();
-    generateSelectDropDown(selectItem, itemsList, 'data', 'item_master_name')
+    generateDataList(dataListItem,itemsList.data,"item_master_short_name");
+
+    const textItem = document.getElementById("selectItem");
+
+    textItem.addEventListener("change", () => {
+
+        const selectedValue = textItem.value;
+
+        const selectedItem = itemsList.data.find(item =>
+            item.item_master_short_name === selectedValue
+        );
+
+        if (selectedItem) {
+            productionItem.item_master_id = selectedItem.id;
+            productionItem.production_master_has_item_item_name = selectedItem.item_master_short_name
+        } else {
+            productionItem.item_master_id = null;
+        }
+
+    });
+
+
+
+
+
 
     await refreshProductionInnerTable();
-
-
 }
+
+
 
 
 
@@ -376,7 +399,6 @@ const checkInnerFormErrors = ()=>{
 
 
 const buttonInnerAdd = async ()=>{
-    productionItem.production_master_has_item_item_name =selectItem.options[selectItem.selectedIndex].text
     let errors = checkInnerFormErrors();
     if (errors==""){
         const userConfirm = confirm(`Are You Sure to add`)

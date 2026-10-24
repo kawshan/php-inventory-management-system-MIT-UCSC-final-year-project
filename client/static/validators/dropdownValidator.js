@@ -27,16 +27,4 @@ function dropdownValidatorWTtoolTip(fieldId,objectName,propertyName){
     }
 }
 
-function dropdownValidatorTwoProp(fieldId,objectName,propertyName,propertyNameTwo){
-    window[objectName][propertyName] = fieldId.value !== "" ? fieldId.value : null;
-    window[objectName][propertyNameTwo] = fieldId.value !== "" ? fieldId.options[fieldId.selectedIndex].text : null;
-    if (fieldId.value !== ""){
-        fieldId.style.border="1px solid green"
-        console.log('valid')
-    }else {
-        fieldId.style.border="1px solid red";
-        console.log('invalid');
-    }
-}
-
 

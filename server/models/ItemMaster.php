@@ -165,6 +165,16 @@ class ItemMaster {
     }
 
 
+
+    public function getItemByShortName($shortName) {
+        $sql = "select * from item_master WHERE item_master_short_name = :shortName";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([":shortName" => $shortName]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+
+
 }
 
 ?>

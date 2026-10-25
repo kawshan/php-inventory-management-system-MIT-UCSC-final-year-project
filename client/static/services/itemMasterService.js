@@ -62,7 +62,11 @@ async function getItemNameByID(id){
 
 }
 
-
+async function getItemByShortNameService(shortName){
+    let baseURL = "../../server/controller/ItemMasterController.php";
+    const response =await fetch(`${baseURL}?method=getItemByShortName&shortName=${encodeURIComponent(shortName)}`)
+    return await response.json();
+}
 
 
 

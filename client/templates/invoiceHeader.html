@@ -82,8 +82,7 @@
 
           <div class="col-2">
           <label class="form-label" for="selectItem">Item<i class="text-danger">*</i> </label>
-<!--          <select class="form-select" id="selectItem" onchange="dropdownValidatorWTtoolTip(this,'invoiceItem','item_master_id'); getInnerText(this)" required></select>-->
-            <input type="text" class="form-control" id="selectItem" list="dataListItem">
+            <input type="text" class="form-control" id="selectItem" list="dataListItem" onchange="getInnerText(this)">
             <datalist id="dataListItem"></datalist>
           </div>
 
@@ -187,7 +186,7 @@
 
       <div class="mb-3">
         <label class="form-label" for="textPayedAmount">Payed Amount</label>
-        <input type="number"  id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount'); getBalance(this)">
+        <input type="number"  id="textPayedAmount" class="form-control fw-bold" style="height: 60px" onwheel="return false" onkeyup="textValidator(this,'','invoiceHeaderMaster','invoice_header_payed_amount'); getBalance(this)">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Payed Amount</div>
       </div>
 
@@ -218,19 +217,19 @@
 
 <!--  invoice master table start-->
   <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
-    <table class="w-full text-sm text-left rtl:text-right text-body" id="invoiceMasterTable">
+    <table class="table table-responsive table-striped table-bordered" id="invoiceMasterTable">
       <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
       <tr>
-        <th scope="col" class="px-6 py-3 font-medium">#</th>
-        <th scope="col" class="px-6 py-3 font-medium">Created Date</th>
-        <th scope="col" class="px-6 py-3 font-medium">Location</th>
-        <th scope="col" class="px-6 py-3 font-medium">Payment Type</th>
-        <th scope="col" class="px-6 py-3 font-medium">Item Names</th>
-        <th scope="col" class="px-6 py-3 font-medium">Invoice Value</th>
-        <th scope="col" class="px-6 py-3 font-medium">Payed Value</th>
-        <th scope="col" class="px-6 py-3 font-medium">Balance Value</th>
-        <th scope="col" class="px-6 py-3 font-medium">Invoice Status</th>
-        <th scope="col" class="px-6 py-3 font-medium">Actions</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">#</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Created Date</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Location</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Payment Type</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Item Names</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Invoice Value</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Payed Value</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Balance Value</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Invoice Status</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Actions</th>
 
       </tr>
       </thead>

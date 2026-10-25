@@ -137,6 +137,21 @@ class ItemMasterController
     }
 
 
+    public function getItemByName($shortName) {
+        $result = $this->itemMaster->getItemByShortName($shortName);
+        header("Content-Type: application/json");
+        echo json_encode([
+            "success" => true,
+            "data" => $result
+        ]);
+
+    }
+
+
+
+
+
+
 }
 
 
@@ -236,6 +251,11 @@ switch ($method) {
 
     case "getName":
         $controller->getName($_GET["id"]);
+        break;
+
+
+    case "getItemByShortName":
+        $controller->getItemByName($_GET["shortName"]);
         break;
 
 

@@ -82,7 +82,7 @@ let invoiceList = await getAllInvoiceService();
         const itemNames = document.createElement("td");
 
         itemNames.innerHTML = item.items
-            .map(innerItem => `<li>${innerItem.item_master_name}</li>`)
+            .map(innerItem => `<span>${innerItem.item_master_name} &nbsp &nbsp </span>`)
             .join("");
 
 
@@ -426,6 +426,7 @@ const refreshInvoiceInnerForm = async () => {
     textDiscountedAmount.style.border = "1px solid #ced4da";
     textValue.style.border = "1px solid #ced4da";
 
+    selectItem.value = "";
     textQuantity.value = "";
     textRate.value = "";
     textDiscountedAmount.value = "";
@@ -478,7 +479,7 @@ const refreshInvoiceInnerTable = () => {
         idCell.classList.add("py-2");
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.itemName || item.item_master_id;
+        nameCell.textContent = item.item_master_short_name || item.item_master_id;
 
         const priceCell = document.createElement("td");
         priceCell.textContent = item.invoice_header_has_item_price;
@@ -640,9 +641,7 @@ const buttonInnerAdd = async () => {
 
 // helping js funcions
 function getInnerText(field){
-const selectedText = field.options[field.selectedIndex].text;
-    console.log(selectedText);
-    invoiceItem.itemName= selectedText;
+    invoiceItem.itemName= field.value;
 }
 
 
@@ -662,4 +661,46 @@ function getBalance(fieldName){
 
 
 
+document.addEventListener("keydown",async function (event){
+    if (event.ctrlKey && event.key==="Enter"){
+        console.log("pressed ctrl and enter key");
 
+        const shortName = document.getElementById("selectItem");
+        const quantity = document.getElementById("textQuantity");
+
+        const shortNameServerResponse = await getItemByShortNameService(shortName.value)
+        console.log(shortNameServerResponse.data.item_master_price);
+
+        const price = shortNameServerResponse.data.item_master_price
+
+        // setting rate
+        const rate = price*quantity.value
+        invoiceItem.invoice_header_has_item_price = rate;
+        textRate.value = rate
+        textRate.style.border="1px solid green";
+
+
+        //discount thing
+        const discountPercentage = document.getElementById("textDiscountPercentage");
+        let discountedAmount = document.getElementById("textDiscountedAmount");
+
+        const discountValue = (rate/100)*discountPercentage.value;
+        discountedAmount.value = discountValue;
+
+        invoiceItem.invoice_header_has_item_discount_amount = discountValue;
+        discountedAmount.style.border="1px solid green";
+
+
+        let valueField =document.getElementById("textValue")
+        valueField.value = rate - discountedAmount.value;
+        invoiceItem.invoice_header_has_item_value = valueField.value;
+        valueField.style.border="1px solid green";
+
+        setTimeout(()=>{
+            buttonInnerAdd();
+        },500)
+
+
+
+    }
+})

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Invoice Master</title>
+    <title>Production Master</title>
 
   <!--    bootstrap linking codes -->
   <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
@@ -113,7 +113,7 @@
 
 
           <div class="col-2 mt-4">
-            <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="btn text-white" style="background-color: #16a34a">Add</button>
+            <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="rounded bg-emerald-700 px-3 py-2 text-neutral-50 hover:bg-black">Add</button>
           </div>
         </div>
         <!--   item form area end     -->
@@ -152,9 +152,9 @@
 
     <div class="col-md-3 mt-4">
       <div class="flex justify-between">
-        <button type="button" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
-        <button type="button" id="btnUpdate" onclick="updateProductionMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
-        <button type="button" id="btnSave" onclick="saveProductionMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
+        <button type="button" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
+        <button type="button" id="btnUpdate" onclick="updateProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+        <button type="button" id="btnSave" onclick="saveProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
       </div>
     </div>
 
@@ -167,14 +167,14 @@
 
 <!--  production master table start-->
   <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
-    <table class="w-full text-sm text-left rtl:text-right text-body" id="productionMasterTable">
+    <table class="table table-bordered table-striped" id="productionMasterTable">
       <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
       <tr>
-        <th scope="col" class="px-6 py-3 font-medium">#</th>
-        <th scope="col" class="px-6 py-3 font-medium">Created Date</th>
-        <th scope="col" class="px-6 py-3 font-medium">Items</th>
-        <th scope="col" class="px-6 py-3 font-medium">Status</th>
-        <th scope="col" class="px-6 py-3 font-medium">Actions</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">#</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Created Date</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Items</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Status</th>
+        <th scope="col" class="px-6 py-3 font-medium text-center">Actions</th>
 
       </tr>
       </thead>

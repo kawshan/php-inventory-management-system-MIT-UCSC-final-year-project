@@ -46,12 +46,12 @@ const refreshProductionMasterTable = async ()=>{
         createdDate.textContent=item.production_master_date;
 
         const ProductionStatus = document.createElement("td");
-        ProductionStatus.textContent = item.production_master_status == 1 ? "Active" : "Inactive";
+        ProductionStatus.innerHTML = `<p class="text-center">${item.production_master_status == 1 ? "Active" : "Inactive"}</p>`;
 
         const itemNames = document.createElement("td");
 
         itemNames.innerHTML = item.item_masters
-            .map(innerItem => `<li >${innerItem.item_master_name}</li>`)
+            .map(innerItem => `<span class="text-center">${innerItem.item_master_name} &nbsp &nbsp </span>`)
             .join("");
 
 
@@ -60,7 +60,7 @@ const refreshProductionMasterTable = async ()=>{
 
         const refillButton = document.createElement("button");
         refillButton.textContent = "Refill"
-        refillButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        refillButton.classList.add("rounded","bg-emerald-800","px-3", "py-2", "text-neutral-50", "hover:bg-black");
         refillButton.onclick = () => {
             refillProductionMaster(item)
         }
@@ -68,7 +68,7 @@ const refreshProductionMasterTable = async ()=>{
 
         const printButton = document.createElement("button");
         printButton.textContent = "print"
-        printButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        printButton.classList.add("rounded","bg-emerald-800","px-3", "py-2", "text-neutral-50", "hover:bg-black");
         printButton.onclick = () => {
             printProductionMaster(item)
         }
@@ -76,7 +76,7 @@ const refreshProductionMasterTable = async ()=>{
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "delete"
-        deleteButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        deleteButton.classList.add("rounded","bg-emerald-800","px-3", "py-2", "text-neutral-50", "hover:bg-black");
         deleteButton.onclick = () => {
             deleteProductionMaster(item)
         }

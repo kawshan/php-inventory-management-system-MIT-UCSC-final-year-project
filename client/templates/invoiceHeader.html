@@ -40,6 +40,7 @@
 
   <!--    helping files link-->
   <script src="../static/commonJS/dropDownGenerator.js"></script>
+  <script src="../static/commonJS/dataListGenerator.js"></script>
   <script src="../static/validators/textValidator.js"></script>
   <script src="../static/validators/dropdownValidator.js"></script>
 
@@ -81,7 +82,9 @@
 
           <div class="col-2">
           <label class="form-label" for="selectItem">Item<i class="text-danger">*</i> </label>
-          <select class="form-select" id="selectItem" onchange="dropdownValidatorWTtoolTip(this,'invoiceItem','item_master_id'); getInnerText(this)" required></select>
+<!--          <select class="form-select" id="selectItem" onchange="dropdownValidatorWTtoolTip(this,'invoiceItem','item_master_id'); getInnerText(this)" required></select>-->
+            <input type="text" class="form-control" id="selectItem" list="dataListItem">
+            <datalist id="dataListItem"></datalist>
           </div>
 
 
@@ -109,7 +112,7 @@
 
 
           <div class="col-2 mt-4">
-            <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="btn text-white" style="background-color: #16a34a">Add</button>
+            <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="rounded bg-emerald-700 px-3 py-2 text-neutral-50 hover:bg-black">Add</button>
           </div>
         </div>
         <!--   item form area end     -->
@@ -202,9 +205,9 @@
 
 
       <div class="flex justify-between">
-        <button type="button" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
-        <button type="button" id="btnUpdate" onclick="updateInvoiceHeader()" class="btn text-white" style="background-color: #065f46">Update</button>
-        <button type="button" id="btnSave" onclick="saveInvoiceHeader()" class="btn text-white" style="background-color: #065f46">Save</button>
+        <button type="button" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
+        <button type="button" id="btnUpdate" onclick="updateInvoiceHeader()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+        <button type="button" id="btnSave" onclick="saveInvoiceHeader()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
       </div>
 
 

@@ -100,7 +100,7 @@ let invoiceList = await getAllInvoiceService();
 
         const refillButton = document.createElement("button");
         refillButton.textContent = "Refill"
-        refillButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        refillButton.classList.add("rounded","bg-emerald-800","px-3", "py-2", "text-neutral-50", "hover:bg-black");
         refillButton.onclick = () => {
             refillInvoiceMaster(item)
         }
@@ -108,7 +108,7 @@ let invoiceList = await getAllInvoiceService();
 
         const printButton = document.createElement("button");
         printButton.textContent = "print"
-        printButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        printButton.classList.add("rounded","bg-emerald-800","px-3", "py-2", "text-neutral-50", "hover:bg-black");
         printButton.onclick = () => {
             printInvoiceMaster(item)
         }
@@ -116,7 +116,7 @@ let invoiceList = await getAllInvoiceService();
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "delete"
-        deleteButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
+        deleteButton.classList.add("rounded","bg-emerald-800","px-3", "py-2", "text-neutral-50", "hover:bg-black");
         deleteButton.onclick = () => {
             deleteInvoiceMaster(item)
         }
@@ -426,17 +426,36 @@ const refreshInvoiceInnerForm = async () => {
     textDiscountedAmount.style.border = "1px solid #ced4da";
     textValue.style.border = "1px solid #ced4da";
 
-
-    selectItem.value = "";
-    selectItem.innerHTML="";
-    itemsList = await getAllItems();
-    generateSelectDropDown(selectItem, itemsList, 'data', 'item_master_name')
-
-
     textQuantity.value = "";
     textRate.value = "";
     textDiscountedAmount.value = "";
     textValue.value = "";
+
+
+    itemsList = await getAllItems();
+    generateDataList(dataListItem,itemsList.data,"item_master_short_name");
+
+    const textItem = document.getElementById("selectItem");
+
+    textItem.addEventListener("change", () => {
+
+        const selectedValue = textItem.value;
+
+        const selectedItem = itemsList.data.find(item =>
+            item.item_master_short_name === selectedValue
+        );
+
+        if (selectedItem) {
+            invoiceItem.item_master_id = selectedItem.id;
+            textItem.style.border="1px solid green";
+        } else {
+            productionItem.item_master_id = null;
+            textItem.style.border="1px solid red";
+        }
+
+    });
+
+
 
     refreshInvoiceInnerTable();
 

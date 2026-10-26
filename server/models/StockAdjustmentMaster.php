@@ -60,16 +60,16 @@ where sam.stock_adjustment_master_status=1 order by sam.id desc";
             if (!isset($adjustments[$adjustmentId])) {
                 $adjustments[$adjustmentId] = [
                     "stock_adjustment_id" => $row["stock_adjustment_id"],
-                    "stock_adjustment_code" => $row["stock_adjustment_master_code"],
-                    "stock_adjustment_date" => $row["stock_adjustment_master_date"],
-                    "stock_adjustment_added_datetime" => $row["stock_adjustment_master_added_datetime"],
-                    "stock_adjustment_modify_datetime" => $row["stock_adjustment_master_modify_datetime"],
-                    "stock_adjustment_delete_datetime" => $row["stock_adjustment_master_delete_datetime"],
-                    "stock_adjustment_added_user" => $row["stock_adjustment_master_added_user"],
-                    "stock_adjustment_modify_user" => $row["stock_adjustment_master_modify_user"],
-                    "stock_adjustment_delete_user" => $row["stock_adjustment_master_delete_user"],
+                    "stock_adjustment_master_code" => $row["stock_adjustment_master_code"],
+                    "stock_adjustment_master_date" => $row["stock_adjustment_master_date"],
+                    "stock_adjustment_master_added_datetime" => $row["stock_adjustment_master_added_datetime"],
+                    "stock_adjustment_master_modify_datetime" => $row["stock_adjustment_master_modify_datetime"],
+                    "stock_adjustment_master_delete_datetime" => $row["stock_adjustment_master_delete_datetime"],
+                    "stock_adjustment_master_added_user" => $row["stock_adjustment_master_added_user"],
+                    "stock_adjustment_master_modify_user" => $row["stock_adjustment_master_modify_user"],
+                    "stock_adjustment_master_delete_user" => $row["stock_adjustment_master_delete_user"],
                     "location_master_id" => $row["location_master_id"],
-                    "stock_adjustment_status" => $row["stock_adjustment_master_status"],
+                    "stock_adjustment_master_status" => $row["stock_adjustment_master_status"],
 
                     "items" => [],
                     "item_master" => [],
@@ -84,9 +84,10 @@ where sam.stock_adjustment_master_status=1 order by sam.id desc";
                     "stock_adjustment_has_item_id" => $row["stock_adjustment_has_item_id"],
                     "stock_adjustment_master_id" => $row["stock_adjustment_master_id"],
                     "item_master_id" => $row["item_master_id"],
-                    "item_master_has_item_quantity" => $row["stock_adjustment_master_has_item_master_quantity"],
+                    "stock_adjustment_master_has_item_master_quantity" => $row["stock_adjustment_master_has_item_master_quantity"],
                     "stock_adjustment_master_has_item_master_rate" => $row["stock_adjustment_master_has_item_master_rate"],
-                    "item_master_has_item_description" => $row["stock_adjustment_master_has_item_master_description"],
+                    "stock_adjustment_master_has_item_master_description" => $row["stock_adjustment_master_has_item_master_description"],
+                    "item_master_short_name" => $row["item_master_short_name"],
 
                 ];
             }
@@ -148,7 +149,7 @@ values(
                 "modify_user" => $data["stock_adjustment_master_modify_user"] ?? null,
                 "delete_user" => $data["stock_adjustment_master_delete_user"] ?? null,
                 "location_master_id" => $data["location_master_id"] ?? null,
-                "status" => $data["stock_adjustment_status"] ?? null,
+                "status" => $data["stock_adjustment_master_status"] ?? null,
             ]);
 
             $adjustmentId = $this->connection->lastInsertId();

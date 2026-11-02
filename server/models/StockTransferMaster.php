@@ -93,6 +93,7 @@ where stm.stock_transfer_master_status=1 order by stm.id desc";
                     "stock_transfer_has_item_id" => $row["stock_transfer_has_item_id"],
                     "stock_transfer_master_id" => $row["stock_transfer_master_id"],
                     "item_master_id" => $row["item_master_id"],
+                    "item_master_short_name" => $row["item_master_short_name"],
                     "stock_transfer_master_has_item_master_description" => $row["stock_transfer_master_has_item_master_description"],
                     "stock_transfer_master_has_item_master_quantity" => $row["stock_transfer_master_has_item_master_quantity"],
                     "from_location" => $row["from_location"],

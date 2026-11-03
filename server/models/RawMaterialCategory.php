@@ -65,21 +65,21 @@ delete_user
 
         $statement = $this->connection->prepare($sql);
         $statement->execute([
-            ":code" => $data["code"],
-            ":name" => $data["name"],
-            ":size" => $data["size"],
-            ":shape" => $data["shape"],
-            ":description" => $data["description"],
-            ":volume" => $data["volume"],
-            ":marginal_order_quantity" => $data["marginal_order_quantity"],
-            ":packing" => $data["packing"],
-            ":status" => $data["status"],
-            ":added_date_time" => $data["added_date_time"],
-            ":modify_date_time" => $data["modify_date_time"],
-            ":delete_date_time" => $data["delete_date_time"],
-            ":added_user" => $data["added_user"],
-            ":modify_user" => $data["modify_user"],
-            ":delete_user" => $data["delete_user"]
+            ":code" => $data["code"] ?? null,
+            ":name" => $data["name"] ?? null,
+            ":size" => $data["size"] ?? null,
+            ":shape" => $data["shape"] ?? null,
+            ":description" => $data["description"] ?? null,
+            ":volume" => $data["volume"] ?? null,
+            ":marginal_order_quantity" => $data["marginal_order_quantity"] ?? null,
+            ":packing" => $data["packing"] ?? null,
+            ":status" => $data["status"] ?? null,
+            ":added_date_time" => date("Y-m-d H:i:s"),
+            ":modify_date_time" => $data["modify_date_time"] ?? null,
+            ":delete_date_time" => $data["delete_date_time"] ?? null,
+            ":added_user" => $data["added_user"] ?? null,
+            ":modify_user" => $data["modify_user"] ?? null,
+            ":delete_user" => $data["delete_user"] ?? null
         ]);
 
         return $this->connection->lastInsertId();
@@ -107,21 +107,21 @@ where id = :id";
 
         $statement = $this->connection->prepare($sql);
         return $statement->execute([
-            ":code" => $data["code"],
-            ":name" => $data["name"],
-            ":size" => $data["size"],
-            ":shape" => $data["shape"],
-            ":description" => $data["description"],
-            ":volume" => $data["volume"],
-            ":marginal_order_quantity" => $data["marginal_order_quantity"],
-            ":packing" => $data["packing"],
-            ":status" => $data["status"],
-            ":added_date_time" => $data["added_date_time"],
-            ":modify_date_time" => $data["modify_date_time"],
-            ":delete_date_time" => $data["delete_date_time"],
-            ":added_user" => $data["added_user"],
-            ":modify_user" => $data["modify_user"],
-            ":delete_user" => $data["delete_user"],
+            ":code" => $data["code"] ?? null,
+            ":name" => $data["name"] ?? null,
+            ":size" => $data["size"] ?? null,
+            ":shape" => $data["shape"] ?? null,
+            ":description" => $data["description"] ?? null,
+            ":volume" => $data["volume"] ?? null,
+            ":marginal_order_quantity" => $data["marginal_order_quantity"] ?? null,
+            ":packing" => $data["packing"] ?? null,
+            ":status" => $data["status"] ?? null,
+            ":added_date_time" => $data["added_date_time"] ?? null,
+            ":modify_date_time" => date("Y-m-d H:i:s"),
+            ":delete_date_time" => $data["delete_date_time"] ?? null,
+            ":added_user" => $data["added_user"] ?? null,
+            ":modify_user" => $data["modify_user"] ?? null,
+            ":delete_user" => $data["delete_user"] ?? null,
             ":id" => $id
         ]);
     }
@@ -129,9 +129,9 @@ where id = :id";
 
 
     public function delete($id) {
-        $sql = "update raw_material_category set status = 0 where id= :id";
+        $sql = "update raw_material_category set status = 0, delete_date_time = :delete_date_time, delete_user = :delete_user where id= :id";
         $statement = $this->connection->prepare($sql);
-        return $statement->execute([":id" => $id]);
+        return $statement->execute([":id" => $id, ":delete_date_time" => date("Y-m-d H:i:s"), ":delete_user" => $data["delete_user"] ?? null]);
     }
 
 

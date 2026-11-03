@@ -78,7 +78,7 @@ const refreshRawMaterialCategoryTable = async ()=>{
         refillButton.textContent = "Refill"
         refillButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
         refillButton.onclick = () => {
-            refillItemMaster(item)
+            refillRawMaterialCategoryMaster(item)
         }
 
 
@@ -86,7 +86,7 @@ const refreshRawMaterialCategoryTable = async ()=>{
         printButton.textContent = "print"
         printButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
         printButton.onclick = () => {
-            printItemMaster(item)
+            printRawMaterialCategory(item)
         }
 
 
@@ -94,7 +94,7 @@ const refreshRawMaterialCategoryTable = async ()=>{
         deleteButton.textContent = "delete"
         deleteButton.classList.add("bg-emerald-700", "text-white", "px-3", "py-2", "rounded");
         deleteButton.onclick = () => {
-            deleteItemMaster(item)
+            deleteRawMaterialCategoryMaster(item)
         }
 
 
@@ -127,3 +127,184 @@ const refreshRawMaterialCategoryTable = async ()=>{
 
 
 }
+
+
+
+
+const refillRawMaterialCategoryMaster = (obj) => {
+    console.log(obj);
+
+    rawMaterialCategory = JSON.parse(JSON.stringify(obj));
+    oldRawMaterialCategory = JSON.parse(JSON.stringify(obj));
+
+
+    textRawMaterialCategoryName.value = rawMaterialCategory.name;
+    textRawMaterialSize.value = rawMaterialCategory.size;
+    textRawMaterialShape.value = rawMaterialCategory.shape;
+    textVolume.value = rawMaterialCategory.volume
+    textRawMaterialMarginalOrderQuantity.value = rawMaterialCategory.marginal_order_quantity
+    textRawMaterialPacking.value = rawMaterialCategory.packing
+    selectStatus.value = rawMaterialCategory.status
+    textDescription.value = rawMaterialCategory.description
+}
+
+
+const deleteRawMaterialCategoryMaster = async (obj) => {
+    console.log("Delete", obj);
+    const userConfirm = confirm(`Are You Sure To delete Following Data?
+Name is ${obj.name}
+Status is ${obj.status}`)
+    if (userConfirm) {
+
+        const deleteServerResponse = await deleteRawMaterialCategoryService(obj.id);
+        if (deleteServerResponse.success) {
+            alert(`Delete Success`);
+            setTimeout(()=>{
+              window.location.reload();
+            },500)
+        } else {
+            alert(`Delete Unsuccessful ${deleteServerResponse.message}`)
+        }
+    } else {
+        alert("Operation Cancelled By User")
+
+    }
+}
+
+
+const printRawMaterialCategory = ()=>{
+
+}
+
+
+
+
+
+const printItemMaster = (obj) => {
+    console.log(obj)
+}
+
+
+const checkErrors = () => {
+
+    let errors = ""
+
+    if (rawMaterialCategory.name == null) {
+        errors += "Name Cannot Be Empty \n"
+        textRawMaterialCategoryName.classList.add("is-invalid");
+        textRawMaterialCategoryName.style.border="1px solid red";
+    }
+
+    if (rawMaterialCategory.status == null) {
+        errors += "Short Name Cannot Be Empty \n"
+        selectStatus.classList.add("is-invalid");
+        selectStatus.style.border="1px solid red";
+    }
+    return errors;
+}
+
+
+const saveRawMaterialCategory = async () => {
+    const errors = checkErrors();
+
+    if (errors !== "") {
+        alert(`you have following errors \n ${errors}`);
+    }
+    const userConfirm = confirm(`Are You Sure To Add Following Data
+Name is ${rawMaterialCategory.name}
+Status ${rawMaterialCategory.status}`)
+    if (!userConfirm) {
+        alert("Operation Cancelled By User")
+    }
+
+    try {
+        const serverResponse = await createRawMaterialCategoryService(rawMaterialCategory);
+
+        if (serverResponse.success) {
+            alert("Save Success")
+            setTimeout(()=>{
+                window.location.reload();
+            },500)
+        } else {
+            alert(`Something Went Wrong: ${serverResponse.message}`);
+        }
+    } catch (error) {
+        alert(`Something Went Wrong: ${error.message}`);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+const checkUpdatesRawMaterialCategory = () => {
+
+    let updates = ""
+
+    if (oldRawMaterialCategory.name !== rawMaterialCategory.name) {
+        updates += "Name is Updated \n"
+    }
+
+    if (oldRawMaterialCategory.size !== rawMaterialCategory.size) {
+        updates += "Size is Updated \n"
+    }
+
+    if (oldRawMaterialCategory.shape !== rawMaterialCategory.shape) {
+        updates += "Shape is updated \n"
+    }
+
+    if (oldRawMaterialCategory.description !== rawMaterialCategory.description) {
+        updates += "Description is updated \n"
+    }
+    if (oldRawMaterialCategory.volume !== rawMaterialCategory.volume) {
+        updates += "Volume is updated \n"
+    }
+
+    if (oldRawMaterialCategory.marginal_order_quantity !== rawMaterialCategory.marginal_order_quantity) {
+        updates += "MOQ is updated \n"
+    }
+
+    if (oldRawMaterialCategory.packing !== rawMaterialCategory.packing) {
+        updates += "Packing is Updated \n"
+    }
+
+    if (oldRawMaterialCategory.status !== rawMaterialCategory.status) {
+        updates += "Status is Updated \n"
+    }
+    return updates;
+}
+
+
+const updateItemMaster = async () => {
+    const updates = checkUpdatesRawMaterialCategory();
+
+    if (updates !== "") {
+        const userConfirm = confirm(`Are You Sure to Proceed with Following Changes ${updates}`)
+        if (userConfirm) {
+            console.log(rawMaterialCategory.id)
+            const updateServerResponse = await updateRawMaterialCategoryService(rawMaterialCategory.id, rawMaterialCategory);
+            if (updateServerResponse.success) {
+                alert(`Update Success`);
+setTimeout(()=>{
+    window.location.reload();
+},500)
+            } else {
+                alert(`Something Went Wrong: ${updateServerResponse.message}`);
+            }
+        } else {
+            alert("User Cancelled The Operation?")
+        }
+    } else {
+        alert("Nothing To Update?")
+    }
+}
+
+
+
+
+

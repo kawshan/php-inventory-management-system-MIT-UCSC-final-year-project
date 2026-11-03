@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raw Material Category Master</title>
+
+<!--    bootstrap linking codes -->
+    <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="../static/bootstrap-5.2/js/bootstrap.min.js"></script>
+
+<!--    tailwind linking code-->
+    <script src="../static/tailwind/browser@4.js"></script>
+
+<!--    sweet alert code links-->
+    <link rel="stylesheet" href="../static/sweetAlert/sweetalert2.min.css">
+    <script src="../static/sweetAlert/sweetalert2.all.min.js"></script>
+
+
+<!--    data table links-->
+    <script src="../static/datatable/js/dataTables.min.js"></script>
+    <script src="../static/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="../static/datatable/js/buttons.dataTables.min.js"></script>
+    <script src="../static/datatable/js/jszip.min.js"></script>
+    <script src="../static/datatable/js/pdfmake.min.js"></script>
+    <script src="../static/datatable/js/vfs_fonts.js"></script>
+    <link rel="stylesheet" href="../static/datatable/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="../static/datatable/css/buttons.dataTables.min.css">
+
+
+<!--   controller file linking code -->
+    <script src="../static/controllerJS/rawMaterialCategoryController.js"></script>
+
+<!--    service files link-->
+    <script src="../static/services/itemCategoryService.js"></script>
+    <script src="../static/services/itemMasterService.js"></script>
+    <script src="../static/services/itemSizeService.js"></script>
+    <script src="../static/services/itemStatusService.js"></script>
+
+<!--    helping files link-->
+    <script src="../static/commonJS/dropDownGenerator.js"></script>
+    <script src="../static/validators/textValidator.js"></script>
+    <script src="../static/validators/dropdownValidator.js"></script>
+
+
+
+</head>
+<body class="container-fluid">
+<h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Raw Material Category Master</h1>
+
+
+<!--form area start-->
+<div class="p-2">
+<div class="row">
+    <div class="col-md-2">
+        <label class="form-label" for="textRawMaterialCategoryName">Name <i class="text-danger">*</i> </label>
+        <input type="text" id="textRawMaterialCategoryName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Name" onkeyup="textValidator(this,'','rawMaterialCategory','name')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Category Name</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textRawMaterialSize">Size <i class="text-danger">*</i> </label>
+        <input type="text" id="textRawMaterialSize" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Size" onkeyup="textValidator(this,'','rawMaterialCategory','size')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Category Size</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textRawMaterialShape">Shape <i class="text-danger">*</i> </label>
+        <input type="text" id="textRawMaterialShape" class="form-control fw-bold" style="height: 60px" placeholder="Enter Category Shape" onkeyup="textValidator(this,'','rawMaterialCategory','shape')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Category Shape</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textVolume">Volume <i class="text-danger">*</i> </label>
+        <input type="text" id="textVolume" class="form-control fw-bold" style="height: 60px" placeholder="Enter Item Volume" onkeyup="textValidator(this,'','rawMaterialCategory','volume')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Volume</div>
+    </div>
+
+
+    <div class="col-md-2">
+        <label class="form-label" for="textRawMaterialMarginalOrderQuantity">MOQ <i class="text-danger">*</i> </label>
+        <input type="text" id="textRawMaterialMarginalOrderQuantity" class="form-control fw-bold" style="height: 60px" placeholder="Enter MOQ" onkeyup="textValidator(this,'','rawMaterialCategory','marginal_order_quantity')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid MOQ</div>
+    </div>
+
+
+    <div class="col-md-2">
+        <label class="form-label" for="textRawMaterialPacking">Packing <i class="text-danger">*</i> </label>
+        <input type="text" id="textRawMaterialPacking" class="form-control fw-bold" style="height: 60px" placeholder="Enter Packing" onkeyup="textValidator(this,'','rawMaterialCategory','packing')">
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Packing</div>
+
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <label class="form-label" for="selectStatus">Status<i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'rawMaterialCategory','status')" required>
+            <option value="" selected disabled>Select An Option</option>
+            <option value="1">Active</option>
+            <option value="0">In-active</option>
+        </select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="textDescription">Description </label>
+        <input type="text" id="textDescription" class="form-control fw-bold" style="height: 60px" placeholder="Enter Cost" onkeyup="textValidator(this,'','rawMaterialCategory','description')">
+    </div>
+
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnReset" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnSave" onclick="saveItemMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
+    </div>
+</div>
+
+
+</div>
+<!--form area end-->
+
+<!--table area start-->
+<table class="table table-bordered table-responsive display" id="tableRawMaterialCategory" >
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>name</th>
+        <th>Code</th>
+        <th>Size</th>
+        <th>Shape</th>
+        <th>Volume</th>
+        <th>MOQ</th>
+        <th>Packing</th>
+        <th>Status</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody id="rawMaterialCategoryTableBody">
+
+    </tbody>
+</table>
+<!--table area end-->
+
+
+
+</body>
+</html>

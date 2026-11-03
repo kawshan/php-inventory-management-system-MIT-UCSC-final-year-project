@@ -12,20 +12,17 @@ $connection = $database->connect();
 $itemMaster = new ItemMaster($connection);
 
 
-class ItemMasterController
-{
+class ItemMasterController {
     private $itemMaster;
 
 
-    public function __construct($itemMaster)
-    {
+    public function __construct($itemMaster) {
         $this->itemMaster = $itemMaster;
     }
 
 
     // GET ALL ITEMS
-    public function findAll()
-    {
+    public function findAll() {
         $items = $this->itemMaster->getAll();
 
         header("Content-Type: application/json");
@@ -38,8 +35,7 @@ class ItemMasterController
 
 
     // GET ITEM BY ID
-    public function getById($id)
-    {
+    public function getById($id) {
         $item = $this->itemMaster->getById($id);
 
         header("Content-Type: application/json");
@@ -64,8 +60,7 @@ class ItemMasterController
 
 
     // CREATE ITEM
-    public function create()
-    {
+    public function create() {
         try {
             $data = json_decode(
                 file_get_contents("php://input"),
@@ -84,7 +79,7 @@ class ItemMasterController
                 "id" => $id
             ]);
 
-        }catch (Throwable $error){
+        } catch (Throwable $error) {
             http_response_code(500);
             echo json_encode([
                 "success" => false,
@@ -95,8 +90,7 @@ class ItemMasterController
 
 
     // UPDATE ITEM
-    public function update($id)
-    {
+    public function update($id) {
         $data = json_decode(
             file_get_contents("php://input"),
             true
@@ -114,8 +108,7 @@ class ItemMasterController
 
 
     // DELETE ITEM
-    public function delete($id)
-    {
+    public function delete($id) {
         $result = $this->itemMaster->delete($id);
 
         header("Content-Type: application/json");
@@ -148,18 +141,10 @@ class ItemMasterController
     }
 
 
-
-
-
-
 }
 
 
-
-
-
 $controller = new ItemMasterController($itemMaster);
-
 
 
 $method = $_GET["method"] ?? "";

@@ -280,7 +280,7 @@ const checkUpdatesRawMaterialCategory = () => {
 }
 
 
-const updateItemMaster = async () => {
+const updateRawMaterialCategory = async () => {
     const updates = checkUpdatesRawMaterialCategory();
 
     if (updates !== "") {

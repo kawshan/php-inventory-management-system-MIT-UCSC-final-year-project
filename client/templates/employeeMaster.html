@@ -33,6 +33,7 @@
 
 <!--    service files link-->
     <script src="../static/services/employeeMasterService.js"></script>
+    <script src="../static/services/designationService.js"></script>
 
 <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -60,7 +61,7 @@
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Date Of Birth</div>
     </div>
     <div class="col-md-2">
-        <label class="form-label" for="textNic">NIC </label>
+        <label class="form-label" for="textNic">NIC <i class="text-danger">*</i> </label>
         <input type="text" id="textNic" class="form-control fw-bold" style="height: 60px" placeholder="Enter NIC" onkeyup="textValidator(this,'','employeeMaster','nic')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid NIC</div>
     </div>
@@ -83,7 +84,7 @@
 
 
     <div class="col-md-2">
-        <label class="form-label" for="textAddress">Address </label>
+        <label class="form-label" for="textAddress">Address <i class="text-danger">*</i> </label>
         <input type="text" id="textAddress" class="form-control fw-bold" style="height: 60px" placeholder="Enter Address" onkeyup="textValidator(this,'','employeeMaster','address')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Address</div>
 
@@ -113,7 +114,7 @@
 
         <div class="col-md-2">
             <label class="form-label" for="selectStatus">Status<i class="text-danger">*</i> </label>
-            <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'employeeMaster','employee_status\n')" required>
+            <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'employeeMaster','employee_status')" required>
                 <option value="" selected disabled>Select An Option</option>
                 <option value="1">Active</option>
                 <option value="0">In-active</option>
@@ -134,11 +135,11 @@
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+        <button type="button" id="btnUpdate" onclick="updateEmployeeMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnSave" onclick="saveRawMaterialCategory()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
+        <button type="button" id="btnSave" onclick="saveEmployeeMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
     </div>
 </div>
 

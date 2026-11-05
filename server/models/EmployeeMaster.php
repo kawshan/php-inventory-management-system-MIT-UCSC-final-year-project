@@ -12,7 +12,7 @@ class EmployeeMaster {
     }
 
     public function findAll() {
-        $sql = "select * from employee where employee_status=1";
+        $sql = "select * from employee where employee_status=1 order by id DESC";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -56,7 +56,7 @@ employee_status) values (
 
         $statement = $this->connection->prepare($sql);
         $statement->execute([
-            ":employee_name" => $data["employee_name"] ?? null ?? null,
+            ":employee_name" => $data["employee_name"] ?? null,
             ":dob" => $data["dob"] ?? null,
             ":nic" => $data["nic"] ?? null,
             ":gender" => $data["gender"] ?? null,

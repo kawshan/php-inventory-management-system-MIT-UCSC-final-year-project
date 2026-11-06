@@ -21,6 +21,20 @@ class EmployeeMaster {
 
 
     public function create($data) {
+
+        $existingEmployee = "SELECT 1 FROM employee WHERE nic = :nic";
+
+        $statement = $this->connection->prepare($existingEmployee);
+        $statement->execute([
+            ":nic" => $data["nic"]
+        ]);
+
+        if ($statement->fetch()) {
+            return null;
+        }
+
+
+
         $sql = "insert into employee(
 employee_name,
 dob,

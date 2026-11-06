@@ -14,10 +14,13 @@ async function createEmployeeService(data) {
     const response = await fetch(`${baseURL}?method=create`,
         {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(data)});
 
-    const result = await response.json();
+    let result = await response.json();
 
     if (!response.ok || !result.success) {
-        throw new Error(result.message || "Failed to Create Employee");
+        result = {
+            success : false,
+            "message" : result.message
+        }
     }
 
     return result;

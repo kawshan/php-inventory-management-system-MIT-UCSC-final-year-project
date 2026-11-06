@@ -32,6 +32,21 @@ class EmployeeController {
             $data = json_decode(file_get_contents("php://input"), true);
             $id = $this->employeeMaster->create($data);
             header('Content-Type: application/json');
+
+            if ($id === null) {
+
+                http_response_code(409);
+
+                echo json_encode([
+                    "success" => false,
+                    "message" => "Employee already exists!"
+                ]);
+
+                return;
+            }
+
+
+
             http_response_code(200);
             echo json_encode([
                 "success" => true,

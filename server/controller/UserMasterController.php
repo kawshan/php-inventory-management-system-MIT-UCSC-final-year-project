@@ -65,6 +65,24 @@ class UserMasterController {
         $data = json_decode(file_get_contents("php://input"), true);
         $result = $this->userMaster->update($id, $data);
         header('Content-Type: application/json');
+
+
+        if (!$result) {
+
+            http_response_code(409);
+
+            echo json_encode([
+                "success" => false,
+                "message" => "User Name already exists! "
+            ]);
+
+            return;
+        }
+
+
+
+
+
         http_response_code(200);
         echo json_encode([
             "success" => $result,

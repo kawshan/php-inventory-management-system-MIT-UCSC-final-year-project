@@ -15,6 +15,7 @@ class UserMaster {
 
 u.id as user_id,
 u.user_name,
+u.password,
 u.email,
 u.status,
 u.added_date_time,
@@ -55,7 +56,7 @@ left join employee e on u.employee_id = e.id where u.status = 1 order by u.id de
             return null;
         }
 
-
+        $userPasswordHashed = password_hash($data["password"], PASSWORD_DEFAULT);
 
 
 
@@ -89,7 +90,7 @@ role_id) values(
         $statement = $this->connection->prepare($sql);
         $statement->execute([
             ":user_name" => $data["user_name"] ??  null,
-            ":password" => $data["password"] ??  null,
+            ":password" => $userPasswordHashed,
             ":email" => $data["email"] ??  null,
             ":status" => $data["status"] ??  null,
             ":added_date_time" => date("Y-m-d H:i:s"),
@@ -107,6 +108,26 @@ role_id) values(
 
 
     public function update($id,$data) {
+
+
+        $existingUser = "SELECT 1 FROM user 
+                     WHERE user_name = :user_name 
+                     AND id != :id";
+
+        $statement = $this->connection->prepare($existingUser);
+
+        $statement->execute([
+            ":user_name" => $data["user_name"],
+            ":id" => $id
+        ]);
+
+        if ($statement->fetch()) {
+            return null;
+        }
+
+
+
+        $userPasswordHashed = password_hash($data["password"], PASSWORD_DEFAULT);
 
         $sql = "update user set
 user_name = :user_name,
@@ -127,7 +148,7 @@ where id = :id";
         return $statement->execute([
             ":id" => $id,
             ":user_name" => $data["user_name"] ?? null,
-            ":password" => $data["password"] ?? null,
+            ":password" => $userPasswordHashed,
             ":email" => $data["email"] ?? null,
             ":status" => $data["status"] ?? null,
             ":added_date_time" => $data["added_date_time"] ?? null,

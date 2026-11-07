@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Asset Master</title>
+
+<!--    bootstrap linking codes -->
+    <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="../static/bootstrap-5.2/js/bootstrap.min.js"></script>
+
+<!--    tailwind linking code-->
+    <script src="../static/tailwind/browser@4.js"></script>
+
+<!--    sweet alert code links-->
+    <link rel="stylesheet" href="../static/sweetAlert/sweetalert2.min.css">
+    <script src="../static/sweetAlert/sweetalert2.all.min.js"></script>
+
+
+<!--    data table links-->
+    <script src="../static/datatable/js/dataTables.min.js"></script>
+    <script src="../static/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="../static/datatable/js/buttons.dataTables.min.js"></script>
+    <script src="../static/datatable/js/jszip.min.js"></script>
+    <script src="../static/datatable/js/pdfmake.min.js"></script>
+    <script src="../static/datatable/js/vfs_fonts.js"></script>
+    <link rel="stylesheet" href="../static/datatable/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="../static/datatable/css/buttons.dataTables.min.css">
+
+
+<!--   controller file linking code -->
+    <script src="../static/controllerJS/assetMaster.js"></script>
+
+<!--    service files link-->
+    <script src="../static/services/itemCategoryService.js"></script>
+    <script src="../static/services/itemMasterService.js"></script>
+    <script src="../static/services/itemSizeService.js"></script>
+    <script src="../static/services/itemStatusService.js"></script>
+
+<!--    helping files link-->
+    <script src="../static/commonJS/dropDownGenerator.js"></script>
+    <script src="../static/validators/textValidator.js"></script>
+    <script src="../static/validators/dropdownValidator.js"></script>
+
+
+
+</head>
+<body class="container-fluid">
+<h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Asset Master</h1>
+
+
+<!--form area start-->
+<div class="p-2">
+<div class="row">
+    <div class="col-md-2">
+        <label class="form-label" for="selectAssetCategory">Asset Category <i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectAssetCategory" style="height: 60px" onchange="dropdownValidator(this,'assetMaster','assert_category_master_id')"></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textAssetName">Asset Name <i class="text-danger">*</i> </label>
+        <input type="text" id="textAssetName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Asset Name" onkeyup="textValidator(this,'^','assetMaster','name')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Asset Name</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textSerialNumber">Serial Number <i class="text-danger">*</i> </label>
+        <input type="text" id="textSerialNumber" class="form-control fw-bold" style="height: 60px" placeholder="Enter Serial Number" onkeyup="textValidator(this,'','assetMaster','serial_number')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Serial Number</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textBrandName">Brand Name <i class="text-danger">*</i> </label>
+        <input type="text" id="textBrandName" class="form-control fw-bold" style="height: 60px" placeholder="Enter Brand Name" onkeyup="textValidator(this,'','assetMaster','brand')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Brand Name</div>
+    </div>
+
+
+    <div class="col-md-2">
+        <label class="form-label" for="textModel">Model Name <i class="text-danger">*</i> </label>
+        <input type="text" id="textModel" class="form-control fw-bold" style="height: 60px" placeholder="Enter Model Name" onkeyup="textValidator(this,'','assetMaster','model')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Model Name</div>
+    </div>
+
+
+    <div class="col-md-2">
+        <label class="form-label" for="purchaseDate">Purchase Date <i class="text-danger">*</i> </label>
+        <input type="date" id="purchaseDate" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','assetMaster','purchase_date')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Purchase Date</div>
+
+    </div>
+
+
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-2">
+        <label class="form-label" for="textPurchasePrice">Purchase Price<i class="text-danger">*</i> </label>
+        <input type="number" id="textPurchasePrice" class="form-control fw-bold" style="height: 60px" placeholder="Enter Purchase Price" onkeyup="textValidator(this,'','assetMaster','purchase_price')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Purchase Price</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="textWarrantyExpireDate">Warranty Expire Date </label>
+        <input type="date" id="textWarrantyExpireDate" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','assetMaster','warranty_expire_date')" required>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Expire Date</div>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label" for="selectItemStatus">Item Status <i class="text-danger">*</i> </label>
+        <select class="form-select" id="selectItemStatus" style="height: 60px" onchange="dropdownValidator(this,'assetMaster','asset_status_id')"></select>
+        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="textDescription">Description </label>
+        <input type="text" id="textDescription" class="form-control fw-bold" style="height: 60px" placeholder="Enter Description" onkeyup="textValidator(this,'','assetMaster','description')">
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnReset" onclick="window.location.reload()" class="btn text-white" style="background-color: #065f46">Reset</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">
+        <button type="button" id="btnSave" onclick="saveItemMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
+    </div>
+</div>
+
+
+</div>
+<!--form area end-->
+
+<!--table area start-->
+<table class="table table-bordered table-responsive display" id="tableAssetMaster" >
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Asset Category</th>
+        <th>Asset Name</th>
+        <th>Serial Number</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Purchase Date</th>
+        <th>Purchase Price</th>
+        <th>Status</th>
+        <th class="text-center">Actions</th>
+    </tr>
+    </thead>
+    <tbody id="assetTableBody">
+
+    </tbody>
+</table>
+<!--table area end-->
+
+
+
+</body>
+</html>

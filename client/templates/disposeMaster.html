@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dispose Master</title>
+
+    <!--    bootstrap linking codes -->
+    <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <script src="../static/bootstrap-5.2/js/bootstrap.min.js"></script>
+
+    <!--    tailwind linking code-->
+    <script src="../static/tailwind/browser@4.js"></script>
+
+    <!--    sweet alert code links-->
+    <link rel="stylesheet" href="../static/sweetAlert/sweetalert2.min.css">
+    <script src="../static/sweetAlert/sweetalert2.all.min.js"></script>
+
+
+    <!--    data table links-->
+    <script src="../static/datatable/js/dataTables.min.js"></script>
+    <script src="../static/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="../static/datatable/js/buttons.dataTables.min.js"></script>
+    <script src="../static/datatable/js/jszip.min.js"></script>
+    <script src="../static/datatable/js/pdfmake.min.js"></script>
+    <script src="../static/datatable/js/vfs_fonts.js"></script>
+    <link rel="stylesheet" href="../static/datatable/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="../static/datatable/css/buttons.dataTables.min.css">
+
+
+    <!--   controller file linking code -->
+    <script src="../static/controllerJS/disposeMaster.js"></script>
+
+    <!--    service files link-->
+    <script src="../static/services/itemMasterService.js"></script>
+    <script src="../static/services/productionMasterService.js"></script>
+
+    <!--    helping files link-->
+    <script src="../static/commonJS/dropDownGenerator.js"></script>
+    <script src="../static/commonJS/dataListGenerator.js"></script>
+    <script src="../static/validators/textValidator.js"></script>
+    <script src="../static/validators/dropdownValidator.js"></script>
+    <script src="../static/validators/dataListValidator.js"></script>
+
+
+</head>
+<body class="container-fluid" style="font-family: 'Helvetica Neue'">
+<h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">Dispose Master</h1>
+
+<div class="p-2">
+
+
+    <div class="row">
+
+        <!-- Left Side Area (Branch Name, Discount %, and a Wide Input/Textarea below them) -->
+        <div class="col-md-9">
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label" for="textDate">Date</label>
+                    <input type="date" id="textDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','disposeMaster','date')">
+                    <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Date</div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label class="form-label" for="selectStatus">Status<i class="text-danger">*</i> </label>
+                    <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'disposeMaster','status')" required>
+                        <option value="" selected disabled>Select An Option</option>
+                        <option value="1">Active</option>
+                        <option value="0">In-active</option>
+                    </select>
+                    <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+
+                </div>
+
+                <div class="col-md-3 mb-3 mt-3">
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <!-- item area section start -->
+            <div class="row rounded-4" style="background-color: #f0fdf4">
+                <!--   item form area start     -->
+                <div class="row mb-3">
+                    <h4><u>Add Items here</u></h4>
+
+
+                    <div class="col-2">
+                        <label class="form-label" for="selectItem">Asset<i class="text-danger">*</i> </label>
+                        <input type="text" class="form-control" id="selectItem" list="dataListItem">
+                        <datalist id="dataListItem"></datalist>
+                    </div>
+
+
+                    <div class="col-2">
+                        <label class="form-label" for="selectDisposal">Disposal Type<i class="text-danger">*</i> </label>
+                        <select class="form-select" id="selectDisposal"  onchange="dropdownValidatorWTtoolTip(this,'disposeAsset','disposal_type_id')"></select>
+                    </div>
+
+
+                    <div class="col-2">
+                        <label class="form-label" for="textDisposalValue">Disposal Value<i class="text-danger">*</i> </label>
+                        <input type="text" id="textDisposalValue" class="form-control fw-bold" onkeyup="textValidatorWithoutToolTip(this,'','disposeAsset','disposal_value')">
+                    </div>
+
+
+                    <div class="col-4">
+                        <label class="form-label" for="textDescription">Description</label>
+                        <input type="text" id="textDescription" class="form-control fw-bold" onkeyup="textValidatorWithoutToolTip(this,'','disposeAsset','description')">
+                    </div>
+
+
+
+                    <div class="col-2 mt-4">
+                        <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="rounded bg-emerald-700 px-3 py-2 text-neutral-50 hover:bg-black">Add</button>
+                    </div>
+                </div>
+                <!--   item form area end     -->
+
+
+                <!--   item table area start     -->
+                <div class="relative overflow-x-auto shadow-xs rounded-base border border-default">
+                    <table class="w-full text-sm text-left rtl:text-right text-body" id="innerItemTable">
+                        <thead class="text-sm text-body bg-green-200 border-b rounded-base border-default">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 font-medium">#</th>
+                            <th scope="col" class="px-6 py-3 font-medium">Asset Name</th>
+                            <th scope="col" class="px-6 py-3 font-medium">Disposal Type</th>
+                            <th scope="col" class="px-6 py-3 font-medium">Dispose Value</th>
+                            <th scope="col" class="px-6 py-3 font-medium">Description</th>
+                            <th scope="col" class="px-6 py-3 font-medium">Actions</th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="innerTableTbody">
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <!--   item table area end     -->
+
+
+
+
+
+            </div>
+            <!-- item area section end-->
+
+        </div>
+
+
+        <div class="col-md-3 mt-4">
+            <div class="flex justify-between">
+                <button type="button" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
+                <button type="button" id="btnUpdate" onclick="updateProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+                <button type="button" id="btnSave" onclick="saveProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <!--  production master table start-->
+    <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
+        <table class="table table-bordered table-striped" id="disposeMasterTable">
+            <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
+            <tr>
+                <th scope="col" class="px-6 py-3 font-medium text-center">#</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Date</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Code</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Assets</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Status</th>
+                <th scope="col" class="px-6 py-3 font-medium text-center">Actions</th>
+
+            </tr>
+            </thead>
+            <tbody id="disposeMasterTableTbody">
+
+            </tbody>
+        </table>
+    </div>
+    <!--  production master table end-->
+
+</div>
+
+</body>
+</html>

@@ -5,6 +5,7 @@
     <title>Welcome to Viru♥</title>
 
 
+
     <!--    bootstrap linking codes -->
     <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
     <script src="../static/bootstrap-5.2/js/bootstrap.min.js"></script>
@@ -81,6 +82,7 @@
         <a class="btn" style="background-color: #064e3b !important; color: whitesmoke" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Item Inventory management</a>
         <button class="btn" style="background-color: #064e3b !important; color: whitesmoke" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Raw Material inventory</button>
         <button class="btn" style="background-color: #064e3b !important; color: whitesmoke" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample2">Assert Management</button>
+        <button class="btn" style="background-color: #064e3b !important; color: whitesmoke" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample2">Reporting</button>
         <button class="btn" style="background-color: #064e3b !important; color: whitesmoke" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Toggle All elements</button>
     </p>
 
@@ -118,12 +120,12 @@
                                 <div class="row mt-5">
                                     <div class="col-3"  onclick="window.location.href = '../templates/rawMaterialCategory.html';"  ><img src="../static/icons/category-alt.png"> <div>Raw Material Category </div> </div>
                                     <div class="col-3" onclick="window.location.href = '../templates/rawMaterialMaster.html';" ><img src="../static/icons/category-alt.png"> <div>Raw Material</div></div>
-                                    <div class="col-3"><img src="../static/icons/category-alt.png"> <div>GRN</div></div>
-                                    <div class="col-3"><img src="../static/icons/category-alt.png"> <div>JOB </div></div>
+                                    <div class="col-3" onclick="window.location.href = '../templates/goodRecieveNoticeMaster.html';"  ><img src="../static/icons/category-alt.png"> <div>GRN</div></div>
+                                    <div class="col-3" onclick="window.location.href = '../templates/jobMaster.html';" ><img src="../static/icons/category-alt.png"> <div>JOB </div></div>
                                 </div>
 
                                 <div class="row mt-5">
-                                    <div class="col-3"><img src="../static/icons/category-alt.png"> <div>Issue Note</div> </div>
+                                    <div class="col-3"  onclick="window.location.href = '../templates/issueNoteMaster.html';"  ><img src="../static/icons/category-alt.png"> <div>Issue Note</div> </div>
                                 </div>
 
 
@@ -141,21 +143,36 @@
                     <h3>Inventory Management Section</h3>
 
                     <div class="row mt-5">
-                        <div class="col-3" onclick="window.location.href = '../templates/itemCategoryMaster.html';"><img src="../static/icons/category-alt.png"> <div>Asset Category</div> </div>
-                        <div class="col-3" onclick="window.location.href = '../templates/itemMaster.html';"><img src="../static/icons/category-alt.png"> <div>Asset Master </div></div>
-                        <div class="col-3"><img src="../static/icons/category-alt.png"> <div>Asset Assignment </div></div>
-                        <div class="col-3"><img src="../static/icons/category-alt.png"> <div>Asset Maintenance</div></div>
+                        <div class="col-3" onclick="window.location.href = '../templates/assetCategoryMaster.html';"><img src="../static/icons/category-alt.png"> <div>Asset Category</div> </div>
+                        <div class="col-3" onclick="window.location.href = '../templates/assetMaster.html';"><img src="../static/icons/category-alt.png"> <div>Asset Master </div></div>
+                        <div class="col-3"  onclick="window.location.href = '../templates/assignToPeopleMaster.html';" ><img src="../static/icons/category-alt.png"> <div>Asset Assignment </div></div>
+                        <div class="col-3"  onclick="window.location.href = '../templates/maintenanceMaster.html';"    ><img src="../static/icons/category-alt.png"> <div>Asset Maintenance</div></div>
                     </div>
 
                     <div class="row mt-5">
-                        <div class="col-3" onclick="window.location.href = '../templates/invoiceHeader.html';"><img src="../static/icons/category-alt.png"> <div>Invoice</div> </div>
-                        <div class="col-3"><img src="../static/icons/category-alt.png"> <div>Asset disposal</div> </div>
+                        <div class="col-3" onclick="window.location.href = '../templates/disposeMaster.html';"  ><img src="../static/icons/category-alt.png"> <div>Asset disposal</div> </div>
                     </div>
 
 
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6">
+            <div class="collapse multi-collapse" id="multiCollapseExample4">
+                <div class="card card-body" style="background-color: #ecfdf5">
+
+                    <h3>Reporting Section</h3>
+
+                    <div class="row mt-5">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 

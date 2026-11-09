@@ -1,4 +1,4 @@
- async function getAllDesignations() {
+ async function getAllDesignationsService() {
 
      let baseURL ="http://localhost/project-mit/viru/server/controller/DesignationController.php";
      const response = await fetch(

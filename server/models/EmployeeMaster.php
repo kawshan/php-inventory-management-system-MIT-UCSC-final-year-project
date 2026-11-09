@@ -140,4 +140,14 @@ where id = :id";
 
     }
 
+
+    public function getEmployeesWithoutUserAccount() {
+        $sql= "select * from employee where id not in(select employee_id from user)";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
 }

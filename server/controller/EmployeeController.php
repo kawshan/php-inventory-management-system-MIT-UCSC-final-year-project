@@ -27,6 +27,16 @@ class EmployeeController {
     }
 
 
+    public function getAllEmployeesWithoutUserAccount() {
+        $employees = $this->employeeMaster->getEmployeesWithoutUserAccount();
+        header('Content-Type: application/json');
+        echo json_encode([
+            "success" => true,
+            "employees" => $employees
+        ]);
+    }
+
+
     public function create() {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
@@ -97,6 +107,12 @@ switch ($method) {
             $controller->findAll();
         }
         break;
+
+     case "employeeWithoutUserAccount":
+         if ($_SERVER["REQUEST_METHOD"] === "GET") {
+             $controller->getAllEmployeesWithoutUserAccount();
+         }
+         break;
 
     case "create":
 

@@ -30,7 +30,7 @@ const refreshEmployeeMasterForm = async () => {
     selectDesignation.style.border = "1px solid #cred4da";
     selectStatus.style.border = "1px solid #cred4da";
 
-    designationsList = await getAllDesignations();
+    designationsList = await getAllDesignationsService();
     generateSelectDropDown(selectDesignation, designationsList, "status", "name");
 
 

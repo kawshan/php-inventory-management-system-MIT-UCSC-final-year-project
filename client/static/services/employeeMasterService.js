@@ -9,6 +9,23 @@ async function getAllEmployeeService() {
     return await response.json();
 }
 
+
+async function getAllEmployeesWithoutUserAccountService() {
+    let baseURL = "../../server/controller/EmployeeController.php";
+    const response = await fetch(
+        `${baseURL}?method=employeeWithoutUserAccount`
+    );
+    if (!response.ok) {
+        throw new Error("Failed to get items");
+    }
+    return await response.json();
+}
+
+
+
+
+
+
 async function createEmployeeService(data) {
     let baseURL = "../../server/controller/EmployeeController.php";
     const response = await fetch(`${baseURL}?method=create`,

@@ -25,39 +25,32 @@ class UserMasterController {
     }
 
 
-    public function create() {
-        try {
-            $data = json_decode(file_get_contents("php://input"), true);
-            $id = $this->userMaster->create($data);
-            header('Content-Type: application/json');
+    public function login() {
 
-            if ($id === null) {
+        $data = json_decode(file_get_contents("php://input"), true);
 
-                http_response_code(409);
+        $user = $this->userMaster->login($data);
 
-                echo json_encode([
-                    "success" => false,
-                    "message" => "User Name already exists! "
-                ]);
-
-                return;
-            }
-
-
-
-            http_response_code(200);
-            echo json_encode([
-                "success" => true,
-                "employeeId" => $id,
-                "message" => "User created!"
-            ]);
-        } catch (Throwable $error) {
-            http_response_code(500);
+        if (!$user) {
             echo json_encode([
                 "success" => false,
-                "message" => $error->getMessage(),
+                "message" => "Invalid username or password!"
             ]);
+
+            exit();
         }
+
+        session_start();
+
+        session_regenerate_id(true);
+
+        $_SESSION["user"] = $user;
+
+        echo json_encode([
+            "success" => true,
+            "message" => "User logged in successfully!",
+            "user" => $user
+        ]);
     }
 
 
@@ -102,6 +95,10 @@ class UserMasterController {
         ]);
     }
 
+
+
+
+
 }
 
 $controller = new UserMasterController($userMaster);
@@ -114,6 +111,11 @@ switch ($method) {
             $controller->findAll();
         }
         break;
+
+     case "login":
+         $controller->login();
+         break;
+
 
     case "create":
 

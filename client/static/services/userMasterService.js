@@ -60,3 +60,17 @@ async function deleteUserService(id){
 
 
 
+async function loginService(data) {
+
+    const baseURL = "../../server/controller/UserMasterController.php?method=login";
+
+    const response = await fetch(baseURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    return await response.json();
+}

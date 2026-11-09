@@ -1,10 +1,28 @@
-window.addEventListener('load',function (){
+window.addEventListener('load',async function (){
 
 
 
 
+
+
+
+
+    const authenticated = await checkSession();
+
+    if (!authenticated) {
+        return;
+    }
+
+    document.body.style.display = "block";
     updateDateTime();
     setInterval(updateDateTime, 1000);
+
+
+
+
+
+
+
 
 })
 

@@ -16,6 +16,10 @@
             href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
             rel="stylesheet"
     />
+    <!--    service files link-->
+    <script src="../static/services/userMasterService.js"></script>
+
+
 </head>
 <body
         class="flex font-poppins items-center justify-center dark:bg-gray-900 min-w-screen min-h-screen"
@@ -31,11 +35,11 @@
             <h1 class="pt-8 pb-6 font-bold text-5xl dark:text-gray-400 text-center cursor-default">
                 Sign Up
             </h1>
-            <form action="#" method="post" class="space-y-4">
+            <form id="loginForm" class="space-y-4">
                 <div>
-                    <label for="UserName" class="mb-2 dark:text-gray-400 text-lg">User Name</label>
+                    <label for="textUserName" class="mb-2 dark:text-gray-400 text-lg">User Name</label>
                     <input
-                            id="UserName"
+                            id="textUserName"
                             class="border dark:bg-indigo-700 dark:text-gray-300 dark:border-gray-700 p-3 shadow-md placeholder:text-base border-gray-300 rounded-lg w-full focus:scale-105 ease-in-out duration-300"
                             type="text"
                             placeholder="Username"
@@ -43,9 +47,9 @@
                     />
                 </div>
                 <div>
-                    <label for="password" class="mb-2 dark:text-gray-400 text-lg">Password</label>
+                    <label for="textPassword" class="mb-2 dark:text-gray-400 text-lg">Password</label>
                     <input
-                            id="password"
+                            id="textPassword"
                             class="border dark:bg-indigo-700 dark:text-gray-300 dark:border-gray-700 p-3 mb-2 shadow-md placeholder:text-base border-gray-300 rounded-lg w-full focus:scale-105 ease-in-out duration-300"
                             type="password"
                             placeholder="Password"
@@ -59,9 +63,6 @@
                     SIGN UP
                 </button>
             </form>
-
-
-
 
 
             <div
@@ -96,4 +97,32 @@
     </div>
 </div>
 </body>
+<script>
+
+
+    loginForm.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const data = {
+            user_name: textUserName.value,
+            password: textPassword.value
+        };
+
+        const response = await loginService(data);
+
+        if (response.success) {
+
+            alert("Login successful!");
+
+            window.location.href = "dashboard.html";
+
+        } else {
+
+            alert(response.message);
+
+        }
+
+    });
+</script>
 </html>

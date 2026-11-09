@@ -186,4 +186,39 @@ where id = :id";
     }
 
 
+
+    public function login($data) {
+        $sql = "SELECT
+            id,
+            user_name,
+            password,
+            email,
+            status,
+            employee_id,
+            role_id
+            FROM user
+            WHERE user_name = :user_name
+            AND status = 1";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ":user_name" => $data["user_name"],
+        ]);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!$user){
+            return false;
+        }
+
+        if (!password_verify($data["password"], $user["password"])) {
+            return false;
+        }
+
+        unset($user["password"]);
+        return $user;
+    }
+
+
+
+
+
 }

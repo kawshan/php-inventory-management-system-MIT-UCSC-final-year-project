@@ -13,7 +13,7 @@ class RawMaterialCategory {
 
 
     public function getAll() {
-        $sql = "select * from raw_material_category where status=1 order by id desc";
+        $sql = "select * from raw_material_category order by id desc";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);

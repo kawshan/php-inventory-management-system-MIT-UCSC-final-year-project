@@ -33,6 +33,7 @@
 
 <!--    service files link-->
     <script src="../static/services/rawMaterialCategoryService.js"></script>
+    <script src="../static/services/rawmaterialMasterService.js"></script>
 
 <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -108,11 +109,11 @@
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnUpdate" onclick="updateRawMaterialCategory()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+        <button type="button" id="btnUpdate" onclick="updateEmployeeMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnSave" onclick="saveRawMaterialCategory()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
+        <button type="button" id="btnSave" onclick="saveRawMaterialMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
     </div>
 </div>
 
@@ -127,11 +128,9 @@
         <th>#</th>
         <th>name</th>
         <th>Code</th>
-        <th>Size</th>
-        <th>Shape</th>
-        <th>Volume</th>
-        <th>MOQ</th>
         <th>Packing</th>
+        <th>Rate</th>
+        <th>ReOrder-level</th>
         <th>Status</th>
         <th class="text-center">Actions</th>
     </tr>

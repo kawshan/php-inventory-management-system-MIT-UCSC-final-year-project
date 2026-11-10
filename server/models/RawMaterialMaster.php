@@ -31,12 +31,12 @@ rm.modify_user,
 rm.delete_user,
 
 
-rmc.id as raw_material_category,
+rmc.id as raw_material_category_id,
 rmc.name as raw_material_category_name
 
 
 from raw_material_master as rm
-left join raw_material_category rmc on rm.raw_material_category_id = rmc.id order by rm.id";
+left join raw_material_category rmc on rm.raw_material_category_id = rmc.id order by rm.id desc";
 
         $statement = $this->connection->prepare($sql);
         $statement->execute();

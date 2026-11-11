@@ -11,7 +11,20 @@ class PrivilegeMaster {
     }
 
     public function findAll() {
-        $sql = "SELECT * FROM privilege";
+        $sql = "select
+p.id,
+p.sel,
+p.inst,
+p.upd,
+p.del,
+p.role_id,
+p.module_id,
+r.name as role_name,
+m.name as module_name
+
+from privilege as p
+left join role as r on p.role_id = r.id
+left join module as m on p.module_id = m.id order by p.id desc";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);

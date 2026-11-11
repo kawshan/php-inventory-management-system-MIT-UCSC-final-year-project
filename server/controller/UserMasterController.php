@@ -54,6 +54,43 @@ class UserMasterController {
     }
 
 
+    public function create() {
+        try {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $id = $this->userMaster->create($data);
+            header('Content-Type: application/json');
+
+            if ($id === null) {
+
+                http_response_code(409);
+
+                echo json_encode([
+                    "success" => false,
+                    "message" => "User already exists!"
+                ]);
+
+                return;
+            }
+
+
+
+            http_response_code(200);
+            echo json_encode([
+                "success" => true,
+                "employeeId" => $id,
+                "message" => "user created!"
+            ]);
+        } catch (Throwable $error) {
+            http_response_code(500);
+            echo json_encode([
+                "success" => false,
+                "message" => $error->getMessage(),
+            ]);
+        }
+    }
+
+
+
     public function update($id) {
         $data = json_decode(file_get_contents("php://input"), true);
         $result = $this->userMaster->update($id, $data);

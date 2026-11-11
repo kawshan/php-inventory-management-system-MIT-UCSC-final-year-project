@@ -65,10 +65,11 @@ const refreshPrivilegeMasterTable = async ()=>{
         deleteCell.textContent = item.del == 1 ? "Active" : "Inactive";
 
         const roleCell = document.createElement("td");
-        roleCell.textContent = item.role_id;
+        roleCell.textContent = item.role_name;
 
         const moduleCell = document.createElement("td");
-        moduleCell.textContent = item.module_id;
+        moduleCell.textContent = item.module_name;
+
 
         const actionCell = document.createElement("td");
         actionCell.classList.add("flex", "justify-center", "items-center", "gap-2");

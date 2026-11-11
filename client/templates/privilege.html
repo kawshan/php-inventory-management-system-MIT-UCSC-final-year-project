@@ -32,10 +32,9 @@
     <script src="../static/controllerJS/privilegeMaster.js"></script>
 
 <!--    service files link-->
-    <script src="../static/services/employeeMasterService.js"></script>
-    <script src="../static/services/userMasterService.js"></script>
-    <script src="../static/services/designationService.js"></script>
     <script src="../static/services/roleService.js"></script>
+    <script src="../static/services/privilegeMasterService.js"></script>
+    <script src="../static/services/moduleService.js"></script>
 
 <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -115,11 +114,11 @@
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnUpdate" onclick="updateUserMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+        <button type="button" id="btnUpdate" onclick="updatePrivilegeMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnSave" onclick="saveUserMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
+        <button type="button" id="btnSave" onclick="savePrivilegeMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Save</button>
     </div>
 </div>
 
@@ -135,7 +134,9 @@
         <th>Select</th>
         <th>Create</th>
         <th>Update</th>
-        <th>Delet</th>
+        <th>Delete</th>
+        <th>Role</th>
+        <th>Module</th>
         <th class="text-center">Actions</th>
     </tr>
     </thead>

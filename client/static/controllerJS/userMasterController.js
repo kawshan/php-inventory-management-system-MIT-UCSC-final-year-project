@@ -116,6 +116,14 @@ const refreshUserMasterTable = async ()=> {
 
     })
 
+    new DataTable('#tableUserMaster', {
+        layout: {
+            topStart: {
+                buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+            }
+        }
+    });
+
 }
 
 

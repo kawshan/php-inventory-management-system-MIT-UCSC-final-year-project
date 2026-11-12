@@ -32,10 +32,7 @@
     <script src="../static/controllerJS/assetCategoryMaster.js"></script>
 
 <!--    service files link-->
-    <script src="../static/services/itemCategoryService.js"></script>
-    <script src="../static/services/itemMasterService.js"></script>
-    <script src="../static/services/itemSizeService.js"></script>
-    <script src="../static/services/itemStatusService.js"></script>
+    <script src="../static/services/assetCategoryMasterService.js"></script>
 
 <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -50,7 +47,7 @@
 
 
 <!--form area start-->
-<div class="p-2">
+<div class="p-2 mb-5">
 <div class="row">
     <div class="col-md-2">
         <label class="form-label" for="textAssetName">Asset Name <i class="text-danger">*</i> </label>
@@ -83,11 +80,11 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-            <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
+            <button type="button" id="btnUpdate" onclick="updateAssetCategoryMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-2">
-            <button type="button" id="btnSave" onclick="saveItemMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
+            <button type="button" id="btnSave" onclick="saveAssetMasterCategory()" class="btn text-white" style="background-color: #065f46">Save</button>
         </div>
     </div>
 
@@ -96,19 +93,18 @@
 <!--form area end-->
 
 <!--table area start-->
-<table class="table table-bordered table-responsive display" id="tableItemMaster" >
+<table class="table table-bordered table-responsive display" id="tableAssetCategoryMaster" >
     <thead>
     <tr>
         <th>#</th>
         <th>Item name</th>
-        <th>Item Short name</th>
-        <th>Item Price</th>
-        <th>Item Cost</th>
-        <th>Barcode</th>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Status</th>
         <th class="text-center">Actions</th>
     </tr>
     </thead>
-    <tbody id="itemTableBody">
+    <tbody id="assetCategoryTableBody">
 
     </tbody>
 </table>

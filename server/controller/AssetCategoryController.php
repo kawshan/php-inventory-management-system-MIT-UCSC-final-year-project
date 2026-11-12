@@ -29,6 +29,18 @@ class AssetCategoryController {
     }
 
 
+
+    public function getAssetCategoryActiveOnly() {
+        $assetCategoriesList = $this->assetCategoryMaster->getOnlyActiveCategories();
+        header('Content-Type: application/json');
+        echo json_encode([
+            "success" => true,
+            "data" => $assetCategoriesList
+        ]);
+
+    }
+
+
     public function getById($id) {
         $assetCategory = $this->assetCategoryMaster->getAssetCategoryById($id);
         header('Content-Type: application/json');
@@ -114,6 +126,12 @@ switch ($method) {
     case  "findAll":
         if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $controller->getAllAssetCategoryMaster();
+        }
+        break;
+
+    case "activeCategories" :
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $controller->getAssetCategoryActiveOnly();
         }
         break;
     case  "getById":

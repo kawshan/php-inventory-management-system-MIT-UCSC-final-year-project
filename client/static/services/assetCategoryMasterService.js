@@ -10,6 +10,19 @@ async function getAllAssetCategoryService() {
 }
 
 
+async function getAllAssetCategoryServiceActiveOnly() {
+    let baseURL = "../../server/controller/AssetCategoryController.php";
+    const response = await fetch(
+        `${baseURL}?method=activeCategories`
+    );
+    if (!response.ok) {
+        throw new Error("Failed to get items");
+    }
+    return await response.json();
+}
+
+
+
 async function createAssetCategoryService(data) {
     let baseURL = "../../server/controller/AssetCategoryController.php";
     const response = await fetch(`${baseURL}?method=create`,

@@ -116,21 +116,6 @@ switch ($method) {
             $controller->getAllAssetMaster();
         }
         break;
-    case  "getById":
-
-        if ($_SERVER["REQUEST_METHOD"] === "GET") {
-            if (!isset($_GET["id"])) {
-                http_response_code(400);
-                echo json_encode([
-                    "success" => false,
-                    "message" => "Item Category not found"
-                ]);
-                exit;
-            }
-            $controller->getById($_GET["id"]);
-        }
-
-        break;
 
     case "create":
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

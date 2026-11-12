@@ -38,8 +38,7 @@ ass.name as asset_status_name
 
 from asset_master as am
 left join assert_category_master acm on am.assert_category_master_id = acm.id
-left join asset_status as ass on am.asset_status_id = ass.id;
-        ";
+left join asset_status as ass on am.asset_status_id = ass.id order by am.id desc";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);

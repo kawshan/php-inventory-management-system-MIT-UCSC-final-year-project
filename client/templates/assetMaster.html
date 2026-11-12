@@ -32,10 +32,9 @@
     <script src="../static/controllerJS/assetMaster.js"></script>
 
 <!--    service files link-->
-    <script src="../static/services/itemCategoryService.js"></script>
-    <script src="../static/services/itemMasterService.js"></script>
-    <script src="../static/services/itemSizeService.js"></script>
-    <script src="../static/services/itemStatusService.js"></script>
+    <script src="../static/services/assetCategoryMasterService.js"></script>
+    <script src="../static/services/assetMasterService.js"></script>
+    <script src="../static/services/assetMasterStatusService.js"></script>
 
 <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -63,8 +62,8 @@
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Asset Name</div>
     </div>
     <div class="col-md-2">
-        <label class="form-label" for="textSerialNumber">Serial Number <i class="text-danger">*</i> </label>
-        <input type="text" id="textSerialNumber" class="form-control fw-bold" style="height: 60px" placeholder="Enter Serial Number" onkeyup="textValidator(this,'','assetMaster','serial_number')" required>
+        <label class="form-label" for="textSerialNumber">Serial Number </label>
+        <input type="text" id="textSerialNumber" class="form-control fw-bold" style="height: 60px" placeholder="Enter Serial Number" onkeyup="textValidator(this,'','assetMaster','serial_number')">
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Serial Number</div>
     </div>
     <div class="col-md-2">
@@ -83,7 +82,7 @@
 
     <div class="col-md-2">
         <label class="form-label" for="purchaseDate">Purchase Date <i class="text-danger">*</i> </label>
-        <input type="date" id="purchaseDate" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','assetMaster','purchase_date')" required>
+        <input type="date" id="purchaseDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','assetMaster','purchase_date')" required>
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Purchase Date</div>
 
     </div>
@@ -99,7 +98,7 @@
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textWarrantyExpireDate">Warranty Expire Date </label>
-        <input type="date" id="textWarrantyExpireDate" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','assetMaster','warranty_expire_date')" required>
+        <input type="date" id="textWarrantyExpireDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','assetMaster','warranty_expire_date')" required>
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a Valid Expire Date</div>
     </div>
     <div class="col-md-2">
@@ -127,11 +126,11 @@
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnUpdate" onclick="updateItemMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
+        <button type="button" id="btnUpdate" onclick="saveAssetMaster()" class="btn text-white" style="background-color: #065f46">Update</button>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-2">
-        <button type="button" id="btnSave" onclick="saveItemMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
+        <button type="button" id="btnSave" onclick="saveAssetMaster()" class="btn text-white" style="background-color: #065f46">Save</button>
     </div>
 </div>
 

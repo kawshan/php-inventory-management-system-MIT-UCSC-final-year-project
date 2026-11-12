@@ -16,6 +16,14 @@ class AssetCategoryMaster {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+    public function getOnlyActiveCategories() {
+        $sql = "SELECT * from assert_category_master where status = 1 order by id desc";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function getAssetCategoryById($id) {
         $sql = "select * from assert_category_master where id=:id";
         $statement = $this->connection->prepare($sql);

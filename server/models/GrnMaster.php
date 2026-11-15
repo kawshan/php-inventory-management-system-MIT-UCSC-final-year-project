@@ -271,7 +271,7 @@ description
             $statement = $this->connection->prepare($sql);
             $statement->execute([
                 ":delete_date_time" => date("Y-m-d H:i:s"),
-                ":delete_user" => $data["delete_user"],
+                ":delete_user" => $data["delete_user"] ?? null,
                 ":id" => $id
             ]);
             return $id;

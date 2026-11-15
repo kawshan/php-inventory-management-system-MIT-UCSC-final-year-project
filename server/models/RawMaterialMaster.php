@@ -17,7 +17,7 @@ public function findAllRawMaterial() {
 
 rm.id as raw_material_id,
 rm.code,
-rm.name as raw_material_name,
+rm.name as name,
 rm.packing,
 rm.rate,
 rm.re_order_level,

@@ -47,7 +47,7 @@ const refreshRawMaterialTable = async ()=>{
         idCell.textContent = index + 1;
 
         const nameCell = document.createElement("td");
-        nameCell.textContent = item.raw_material_name;
+        nameCell.textContent = item.name;
 
         const codeCell = document.createElement("td");
         codeCell.textContent = item.code;
@@ -126,7 +126,7 @@ const refillRawMaterialMaster = (obj)=>{
     oldRawMaterialMaster = JSON.parse(JSON.stringify(obj));
 
     selectRawMaterialCategory.value = rawMaterialMaster.raw_material_category_id
-    textRawMaterialName.value = rawMaterialMaster.raw_material_name
+    textRawMaterialName.value = rawMaterialMaster.name
     textRawMaterialPacking.value = rawMaterialMaster.packing
     textRate.value = rawMaterialMaster.rate
     textReOrderLevel.value = rawMaterialMaster.re_order_level
@@ -145,7 +145,7 @@ const printRawMaterialMaster = ()=>{
 const deleteRawMaterialMaster = async (obj)=>{
     console.log("Delete", obj);
     const userConfirm = confirm(`Are You Sure To delete Following Data?
-Name is ${obj.raw_material_name}
+Name is ${obj.name}
 Status is ${obj.status}`)
     if (userConfirm) {
 

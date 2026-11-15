@@ -153,7 +153,7 @@ const refillAssetMaster = (obj)=>{
     assetMaster = JSON.parse(JSON.stringify(obj));
     oldAssetMaster = JSON.parse(JSON.stringify(obj));
 
-    selectAssetCategory.value= assetMaster.asset_category_idm
+    selectAssetCategory.value= assetMaster.assert_category_master_id
     textAssetName.value= assetMaster.name
     textSerialNumber.value= assetMaster.serial_number
     textBrandName.value = assetMaster.brand
@@ -192,8 +192,9 @@ Status ${obj.asset_status_id}`)
         const deleteServerResponse = await deleteAsseMasterService(obj.id);
         if (deleteServerResponse.success) {
             alert(`Delete Success`);
-            await refreshItemMasterTable();
-            await refreshItemMasterForm();
+            setTimeout(()=>{
+                window.location.reload();
+            },500)
         } else {
             alert(`Delete Unsuccessful ${deleteServerResponse.message}`)
         }
@@ -356,7 +357,7 @@ const updateAssetMaster = async () => {
         const userConfirm = confirm(`Are You Sure to Proceed with Following Changes ${updates}`)
         if (userConfirm) {
             console.log(assetMaster.id)
-            const updateServerResponse = await updateItemService(assetMaster.id, assetMaster);
+            const updateServerResponse = await updateAsseMasterService(assetMaster.id, assetMaster);
             if (updateServerResponse.success) {
                 alert(`Update Success`);
                 setTimeout(()=>{

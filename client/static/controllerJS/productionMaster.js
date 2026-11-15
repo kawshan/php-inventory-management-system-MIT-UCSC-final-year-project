@@ -273,6 +273,7 @@ const refreshProductionInnerForm = async ()=>{
 
     textQuantity.value="";
     textDescription.value="";
+    selectItem.value="";
 
 
     itemsList = await getAllItems();

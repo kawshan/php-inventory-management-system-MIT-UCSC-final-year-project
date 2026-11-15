@@ -30,7 +30,7 @@ am.added_user,
 am.modify_user,
 am.delete_user,
 
-acm.id as asset_category_idm,
+acm.id as assert_category_master_id,
 acm.name as asset_category_name,
 
 ass.id as asset_status_id,

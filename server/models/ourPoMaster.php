@@ -210,8 +210,6 @@ description
          :rate,
          :description
 )";
-
-            $statement = $this->connection->prepare($sql);
 //            add into details
             $statement = $this->connection->prepare($sql);
             foreach ($data["rawMaterials"] as $rawMaterial) {

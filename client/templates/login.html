@@ -1,105 +1,481 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Inventory Management System</title>
+
+    <!-- Tailwind CSS -->
     <script src="../static/tailwind/browser@4.js"></script>
 
-    <title>Sign Up</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet"
-    />
-    <link
-            href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-    />
-    <!--    service files link-->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Service Files -->
     <script src="../static/services/userMasterService.js"></script>
 
-
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
-<body
-        class="flex font-poppins items-center justify-center dark:bg-gray-900 min-w-screen min-h-screen"
->
-<div class="grid gap-8">
-    <div
-            id="back-div"
-            class="bg-gradient-to-r from-blue-500 to-purple-500 rounded-[26px] m-4 "
-    >
-        <div
-                class="border-[20px] border-transparent rounded-[20px] dark:bg-gray-900 bg-white shadow-lg xl:p-10 2xl:p-10 lg:p-10 md:p-10 sm:p-2 m-2"
-        >
-            <h1 class="pt-8 pb-6 font-bold text-5xl dark:text-gray-400 text-center cursor-default">
-                Sign Up
-            </h1>
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label for="textUserName" class="mb-2 dark:text-gray-400 text-lg">User Name</label>
-                    <input
-                            id="textUserName"
-                            class="border dark:bg-indigo-700 dark:text-gray-300 dark:border-gray-700 p-3 shadow-md placeholder:text-base border-gray-300 rounded-lg w-full focus:scale-105 ease-in-out duration-300"
-                            type="text"
-                            placeholder="Username"
-                            required
-                    />
-                </div>
-                <div>
-                    <label for="textPassword" class="mb-2 dark:text-gray-400 text-lg">Password</label>
-                    <input
-                            id="textPassword"
-                            class="border dark:bg-indigo-700 dark:text-gray-300 dark:border-gray-700 p-3 mb-2 shadow-md placeholder:text-base border-gray-300 rounded-lg w-full focus:scale-105 ease-in-out duration-300"
-                            type="password"
-                            placeholder="Password"
-                            required
-                    />
-                </div>
-                <button
-                        class="bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg mt-6 p-2 text-white rounded-lg w-full hover:scale-105 hover:from-purple-500 hover:to-blue-500 transition duration-300 ease-in-out"
-                        type="submit"
-                >
-                    SIGN UP
-                </button>
-            </form>
 
+<body class="min-h-screen bg-emerald-50 flex items-center justify-center p-4 md:p-8">
 
-            <div
-                    class="text-gray-500 flex text-center flex-col mt-4 items-center text-sm"
-            >
-                <p class="cursor-default">
-                    By signing in, you agree to our
-                    <a
-                            class="group text-blue-400 transition-all duration-100 ease-in-out"
-                            href="#"
-                    >
-                <span
-                        class="cursor-pointer bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out"
-                >
-                  Terms
-                </span>
-                    </a>
-                    and
-                    <a
-                            class="group text-blue-400 transition-all duration-100 ease-in-out"
-                            href="#"
-                    >
-                <span
-                        class="cursor-pointer bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out"
-                >
-                  Privacy Policy
-                </span>
-                    </a>
+<!-- Main Container -->
+<div class="w-full max-w-6xl overflow-hidden rounded-3xl bg-white shadow-2xl shadow-emerald-900/10">
+
+    <div class="grid min-h-[620px] grid-cols-1 lg:grid-cols-2">
+
+        <!-- Left Branding Section -->
+        <div class="relative hidden overflow-hidden bg-emerald-900 p-12 text-white lg:flex lg:flex-col lg:justify-between">
+
+            <!-- Decorative Background Elements -->
+            <div class="absolute -right-32 -top-32 h-96 w-96 rounded-full border-[50px] border-white/5"></div>
+            <div class="absolute -bottom-40 -left-32 h-96 w-96 rounded-full border-[50px] border-white/5"></div>
+
+            <!-- Branding -->
+            <div class="relative z-10">
+
+                <div class="mb-12 flex items-center gap-3">
+
+                    <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 shadow-lg backdrop-blur-sm">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.8"
+                             stroke="currentColor"
+                             class="h-8 w-8">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M3.75 7.5 12 3l8.25 4.5M3.75 7.5 12 12m-8.25-4.5V16.5L12 21m0-9 8.25-4.5m-8.25 4.5V21m8.25-13.5V16.5L12 21m-4.125-15.75 8.25 4.5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold tracking-wide">
+                            INVENTORY
+                        </h2>
+                        <p class="text-xs font-medium tracking-[0.25em] text-emerald-200">
+                            MANAGEMENT SYSTEM
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="mt-16">
+
+                    <p class="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-emerald-300">
+                        Welcome Back
+                    </p>
+
+                    <h1 class="text-4xl font-bold leading-tight xl:text-5xl">
+                        Manage Your
+                        <span class="text-emerald-300">Business</span>
+                        With Confidence.
+                    </h1>
+
+                    <p class="mt-6 max-w-md text-base leading-8 text-emerald-100/80">
+                        Your central workspace for managing inventory, assets,
+                        purchases, sales, and everyday business operations.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Feature Highlights -->
+            <div class="relative z-10 mt-12 space-y-5">
+
+                <div class="flex items-center gap-4">
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.8"
+                             stroke="currentColor"
+                             class="h-6 w-6 text-emerald-300">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M3.75 6.75h16.5v13.5H3.75zM3.75 10.5h16.5M8.25 6.75V3.75m7.5 3V3.75"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div>
+                        <p class="font-semibold">Inventory Management</p>
+                        <p class="text-sm text-emerald-200/70">Keep your stock organized.</p>
+                    </div>
+
+                </div>
+
+                <div class="flex items-center gap-4">
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.8"
+                             stroke="currentColor"
+                             class="h-6 w-6 text-emerald-300">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5v-9ZM12 12l9-4.5M12 12v9m0-9L3 7.5"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div>
+                        <p class="font-semibold">Asset Management</p>
+                        <p class="text-sm text-emerald-200/70">Track and manage your assets.</p>
+                    </div>
+
+                </div>
+
+                <div class="flex items-center gap-4">
+
+                    <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke-width="1.8"
+                             stroke="currentColor"
+                             class="h-6 w-6 text-emerald-300">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M12 3 4.5 6v5.25c0 4.5 3.15 7.95 7.5 9.75 4.35-1.8 7.5-5.25 7.5-9.75V6L12 3Z"/>
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="m9 12 2 2 4-4"/>
+
+                        </svg>
+
+                    </div>
+
+                    <div>
+                        <p class="font-semibold">Secure Access</p>
+                        <p class="text-sm text-emerald-200/70">Your business data matters.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="relative z-10 mt-12 border-t border-white/10 pt-6">
+                <p class="text-xs text-emerald-200/60">
+                    Inventory & Asset Management System
                 </p>
             </div>
+
         </div>
+
+        <!-- Right Login Section -->
+        <div class="flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-14 xl:px-20">
+
+            <!-- Mobile Branding -->
+            <div class="mb-10 flex items-center justify-center gap-3 lg:hidden">
+
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-800 text-white">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="1.8"
+                         stroke="currentColor"
+                         class="h-7 w-7">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M3.75 7.5 12 3l8.25 4.5M3.75 7.5 12 12m-8.25-4.5V16.5L12 21m0-9 8.25-4.5m-8.25 4.5V21m8.25-13.5V16.5L12 21m-4.125-15.75 8.25 4.5"/>
+
+                    </svg>
+
+                </div>
+
+                <div>
+                    <h2 class="font-bold text-emerald-950">INVENTORY</h2>
+                    <p class="text-xs tracking-widest text-emerald-700">MANAGEMENT SYSTEM</p>
+                </div>
+
+            </div>
+
+            <!-- Login Heading -->
+            <div class="mb-9">
+
+                <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-100 text-emerald-800">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="1.8"
+                         stroke="currentColor"
+                         class="h-7 w-7">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0"/>
+
+                    </svg>
+
+                </div>
+
+                <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+                    Welcome Back!
+                </h1>
+
+                <p class="mt-3 text-sm leading-6 text-slate-500">
+                    Please enter your credentials to access your account.
+                </p>
+
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-6">
+
+                <!-- Username -->
+                <div>
+
+                    <label for="textUserName"
+                           class="mb-2 block text-sm font-semibold text-slate-700">
+                        User Name
+                    </label>
+
+                    <div class="relative">
+
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.8"
+                                 stroke="currentColor"
+                                 class="h-5 w-5">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0"/>
+
+                            </svg>
+
+                        </div>
+
+                        <input
+                                id="textUserName"
+                                class="w-full rounded-xl border border-slate-200 bg-slate-50 py-4 pl-12 pr-4 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 hover:border-emerald-300 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+                                type="text"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required>
+
+                    </div>
+
+                </div>
+
+                <!-- Password -->
+                <div>
+
+                    <div class="mb-2 flex items-center justify-between">
+
+                        <label for="textPassword"
+                               class="block text-sm font-semibold text-slate-700">
+                            Password
+                        </label>
+
+                    </div>
+
+                    <div class="relative">
+
+                        <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.8"
+                                 stroke="currentColor"
+                                 class="h-5 w-5">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M16.5 10.5V7.5a4.5 4.5 0 0 0-9 0v3m-1.5 0h12a1.5 1.5 0 0 1 1.5 1.5v7.5a1.5 1.5 0 0 1-1.5 1.5h-12A1.5 1.5 0 0 1 4.5 19.5V12a1.5 1.5 0 0 1 1.5-1.5Z"/>
+
+                            </svg>
+
+                        </div>
+
+                        <input
+                                id="textPassword"
+                                class="w-full rounded-xl border border-slate-200 bg-slate-50 py-4 pl-12 pr-14 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 hover:border-emerald-300 focus:border-emerald-600 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+                                type="password"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required>
+
+                        <button
+                                type="button"
+                                id="togglePassword"
+                                onclick="togglePasswordVisibility()"
+                                class="absolute inset-y-0 right-0 flex items-center px-4 text-slate-400 transition hover:text-emerald-700"
+                                aria-label="Show password">
+
+                            <svg id="eyeIcon"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke-width="1.8"
+                                 stroke="currentColor"
+                                 class="h-5 w-5">
+
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M2.25 12s3.5-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.5 7.5-9.75 7.5S2.25 12 2.25 12Z"/>
+
+                                <circle cx="12" cy="12" r="3" />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Login Button -->
+                <button
+                        type="submit"
+                        class="group flex w-full items-center justify-center gap-3 rounded-xl bg-emerald-800 py-4 text-sm font-semibold tracking-wide text-white shadow-lg shadow-emerald-900/20 transition duration-300 hover:-translate-y-0.5 hover:bg-emerald-900 hover:shadow-xl hover:shadow-emerald-900/25 focus:outline-none focus:ring-4 focus:ring-emerald-200">
+
+                    <span>LOGIN TO YOUR ACCOUNT</span>
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="2"
+                         stroke="currentColor"
+                         class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+
+                    </svg>
+
+                </button>
+
+            </form>
+
+            <!-- Security Message -->
+            <div class="mt-8 flex items-center justify-center gap-2 text-center">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke-width="1.8"
+                     stroke="currentColor"
+                     class="h-4 w-4 text-emerald-700">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 3 4.5 6v5.25c0 4.5 3.15 7.95 7.5 9.75 4.35-1.8 7.5-5.25 7.5-9.75V6L12 3Z"/>
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="m9 12 2 2 4-4"/>
+
+                </svg>
+
+                <p class="text-xs text-slate-500">
+                    Secure access to your business management system.
+                </p>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-12 border-t border-slate-100 pt-6 text-center">
+
+                <p class="text-xs text-slate-400">
+                    Inventory & Asset Management System
+                </p>
+
+                <p class="mt-2 text-xs font-medium text-emerald-800">
+                    Powered by Smart Management
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
+
 </div>
+
 </body>
+
 <script>
 
+    // Show / Hide Password
+    function togglePasswordVisibility() {
 
+        const passwordInput = document.getElementById("textPassword");
+        const eyeIcon = document.getElementById("eyeIcon");
+        const toggleButton = document.getElementById("togglePassword");
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            eyeIcon.innerHTML = `
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 3l18 18M10.58 10.59a2 2 0 0 0 2.83 2.83"/>
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9.88 5.09A10.8 10.8 0 0 1 12 4.5c6.25 0 9.75 7.5 9.75 7.5a16.8 16.8 0 0 1-3.2 4.1M6.18 6.18C3.64 8.05 2.25 12 2.25 12s3.5 7.5 9.75 7.5c1.37 0 2.6-.32 3.69-.84"/>
+            `;
+
+            toggleButton.setAttribute("aria-label", "Hide password");
+
+        } else {
+
+            passwordInput.type = "password";
+
+            eyeIcon.innerHTML = `
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.25 12s3.5-7.5 9.75-7.5 9.75 7.5 9.75 7.5-3.5 7.5-9.75 7.5S2.25 12 2.25 12Z"/>
+
+                <circle cx="12" cy="12" r="3" />
+            `;
+
+            toggleButton.setAttribute("aria-label", "Show password");
+
+        }
+
+    }
+
+
+    // Login Functionality
     loginForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
@@ -124,5 +500,7 @@
         }
 
     });
+
 </script>
+
 </html>

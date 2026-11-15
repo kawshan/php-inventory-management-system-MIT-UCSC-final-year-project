@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>GRN Master</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRN Master</title>
 
-  <!--    bootstrap linking codes -->
+  <!-- Bootstrap linking codes -->
   <link rel="stylesheet" href="../static/bootstrap-5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/main.css">
   <script src="../static/bootstrap-5.2/js/bootstrap.min.js"></script>
 
-  <!--    tailwind linking code-->
+  <!-- Tailwind linking code -->
   <script src="../static/tailwind/browser@4.js"></script>
 
-  <!--    sweet alert code links-->
+  <!-- Sweet Alert code links -->
   <link rel="stylesheet" href="../static/sweetAlert/sweetalert2.min.css">
   <script src="../static/sweetAlert/sweetalert2.all.min.js"></script>
 
-
-  <!--    data table links-->
+  <!-- Data table links -->
   <script src="../static/datatable/js/dataTables.min.js"></script>
   <script src="../static/datatable/js/dataTables.buttons.min.js"></script>
   <script src="../static/datatable/js/buttons.dataTables.min.js"></script>
@@ -27,179 +27,392 @@
   <link rel="stylesheet" href="../static/datatable/css/dataTables.dataTables.min.css">
   <link rel="stylesheet" href="../static/datatable/css/buttons.dataTables.min.css">
 
-
-  <!--   controller file linking code -->
+  <!-- Controller file linking code -->
   <script src="../static/controllerJS/goodRecieveNoticeMaster.js"></script>
 
-  <!--    service files link-->
+  <!-- Service files link -->
   <script src="../static/services/itemMasterService.js"></script>
   <script src="../static/services/productionMasterService.js"></script>
 
-  <!--    helping files link-->
+  <!-- Helping files link -->
   <script src="../static/commonJS/dropDownGenerator.js"></script>
   <script src="../static/commonJS/dataListGenerator.js"></script>
   <script src="../static/validators/textValidator.js"></script>
   <script src="../static/validators/dropdownValidator.js"></script>
   <script src="../static/validators/dataListValidator.js"></script>
-
-
 </head>
-<body class="container-fluid" style="font-family: 'Helvetica Neue'">
-<h1 class="text-center bg-emerald-900 mt-2 p-4 rounded-2 text-white">GRN Master</h1>
 
-<div class="p-2">
+<body class="min-h-screen bg-slate-50 font-sans text-slate-800">
 
+<div class="mx-auto max-w-[1600px] px-4 py-6 sm:px-6 lg:px-8">
 
-  <div class="row">
+  <!-- Page Header -->
+  <div class="mb-6 rounded-2xl bg-gradient-to-r from-emerald-900 to-emerald-700 px-6 py-7 shadow-lg sm:px-8">
 
-    <!-- Left Side Area-->
-    <div class="col-md-9">
-      <div class="row">
+    <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
 
-        <div class="col-md-3 mb-3">
-          <label class="form-label" for="textDate">Date</label>
-          <input type="date" id="textDate" class="form-control fw-bold" style="height: 60px" onchange="textValidator(this,'','grnMaster','date')">
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Date</div>
+      <div>
+        <p class="mb-1 text-sm font-medium uppercase tracking-widest text-emerald-200">
+          Inventory Management
+        </p>
+
+        <h1 class="text-2xl font-bold text-white sm:text-3xl">
+          Goods Received Note
+        </h1>
+
+        <p class="mt-2 text-sm text-emerald-100">
+          Record received raw materials against purchase orders.
+        </p>
       </div>
 
-        <div class="col-md-3 mb-3">
-          <label class="form-label" for="textOurPurchaseOrder">Our Purchase Order</label>
-          <input type="text" id="textOurPurchaseOrder" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','grnMaster','our_purchase_order_id')">
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter Valid Purchase Order</div>
+      <div class="hidden h-16 w-16 items-center justify-center rounded-2xl bg-white/10 text-4xl sm:flex">
+        📥
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- GRN Form -->
+  <div class="mb-7 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-7">
+
+    <!-- Section Header -->
+    <div class="mb-6 flex items-center gap-3 border-b border-slate-100 pb-4">
+
+      <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-xl">
+        📋
+      </div>
+
+      <div>
+        <h2 class="text-lg font-bold text-slate-800">
+          GRN Information
+        </h2>
+
+        <p class="text-sm text-slate-500">
+          Enter the goods receiving transaction details.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- Header Information -->
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+      <!-- Date -->
+      <div>
+        <label class="mb-2 block text-sm font-semibold text-slate-700" for="textDate">
+          Date
+        </label>
+
+        <input
+                type="date"
+                id="textDate"
+                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold text-slate-700 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                onchange="textValidator(this,'','grnMaster','date')">
+
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please enter a valid Date</div>
+      </div>
+
+
+      <!-- Purchase Order -->
+      <div>
+        <label class="mb-2 block text-sm font-semibold text-slate-700" for="textOurPurchaseOrder">
+          Our Purchase Order
+        </label>
+
+        <input
+                type="text"
+                id="textOurPurchaseOrder"
+                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold text-slate-700 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                placeholder="Enter Purchase Order"
+                onkeyup="textValidator(this,'','grnMaster','our_purchase_order_id')">
+
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please enter Valid Purchase Order</div>
+      </div>
+
+
+      <!-- Supplier -->
+      <div>
+        <label class="mb-2 block text-sm font-semibold text-slate-700" for="selectSupplier">
+          Supplier Name <i class="text-red-500">*</i>
+        </label>
+
+        <select
+                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                id="selectSupplier"
+                onchange="dropdownValidator(this,'grnMaster','supplier_id')"
+                required>
+
+        </select>
+
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please Select an Option</div>
+      </div>
+
+
+      <!-- Status -->
+      <div>
+        <label class="mb-2 block text-sm font-semibold text-slate-700" for="selectStatus">
+          GRN Status <i class="text-red-500">*</i>
+        </label>
+
+        <select
+                class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-700 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                id="selectStatus"
+                onchange="dropdownValidator(this,'grnMaster','status')"
+                required>
+
+          <option value="" selected disabled>Select An Option</option>
+          <option value="1">Active</option>
+          <option value="0">In-active</option>
+
+        </select>
+
+        <div class="valid-feedback">Looks good!</div>
+        <div class="invalid-feedback">Please Select an Option</div>
+      </div>
+
+    </div>
+
+
+    <!-- Raw Material Details -->
+    <div class="mt-8 overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/50">
+
+      <!-- Section Header -->
+      <div class="flex flex-col justify-between gap-2 border-b border-emerald-100 bg-emerald-100/60 px-5 py-4 sm:flex-row sm:items-center">
+
+        <div>
+          <h3 class="text-lg font-bold text-emerald-950">
+            Raw Material Details
+          </h3>
+
+          <p class="mt-1 text-sm text-emerald-800">
+            Add the raw materials received in this transaction.
+          </p>
         </div>
 
-        <div class="col-md-3 mb-3">
-          <label class="form-label" for="selectSupplier">Supplier Name<i class="text-danger">*</i> </label>
-          <select class="form-select" id="selectSupplier" style="height: 60px" onchange="dropdownValidator(this,'grnMaster','supplier_id')" required></select>
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
-        </div>
-
-        <div class="col-md-3 mb-3">
-          <label class="form-label" for="selectStatus">GRN Status<i class="text-danger">*</i> </label>
-          <select class="form-select" id="selectStatus" style="height: 60px" onchange="dropdownValidator(this,'grnMaster','status')" required>
-            <option value="" selected disabled>Select An Option</option>
-            <option value="1">Active</option>
-            <option value="0">In-active</option>
-          </select>
-          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
-        </div>
-
+        <span class="w-fit rounded-full bg-emerald-200 px-3 py-1 text-xs font-semibold text-emerald-900">
+                    GRN Items
+                </span>
 
       </div>
 
 
+      <!-- Raw Material Entry Form -->
+      <div class="p-5">
 
+        <div class="mb-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12">
 
-      <!-- item area section start -->
-      <div class="row rounded-4" style="background-color: #f0fdf4">
-        <!--   item form area start     -->
-        <div class="row mb-3">
-          <h4><u>Add Items here</u></h4>
+          <!-- Raw Material -->
+          <div class="lg:col-span-3">
+            <label class="mb-2 block text-sm font-semibold text-slate-700" for="selectItem">
+              Raw Material <i class="text-red-500">*</i>
+            </label>
 
+            <input
+                    type="text"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                    id="selectItem"
+                    list="dataListItem"
+                    placeholder="Search raw material...">
 
-          <div class="col-2">
-          <label class="form-label" for="selectItem">RawMaterial<i class="text-danger">*</i> </label>
-            <input type="text" class="form-control" id="selectItem" list="dataListItem">
             <datalist id="dataListItem"></datalist>
           </div>
 
 
-          <div class="col-2">
-            <label class="form-label" for="textQuantity">Quantity</label>
-            <input type="number" id="textQuantity" class="form-control fw-bold" onkeyup="textValidatorWithoutToolTip(this,'','grnRawMaterial','quantity')">
+          <!-- Quantity -->
+          <div class="lg:col-span-2">
+            <label class="mb-2 block text-sm font-semibold text-slate-700" for="textQuantity">
+              Quantity
+            </label>
+
+            <input
+                    type="number"
+                    id="textQuantity"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                    placeholder="0"
+                    onkeyup="textValidatorWithoutToolTip(this,'','grnRawMaterial','quantity')">
           </div>
 
-          <div class="col-2">
-            <label class="form-label" for="textRate">Rate</label>
-            <input type="number" id="textRate" class="form-control fw-bold" onkeyup="textValidatorWithoutToolTip(this,'','grnRawMaterial','rate')">
+
+          <!-- Rate -->
+          <div class="lg:col-span-2">
+            <label class="mb-2 block text-sm font-semibold text-slate-700" for="textRate">
+              Rate
+            </label>
+
+            <input
+                    type="number"
+                    id="textRate"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                    placeholder="0.00"
+                    onkeyup="textValidatorWithoutToolTip(this,'','grnRawMaterial','rate')">
           </div>
 
 
-          <div class="col-4">
-            <label class="form-label" for="textDescription">Description</label>
-            <input type="text" id="textDescription" class="form-control fw-bold" onkeyup="textValidatorWithoutToolTip(this,'','grnRawMaterial','description')">
+          <!-- Description -->
+          <div class="lg:col-span-4">
+            <label class="mb-2 block text-sm font-semibold text-slate-700" for="textDescription">
+              Description
+            </label>
+
+            <input
+                    type="text"
+                    id="textDescription"
+                    class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 font-semibold outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100"
+                    placeholder="Enter description..."
+                    onkeyup="textValidatorWithoutToolTip(this,'','grnRawMaterial','description')">
           </div>
 
 
-          <div class="col-2 mt-4">
-            <button type="button" id="btnSaveInner" onclick="buttonInnerAdd()" class="rounded bg-emerald-700 px-3 py-2 text-neutral-50 hover:bg-black">Add</button>
+          <!-- Add Button -->
+          <div class="flex items-end lg:col-span-1">
+            <button
+                    type="button"
+                    id="btnSaveInner"
+                    onclick="buttonInnerAdd()"
+                    class="w-full rounded-lg bg-emerald-700 px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-emerald-800 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-200">
+
+              + Add
+            </button>
           </div>
+
         </div>
-        <!--   item form area end     -->
 
 
-        <!--   item table area start     -->
-        <div class="relative overflow-x-auto shadow-xs rounded-base border border-default">
-          <table class="w-full text-sm text-left rtl:text-right text-body" id="innerItemTable">
-            <thead class="text-sm text-body bg-green-200 border-b rounded-base border-default">
-            <tr>
-              <th scope="col" class="px-6 py-3 font-medium">#</th>
-              <th scope="col" class="px-6 py-3 font-medium">RawMaterial</th>
-              <th scope="col" class="px-6 py-3 font-medium">Quantity</th>
-              <th scope="col" class="px-6 py-3 font-medium">Description</th>
-              <th scope="col" class="px-6 py-3 font-medium">Actions</th>
+        <!-- Raw Material Table -->
+        <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
 
-            </tr>
-            </thead>
-            <tbody id="innerTableTbody">
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[750px] text-left text-sm" id="innerItemTable">
 
+              <thead class="bg-emerald-800 text-white">
+              <tr>
+                <th scope="col" class="px-5 py-4 font-semibold">#</th>
+                <th scope="col" class="px-5 py-4 font-semibold">Raw Material</th>
+                <th scope="col" class="px-5 py-4 font-semibold">Quantity</th>
+                <th scope="col" class="px-5 py-4 font-semibold">Description</th>
+                <th scope="col" class="px-5 py-4 text-center font-semibold">Actions</th>
+              </tr>
+              </thead>
 
-            </tbody>
-          </table>
+              <tbody id="innerTableTbody" class="divide-y divide-slate-100">
+              </tbody>
+
+            </table>
+          </div>
+
         </div>
-        <!--   item table area end     -->
-
-
-
-
 
       </div>
-      <!-- item area section end-->
 
     </div>
 
 
+    <!-- Action Buttons -->
+    <div class="mt-7 flex flex-wrap justify-end gap-3 border-t border-slate-100 pt-6">
+
+      <button
+              type="button"
+              onclick="window.location.reload()"
+              class="rounded-lg border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100 focus:outline-none focus:ring-4 focus:ring-slate-200">
+
+        ↻ Reset
+      </button>
+
+      <button
+              type="button"
+              id="btnUpdate"
+              onclick="updateProductionMaster()"
+              class="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-blue-200">
+
+        Update
+      </button>
+
+      <button
+              type="button"
+              id="btnSave"
+              onclick="saveProductionMaster()"
+              class="rounded-lg bg-emerald-700 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 hover:shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-200">
+
+        ✓ Save
+      </button>
+
+    </div>
+
+  </div>
 
 
+  <!-- GRN Records Table -->
+  <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
+    <div class="flex flex-col justify-between gap-2 border-b border-slate-100 px-5 py-5 sm:flex-row sm:items-center sm:px-7">
 
+      <div class="flex items-center gap-3">
 
-    <!-- Right Side Area-->
-    <div class="col-md-3 mt-4">
-      <div class="flex justify-between">
-        <button type="button" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
-        <button type="button" id="btnUpdate" onclick="updateProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
-        <button type="button" id="btnSave" onclick="saveProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-xl">
+          📑
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-slate-800">
+            GRN Records
+          </h2>
+
+          <p class="text-sm text-slate-500">
+            View and manage goods received transactions.
+          </p>
+        </div>
+
       </div>
+
+      <span class="w-fit rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+                Receiving History
+            </span>
+
     </div>
 
 
+    <div class="overflow-x-auto p-5 sm:p-7">
 
+      <table class="w-full min-w-[800px] text-left text-sm" id="productionMasterTable">
 
+        <thead class="bg-emerald-800 text-white">
+        <tr>
+          <th scope="col" class="px-6 py-4 text-center font-semibold">#</th>
+          <th scope="col" class="px-6 py-4 text-center font-semibold">Date</th>
+          <th scope="col" class="px-6 py-4 text-center font-semibold">Purchase Order No</th>
+          <th scope="col" class="px-6 py-4 text-center font-semibold">Raw Materials</th>
+          <th scope="col" class="px-6 py-4 text-center font-semibold">Status</th>
+          <th scope="col" class="px-6 py-4 text-center font-semibold">Actions</th>
+        </tr>
+        </thead>
+
+        <tbody id="invoiceMasterTableTbody" class="divide-y divide-slate-100">
+        </tbody>
+
+      </table>
+
+    </div>
 
   </div>
 
 
-<!--  production master table start-->
-  <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
-    <table class="table table-bordered table-striped" id="productionMasterTable">
-      <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
-      <tr>
-        <th scope="col" class="px-6 py-3 font-medium text-center">#</th>
-        <th scope="col" class="px-6 py-3 font-medium text-center">Date</th>
-        <th scope="col" class="px-6 py-3 font-medium text-center">Purchase Order No</th>
-        <th scope="col" class="px-6 py-3 font-medium text-center">Raw Materials</th>
-        <th scope="col" class="px-6 py-3 font-medium text-center">Status</th>
-        <th scope="col" class="px-6 py-3 font-medium text-center">Actions</th>
+  <!-- Footer -->
+  <footer class="mt-10 border-t border-slate-200 py-5 text-center">
 
-      </tr>
-      </thead>
-      <tbody id="invoiceMasterTableTbody">
+    <p class="text-sm text-slate-500">
+      Viru Inventory & Asset Management System
+    </p>
 
-      </tbody>
-    </table>
-  </div>
-<!--  production master table end-->
+    <p class="mt-1 text-xs text-slate-400">
+      © Viru. All Rights Reserved.
+    </p>
+
+  </footer>
 
 </div>
 

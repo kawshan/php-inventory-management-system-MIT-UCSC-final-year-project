@@ -20,6 +20,18 @@ class EmployeeMaster {
     }
 
 
+    public function getNicFromEmployeeID($id) {
+        $sql = "select nic from employee where id=:id";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ":id" => $id
+        ]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+
     public function create($data) {
 
         $existingEmployee = "SELECT 1 FROM employee WHERE nic = :nic";

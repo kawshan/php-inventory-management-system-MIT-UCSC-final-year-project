@@ -409,4 +409,25 @@ const checkUserNameValidity = async (fieldId) => {
 
 
 
+const getNicFromEmployeeId = async (fieldId) =>{
 
+    const selectedId = fieldId.value;
+    const serverResponse = await getEmployeeNicByIdService(selectedId);
+    if (serverResponse.data){
+        console.log(serverResponse.data.nic); //ok we can get nic
+
+        let password = document.getElementById("textPassword");
+        let rePassword = document.getElementById("textRePassword");
+
+        password.value = serverResponse.data.nic
+        rePassword.value = serverResponse.data.nic
+
+        validatePasswords();
+
+
+    }else {
+        console.log(`No nic is found please check..`);
+    }
+
+
+}

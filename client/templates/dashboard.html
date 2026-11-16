@@ -196,9 +196,19 @@
             🏢 Asset Management
         </button>
 
+
+
         <button
                 class="collapse-toggle rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-900"
-                type="button" onclick="toggleCard('multiCollapseExample4')">
+                type="button"
+                onclick="toggleCard('multiCollapseExample4')">
+            👨‍💼 Employee & User Management
+        </button>
+
+
+        <button
+                class="collapse-toggle rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-900"
+                type="button" onclick="toggleCard('multiCollapseExample5')">
             📊 Reporting
         </button>
 
@@ -433,10 +443,87 @@
 
         </div>
 
-        <!-- Reporting Section -->
+        <!-- user Management Section -->
         <div class="col-12 col-xl-6">
 
             <div class="hidden" id="multiCollapseExample4">
+
+                <div class="h-full overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
+
+                    <!-- Card Header -->
+                    <div class="flex items-center gap-4 border-b border-emerald-100 bg-emerald-50 px-5 py-5">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-700 text-3xl text-white">
+                            👨‍💼
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-bold text-emerald-950">
+                                Employee & User Management
+                            </h3>
+                            <p class="text-sm text-slate-500">
+                                Manage employees, system users, and access privileges.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Modules -->
+                    <div class="grid grid-cols-2 gap-4 p-5 sm:grid-cols-3">
+
+                        <!-- Employee Master -->
+                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                             onclick="window.location.href = '../templates/employeeMaster.html';">
+
+                            <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-3xl">
+                                👥
+                            </div>
+
+                            <div class="text-sm font-semibold text-slate-700">
+                                Employee Master
+                            </div>
+                        </div>
+
+                        <!-- User Master -->
+                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                             onclick="window.location.href = '../templates/userMaster.html';">
+
+                            <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-3xl">
+                                👤
+                            </div>
+
+                            <div class="text-sm font-semibold text-slate-700">
+                                User Master
+                            </div>
+                        </div>
+
+                        <!-- User Privilege -->
+                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                             onclick="window.location.href = '../templates/privilege.html';">
+
+                            <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 text-3xl">
+                                🔐
+                            </div>
+
+                            <div class="text-sm font-semibold text-slate-700">
+                                User Privilege
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="row g-4 mt-1">
+        <!-- Reporting Section -->
+        <div class="col-12 col-xl-6">
+
+            <div class="hidden" id="multiCollapseExample5">
 
                 <div class="h-full overflow-hidden rounded-2xl border border-emerald-100 bg-white shadow-sm">
 
@@ -474,6 +561,9 @@
         </div>
 
     </div>
+
+
+
 
     <!-- Footer -->
     <!-- Footer -->

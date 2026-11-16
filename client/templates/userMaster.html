@@ -95,7 +95,7 @@
 
     <div class="col-md-2">
         <label class="form-label" for="selectEmployee">Employee <i class="text-danger">*</i> </label>
-        <select class="form-select" id="selectEmployee" style="height: 60px" onchange="dropdownValidator(this,'userMaster','employee_id')"></select>
+        <select class="form-select" id="selectEmployee" style="height: 60px" onchange="dropdownValidator(this,'userMaster','employee_id'); getNicFromEmployeeId(this)"></select>
         <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please Select an Option</div>
 
     </div>

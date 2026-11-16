@@ -10,6 +10,20 @@ async function getAllEmployeeService() {
 }
 
 
+
+async function getEmployeeNicByIdService(id) {
+    let baseURL = "../../server/controller/EmployeeController.php";
+    const response = await fetch(
+        `${baseURL}?method=getNicFromId&id=${encodeURIComponent(id)}`
+    );
+    if (!response.ok) {
+        throw new Error("Failed to get nic");
+    }
+    return await response.json();
+}
+
+
+
 async function getAllEmployeesWithoutUserAccountService() {
     let baseURL = "../../server/controller/EmployeeController.php";
     const response = await fetch(

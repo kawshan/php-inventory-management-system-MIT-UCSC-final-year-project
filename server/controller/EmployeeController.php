@@ -37,6 +37,17 @@ class EmployeeController {
     }
 
 
+    public function getNicFromId($id) {
+        $result = $this->employeeMaster->getNicFromEmployeeID($id);
+        header('Content-Type: application/json');
+        echo json_encode([
+            "success" => true,
+            "data" => $result
+        ]);
+    }
+
+
+
     public function create() {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
@@ -141,6 +152,13 @@ switch ($method) {
         }
 
         break;
+
+
+    case "getNicFromId":
+        $controller->getNicFromId($_GET["id"]);
+        break;
+
+
 
     case "delete":
 

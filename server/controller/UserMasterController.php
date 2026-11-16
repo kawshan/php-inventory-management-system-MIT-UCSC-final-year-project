@@ -133,6 +133,74 @@ class UserMasterController {
     }
 
 
+    public function changePassword() {
+
+        session_start();
+
+        if (!isset($_SESSION["user"])) {
+
+            http_response_code(401);
+
+            echo json_encode([
+                "success" => false,
+                "message" => "Unauthorized!"
+            ]);
+
+            exit();
+
+        }
+
+        $data = json_decode(file_get_contents("php://input"), true);
+
+        if (
+            empty($data["current_password"]) ||
+            empty($data["new_password"]) ||
+            empty($data["confirm_password"])
+        ) {
+
+            echo json_encode([
+                "success" => false,
+                "message" => "All fields are required!"
+            ]);
+
+            exit();
+
+        }
+
+        if ($data["new_password"] !== $data["confirm_password"]) {
+
+            echo json_encode([
+                "success" => false,
+                "message" => "New passwords do not match!"
+            ]);
+
+            exit();
+
+        }
+
+        if (strlen($data["new_password"]) < 8) {
+
+            echo json_encode([
+                "success" => false,
+                "message" => "Password must contain at least 8 characters!"
+            ]);
+
+            exit();
+
+        }
+
+        $data["user_id"] = $_SESSION["user"]["id"];
+
+        $result = $this->userMaster->changePassword($data);
+
+        echo json_encode($result);
+
+    }
+
+
+
+
+
 
 
 
@@ -152,6 +220,12 @@ switch ($method) {
      case "login":
          $controller->login();
          break;
+
+
+
+    case "changePassword":
+        $controller->changePassword();
+        break;
 
 
     case "create":

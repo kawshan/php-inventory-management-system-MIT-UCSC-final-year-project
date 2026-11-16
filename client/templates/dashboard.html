@@ -31,6 +31,8 @@
 
     <!-- Service files link -->
     <script src="../static/services/authenticationService.js"></script>
+    <script src="../static/services/userMasterService.js"></script>
+    <script src="../static/services/logout.js"></script>
 
     <style>
         .module-card {
@@ -91,32 +93,31 @@
             ☰
         </button>
 
-        <div class="collapse w-full lg:block lg:w-auto" id="navbarNav">
-            <ul class="mt-4 flex flex-col gap-2 lg:mt-0 lg:flex-row lg:items-center lg:gap-7">
+        <!-- Welcome Message -->
+        <div class="hidden items-center gap-3 rounded-xl border border-emerald-700 bg-emerald-900/70 px-4 py-2 sm:flex">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-700 text-xl text-white">
+                👋
+            </div>
 
-                <li class="nav-item">
-                    <a class="nav-link active text-sm font-semibold text-white hover:text-emerald-300"
-                       aria-current="page" href="#">Home</a>
-                </li>
+            <div>
+                <div class="text-sm font-bold text-white">
+                    Hello, <span id="welcomeUserName" class="text-emerald-300"></span>!
+                </div>
 
-                <li class="nav-item">
-                    <a class="nav-link text-sm font-medium text-emerald-100 hover:text-white"
-                       href="#">Features</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-sm font-medium text-emerald-100 hover:text-white"
-                       href="#">Pricing</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-sm font-medium text-emerald-100 hover:text-white"
-                       href="#">Something</a>
-                </li>
-
-            </ul>
+                <div class="text-xs text-emerald-200">
+                    You Logged in as <span id="welcomeRoleName" class="font-semibold text-white"></span>
+                </div>
+            </div>
         </div>
 
+        <button type="button" onclick="openChangePasswordModal()"
+                class="hidden items-center gap-2 rounded-xl border border-emerald-700 bg-emerald-900/70 px-4 py-3 text-sm font-semibold text-emerald-100 shadow-sm transition hover:border-emerald-500 hover:bg-emerald-800 hover:text-white sm:flex">
+
+            <span class="text-xl">⚙️</span>
+
+            <span>Change Password</span>
+
+        </button>
         <!-- Date and Time -->
         <div class="hidden items-center gap-3 rounded-xl border border-emerald-700 bg-emerald-900/70 px-4 py-2 text-right sm:flex">
             <div class="text-2xl">🕒</div>
@@ -133,7 +134,8 @@
 <main class="mx-auto max-w-[1600px] px-4 py-7 sm:px-6 lg:px-8">
 
     <!-- Welcome Header -->
-    <section class="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 p-6 shadow-lg sm:p-9">
+    <section
+            class="mb-8 overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-700 p-6 shadow-lg sm:p-9">
 
         <div class="flex flex-col justify-between gap-6 md:flex-row md:items-center">
 
@@ -199,16 +201,6 @@
                 type="button" onclick="toggleCard('multiCollapseExample4')">
             📊 Reporting
         </button>
-
-<!--        <button-->
-<!--                class="collapse-toggle rounded-xl border border-emerald-800 bg-white px-5 py-3 text-sm font-semibold text-emerald-800 shadow-sm hover:bg-emerald-50"-->
-<!--                type="button"-->
-<!--                data-bs-toggle="collapse"-->
-<!--                data-bs-target=".multi-collapse"-->
-<!--                aria-expanded="false"-->
-<!--                aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3 multiCollapseExample4">-->
-<!--            ⇄ Toggle All-->
-<!--        </button>-->
 
     </div>
 
@@ -509,4 +501,156 @@
 </main>
 
 </body>
+
+
+
+
+
+
+
+
+
+<!-- Change Password Modal -->
+<div id="changePasswordModal"
+     class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 px-4 py-6 backdrop-blur-sm">
+
+    <div id="changePasswordModalContent"
+         class="w-full max-w-md scale-95 rounded-2xl border border-emerald-100 bg-white p-6 opacity-0 shadow-2xl transition-all duration-300 sm:p-8">
+
+        <!-- Modal Header -->
+        <div class="mb-6 flex items-center justify-between">
+
+            <div class="flex items-center gap-3">
+
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-2xl">
+                    ⚙️
+                </div>
+
+                <div>
+                    <h2 class="text-xl font-bold text-emerald-950">
+                        Change Password
+                    </h2>
+
+                    <p class="text-xs text-gray-500">
+                        Keep your account secure
+                    </p>
+                </div>
+
+            </div>
+
+            <button type="button"
+                    onclick="closeChangePasswordModal()"
+                    class="rounded-lg p-2 text-gray-400 transition hover:bg-red-50 hover:text-red-600">
+
+                ✕
+
+            </button>
+
+        </div>
+
+
+        <!-- Password Form -->
+        <form id="changePasswordForm" class="space-y-5">
+
+            <!-- Current Password -->
+            <div>
+
+                <label for="currentPassword"
+                       class="mb-2 block text-sm font-semibold text-gray-700">
+
+                    Current Password
+
+                </label>
+
+                <input type="password"
+                       id="currentPassword"
+                       required
+                       autocomplete="current-password"
+                       placeholder="Enter current password"
+                       class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100">
+
+            </div>
+
+
+            <!-- New Password -->
+            <div>
+
+                <label for="newPassword"
+                       class="mb-2 block text-sm font-semibold text-gray-700">
+
+                    New Password
+
+                </label>
+
+                <input type="password"
+                       id="newPassword"
+                       required
+                       minlength="8"
+                       autocomplete="new-password"
+                       placeholder="Enter new password"
+                       class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100">
+
+            </div>
+
+
+            <!-- Confirm Password -->
+            <div>
+
+                <label for="confirmPassword"
+                       class="mb-2 block text-sm font-semibold text-gray-700">
+
+                    Confirm New Password
+
+                </label>
+
+                <input type="password"
+                       id="confirmPassword"
+                       required
+                       minlength="8"
+                       autocomplete="new-password"
+                       placeholder="Confirm new password"
+                       class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100">
+
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="flex gap-3 pt-3">
+
+                <button type="button"
+                        onclick="closeChangePasswordModal()"
+                        class="w-1/2 rounded-xl border border-gray-200 px-4 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-100">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="w-1/2 rounded-xl bg-emerald-700 px-4 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-emerald-800 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-emerald-200">
+
+                    Change Password
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </html>

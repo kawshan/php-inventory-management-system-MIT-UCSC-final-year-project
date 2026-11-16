@@ -11,5 +11,5 @@ async function checkSession() {
 
     const result = await response.json();
 
-    return result.success;
+    return result;
 }

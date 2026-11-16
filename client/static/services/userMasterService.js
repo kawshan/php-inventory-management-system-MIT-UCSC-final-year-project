@@ -74,3 +74,34 @@ async function loginService(data) {
 
     return await response.json();
 }
+
+
+
+
+
+async function changePasswordService(data) {
+
+    const baseURL = "../../server/controller/UserMasterController.php?method=changePassword";
+
+    const response = await fetch(baseURL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(data)
+
+    });
+
+    return await response.json();
+
+}
+
+
+
+
+
+
+

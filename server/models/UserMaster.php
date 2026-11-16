@@ -189,14 +189,15 @@ where id = :id";
 
     public function login($data) {
         $sql = "SELECT
-            id,
-            user_name,
-            password,
-            email,
-            status,
-            employee_id,
-            role_id
-            FROM user
+            u.id,
+            u.user_name,
+            u.password,
+            u.email,
+            u.status,
+            u.employee_id,
+            u.role_id,
+            r.name AS role_name
+            FROM user as u left join role as r on u.role_id = r.id
             WHERE user_name = :user_name
             AND status = 1";
 
@@ -216,6 +217,69 @@ where id = :id";
         unset($user["password"]);
         return $user;
     }
+
+
+
+
+    public function changePassword($data) {
+
+        // Get current password from database
+        $sql = "SELECT password
+            FROM user
+            WHERE id = :id
+            AND status = 1";
+
+        $statement = $this->connection->prepare($sql);
+
+        $statement->execute([
+            ":id" => $data["user_id"]
+        ]);
+
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return [
+                "success" => false,
+                "message" => "User account not found!"
+            ];
+        }
+
+        // Verify current password
+        if (!password_verify($data["current_password"], $user["password"])) { //form eken ena password ekayi db eke hash karapu password ekayi match karanwaaa
+
+            return [
+                "success" => false,
+                "message" => "Current password is incorrect!"
+            ];
+
+        }
+
+        // Hash new password
+        $hashedPassword = password_hash(
+            $data["new_password"],
+            PASSWORD_DEFAULT
+        );
+
+        // Update password
+        $sql = "UPDATE user
+            SET password = :password
+            WHERE id = :id";
+
+        $statement = $this->connection->prepare($sql);
+
+        $statement->execute([
+            ":password" => $hashedPassword,
+            ":id" => $data["user_id"]
+        ]);
+
+        return [
+            "success" => true,
+            "message" => "Password changed successfully!"
+        ];
+
+    }
+
+
 
 
 

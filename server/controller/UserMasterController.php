@@ -25,6 +25,16 @@ class UserMasterController {
     }
 
 
+    public function findByUsername($username) {
+        $result = $this->userMaster->getByUserName($username);
+        header('Content-Type: application/json');
+        echo json_encode([
+            "success" => true,
+            "exists" => $result
+        ]);
+    }
+
+
     public function login() {
 
         $data = json_decode(file_get_contents("php://input"), true);
@@ -256,6 +266,20 @@ switch ($method) {
         }
 
         break;
+
+
+     case "getByUsername":
+         if (!isset($_GET["username"])) {
+             http_response_code(400);
+             echo json_encode([
+                 "success" => false,
+                 "message" => "Username is required"
+             ]);
+             exit;
+         }
+         $controller->findByUsername($_GET["username"]);
+         break;
+
 
     case "delete":
 

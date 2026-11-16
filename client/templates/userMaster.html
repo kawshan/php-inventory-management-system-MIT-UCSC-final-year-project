@@ -53,9 +53,17 @@
 <div class="p-2">
 <div class="row">
     <div class="col-md-2">
-        <label class="form-label" for="textUserName">User Name <i class="text-danger">*</i> </label>
-        <input type="text" id="textUserName" class="form-control fw-bold" style="height: 60px" placeholder="Enter username" onkeyup="textValidator(this,'','userMaster','user_name')">
-        <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid username</div>
+        <label class="form-label" for="textUserName">
+            User Name <i class="text-danger">*</i>
+        </label>
+
+        <input type="text" id="textUserName" class="form-control fw-bold"
+               style="height: 60px"
+               placeholder="Enter username"
+               onkeyup="textValidator(this,'','userMaster','user_name'); checkUserNameValidity(this)">
+
+        <div class="valid-feedback">Username is available!</div>
+        <div class="invalid-feedback">Username already exists!</div>
     </div>
     <div class="col-md-2">
         <label class="form-label" for="textPassword">Password<i class="text-danger">*</i> </label>

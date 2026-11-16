@@ -43,6 +43,17 @@ left join employee e on u.employee_id = e.id where u.status = 1 order by u.id de
     }
 
 
+    public function getByUserName($username) {
+        $sql = "select 1 from user where user_name=:username";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            "username" => $username
+        ]);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result !== false;
+    }
+
+
     public function create($data) {
 
         $existingUser = "SELECT 1 FROM user WHERE user_name=:user_name";
@@ -186,7 +197,6 @@ where id = :id";
     }
 
 
-
     public function login($data) {
         $sql = "SELECT
             u.id,
@@ -217,9 +227,6 @@ where id = :id";
         unset($user["password"]);
         return $user;
     }
-
-
-
 
     public function changePassword($data) {
 

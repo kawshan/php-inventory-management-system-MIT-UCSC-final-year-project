@@ -359,3 +359,54 @@ function validatePasswords(){
 
     }
 }
+
+
+
+
+
+
+
+
+
+const checkUserNameValidity = async (fieldId) => {
+
+    let selectedUserName = fieldId.value.trim();
+
+    // Reset previous validation
+    fieldId.classList.remove("is-valid", "is-invalid");
+
+    if (selectedUserName === "") {
+        userMaster.user_name = null;
+        return;
+    }
+
+    try {
+
+        const serverResponse = await getUserByUserNameService(selectedUserName);
+
+        if (serverResponse.success) {
+
+            if (serverResponse.exists) {
+
+                userMaster.user_name = null;
+                fieldId.classList.add("is-invalid");
+
+            } else {
+
+                userMaster.user_name = selectedUserName;
+                fieldId.classList.add("is-valid");
+
+            }
+
+        }
+
+    } catch (error) {
+        console.error("Username validation failed:", error);
+    }
+};
+
+
+
+
+
+

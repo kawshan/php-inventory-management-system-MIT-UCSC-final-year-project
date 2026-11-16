@@ -9,6 +9,22 @@ async function getAllUserService() {
     return await response.json();
 }
 
+
+
+async function getUserByUserNameService(username) {
+    let baseURL = "../../server/controller/UserMasterController.php";
+    const response = await fetch(
+        `${baseURL}?method=getByUsername&username=${encodeURIComponent(username)}`
+    );
+    if (!response.ok) {
+        throw new Error("Failed to get items");
+    }
+    return await response.json();
+}
+
+
+
+
 async function createUserService(data) {
     let baseURL = "../../server/controller/UserMasterController.php";
     const response = await fetch(`${baseURL}?method=create`,

@@ -179,7 +179,7 @@
     <!-- Module Navigation Buttons -->
     <div class="mb-7 flex flex-wrap gap-3">
 
-        <button class="collapse-toggle rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-900"
+        <button  class="collapse-toggle rounded-xl bg-emerald-800 px-5 py-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-900"
                 type="button" onclick="toggleCard('multiCollapseExample1')">
             📦 Item Inventory
         </button>
@@ -241,7 +241,7 @@
 
                     <div class="grid grid-cols-2 gap-4 p-5 sm:grid-cols-3">
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divItemCategoryMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/itemCategoryMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-3xl">
                                 🏷️
@@ -249,7 +249,7 @@
                             <div class="text-sm font-semibold text-slate-700">Item Category Master</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divItemMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/itemMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-3xl">
                                 📦
@@ -257,7 +257,7 @@
                             <div class="text-sm font-semibold text-slate-700">Item Master</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divProduction" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/productionMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 text-3xl">
                                 🏭
@@ -265,7 +265,7 @@
                             <div class="text-sm font-semibold text-slate-700">Production</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divStockTransfer" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/stockTransferMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-50 text-3xl">
                                 🚚
@@ -273,7 +273,7 @@
                             <div class="text-sm font-semibold text-slate-700">Stock Transfer</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divInvoice" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/invoiceHeader.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
                                 🧾
@@ -281,7 +281,7 @@
                             <div class="text-sm font-semibold text-slate-700">Invoice</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divStockAdjustment" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/stockAdjustmentMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-50 text-3xl">
                                 ⚖️
@@ -320,7 +320,7 @@
 
                     <div class="grid grid-cols-2 gap-4 p-5 sm:grid-cols-3">
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divRawMaterialCategory" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/rawMaterialCategory.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-3xl">
                                 🗂️
@@ -328,7 +328,7 @@
                             <div class="text-sm font-semibold text-slate-700">Raw Material Category</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divRawMaterialMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/rawMaterialMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-3xl">
                                 🧱
@@ -336,7 +336,7 @@
                             <div class="text-sm font-semibold text-slate-700">Raw Material</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divGoodReceiveNoticeMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/goodRecieveNoticeMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-50 text-3xl">
                                 📥
@@ -344,7 +344,7 @@
                             <div class="text-sm font-semibold text-slate-700">GRN</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divJobMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/jobMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 text-3xl">
                                 📝
@@ -352,13 +352,23 @@
                             <div class="text-sm font-semibold text-slate-700">JOB</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divIssueNoteMaster"  class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/issueNoteMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
                                 📤
                             </div>
                             <div class="text-sm font-semibold text-slate-700">Issue Note</div>
                         </div>
+
+
+                        <div id="divPurchaseOrder"  class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                             onclick="window.location.href = '../templates/purchaseOrder.html';">
+                            <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
+                                💵
+                            </div>
+                            <div class="text-sm font-semibold text-slate-700">Purchase Order</div>
+                        </div>
+
 
                     </div>
 
@@ -396,7 +406,7 @@
 
                     <div class="grid grid-cols-2 gap-4 p-5 sm:grid-cols-3">
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divAssetCategoryMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/assetCategoryMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-3xl">
                                 🗃️
@@ -404,7 +414,7 @@
                             <div class="text-sm font-semibold text-slate-700">Asset Category</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divAssetMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/assetMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-3xl">
                                 🖥️
@@ -412,7 +422,7 @@
                             <div class="text-sm font-semibold text-slate-700">Asset Master</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divAssignToPeopleMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/assignToPeopleMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-50 text-3xl">
                                 👥
@@ -420,7 +430,7 @@
                             <div class="text-sm font-semibold text-slate-700">Asset Assignment</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divMaintenanceMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/maintenanceMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-50 text-3xl">
                                 🔧
@@ -428,7 +438,7 @@
                             <div class="text-sm font-semibold text-slate-700">Asset Maintenance</div>
                         </div>
 
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divDisposeMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/disposeMaster.html';">
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-50 text-3xl">
                                 ♻️
@@ -470,7 +480,7 @@
                     <div class="grid grid-cols-2 gap-4 p-5 sm:grid-cols-3">
 
                         <!-- Employee Master -->
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divEmployeeMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/employeeMaster.html';">
 
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-50 text-3xl">
@@ -483,7 +493,7 @@
                         </div>
 
                         <!-- User Master -->
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div  id="divUserMaster" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/userMaster.html';">
 
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-3xl">
@@ -496,7 +506,7 @@
                         </div>
 
                         <!-- User Privilege -->
-                        <div class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
+                        <div id="divPrivilege" class="module-card rounded-xl border border-slate-200 bg-white p-4 text-center"
                              onclick="window.location.href = '../templates/privilege.html';">
 
                             <div class="module-icon mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-purple-50 text-3xl">

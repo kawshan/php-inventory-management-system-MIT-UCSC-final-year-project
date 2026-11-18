@@ -25,6 +25,21 @@ class UserMasterController {
     }
 
 
+
+public function createAdmin() {
+
+    $admin = $this->userMaster->createAdmin();
+
+    header('Content-Type: application/json');
+
+    echo json_encode([
+        "success" => $admin["success"],
+        "data" => $admin
+    ]);
+}
+
+
+
     public function findByUsername($username) {
         $result = $this->userMaster->getByUserName($username);
         header('Content-Type: application/json');
@@ -226,6 +241,17 @@ switch ($method) {
             $controller->findAll();
         }
         break;
+
+    case "createAdmin":
+
+        if ($_SERVER["REQUEST_METHOD"] === "GET") {
+            $controller->createAdmin();
+        }
+        break;
+
+
+
+
 
      case "login":
          $controller->login();

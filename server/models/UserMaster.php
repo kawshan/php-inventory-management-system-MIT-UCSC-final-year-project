@@ -216,7 +216,7 @@ where id = :id";
             ":user_name" => $data["user_name"],
         ]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-        if (!$user){
+        if (!$user) {
             return false;
         }
 
@@ -287,9 +287,73 @@ where id = :id";
     }
 
 
+    public function createAdmin() {
+
+        $sql = "select 1 from user where user_name='adminUser'";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute();
+        $exists = $statement->fetchColumn(); //meken true or false value ekek hambenawa
+
+        if ($exists) {
+            return [
+                "success" => false,
+                "message" => "Admin account already exists!"
+            ];
+        } else {
+
+            $sql = "insert into user (
+user_name,
+password,
+email,
+status,
+added_date_time,
+modify_date_time,
+delete_date_time,
+added_user,
+modify_user,
+delete_user,
+employee_id,
+role_id
+)values (
+:user_name,
+:password,
+:email,
+:status,
+:added_date_time,
+:modify_date_time,
+:delete_date_time,
+:added_user,
+:modify_user,
+:delete_user,
+:employee_id,
+:role_id
+)";
+            $statement = $this->connection->prepare($sql);
+            $result = $statement->execute([
+                ":user_name" => "adminUser",
+                ":password" => password_hash("viruworld", PASSWORD_DEFAULT),
+                ":email" => "viruOfficial@viru.lk",
+                ":status" => 1,
+                ":added_date_time" => date("Y-m-d H:i:s"),
+                ":modify_date_time" => null,
+                ":delete_date_time" => null,
+                ":added_user" => null,
+                ":modify_user" => null,
+                ":delete_user" => null,
+                ":employee_id" => null,
+                ":role_id" => 2
+            ]);
+
+            return [
+                "success" => $result,
+                "message" => $result
+                    ? "Admin account created successfully!"
+                    : "Failed to create admin account!"
+            ];
+        }
 
 
-
+    }
 
 
 }

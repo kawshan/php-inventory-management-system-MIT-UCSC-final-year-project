@@ -154,7 +154,7 @@ where id = :id";
 
 
     public function getEmployeesWithoutUserAccount() {
-        $sql= "select * from employee where id not in(select employee_id from user)";
+        $sql= "SELECT e.* FROM employee e LEFT JOIN `user` u ON u.employee_id = e.id WHERE u.employee_id IS NULL";
         $statement = $this->connection->prepare($sql);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);

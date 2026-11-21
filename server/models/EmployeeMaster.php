@@ -141,15 +141,61 @@ where id = :id";
             ":id" => $id]);
     }
 
-    public function delete($id,$data) {
-        $sql = "update employee set delete_user = :delete_user, delete_date_time = :delete_date_time, employee_status=0 where id = :id";
-        $statement = $this->connection->prepare($sql);
-        return $statement->execute([
-            ":delete_user" => $data["delete_user"] ?? null,
-            ":delete_date_time" => date("Y-m-d H:i:s"),
-            ":id" => $id
-        ]);
+    public function delete($id, $data)
+    {
+        try {
 
+            $this->connection->beginTransaction();
+
+            $sql = "UPDATE employee 
+                SET delete_user = :delete_user, 
+                    delete_date_time = :delete_date_time, 
+                    employee_status = 0 
+                WHERE id = :id";
+
+            $statement = $this->connection->prepare($sql);
+
+            $statement->execute([
+                ":delete_user" => $data["delete_user"] ?? null,
+                ":delete_date_time" => date("Y-m-d H:i:s"),
+                ":id" => $id
+            ]);
+
+            if ($statement->rowCount() == 0) {
+                $this->connection->rollBack();
+
+                return [
+                    "result" => false,
+                    "message" => "Employee not found"
+                ];
+            }
+
+            $sql = "UPDATE user SET status = 0 WHERE employee_id = :id";
+
+            $statement = $this->connection->prepare($sql);
+
+            $statement->execute([
+                ":id" => $id
+            ]);
+
+            $this->connection->commit();
+
+            return [
+                "result" => true,
+                "message" => "Employee and user account deleted successfully"
+            ];
+
+        } catch (Throwable $th) {
+
+            if ($this->connection->inTransaction()) {
+                $this->connection->rollBack();
+            }
+
+            return [
+                "result" => false,
+                "message" => $th->getMessage()
+            ];
+        }
     }
 
 

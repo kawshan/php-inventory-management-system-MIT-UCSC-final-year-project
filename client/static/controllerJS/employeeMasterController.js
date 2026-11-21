@@ -69,7 +69,7 @@ const refreshEmployeeMasterTable = async () => {
 
 
         const statusCell = document.createElement("td");
-        statusCell.textContent = item.status == 1 ? "Active" : "Inactive";
+        statusCell.textContent = item.employee_status == 1 ? "Active" : "Inactive";
 
         const actionCell = document.createElement("td");
         actionCell.classList.add("flex", "justify-center", "items-center", "gap-2");

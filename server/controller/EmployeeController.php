@@ -103,7 +103,6 @@ class EmployeeController {
         http_response_code(200);
         echo json_encode([
             "success" => $result,
-            "message" => "Employee deleted!"
         ]);
     }
 }

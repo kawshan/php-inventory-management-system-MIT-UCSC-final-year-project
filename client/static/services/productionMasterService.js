@@ -1,4 +1,4 @@
-async function getAllInvoiceService() {
+async function getAllProductionService() {
     let baseURL = "../../server/controller/ProductionMasterController.php";
     const response = await fetch(`${baseURL}?method=findAll`);
     if (!response.ok) {

@@ -44,8 +44,10 @@ class GrnMaster {
     sup.contact_person,
 
     opo.code as our_purchase_order_code,
-    opo.date as our_purchase_order_date
+    opo.date as our_purchase_order_date,
+    
 
+    rms.name as rms_name
 
 
 from grn_header as gh left join grn_header_has_raw_material_master as grn_details
@@ -53,6 +55,7 @@ on gh.id = grn_details.grn_header_id
 
 left join supplier as sup on gh.supplier_id = sup.id
 left join our_purchase_order as opo on gh.our_purchase_order_id = opo.id
+left join raw_material_master as rms on grn_details.raw_material_master_id = rms.id
 
 where gh.status=1 order by gh.id desc";
 
@@ -103,6 +106,7 @@ where gh.status=1 order by gh.id desc";
                 "details_id" => $row["details_id"],
                 "grn_header_id" => $row["grn_header_id"],
                 "raw_material_master_id" => $row["raw_material_master_id"],
+                "rms_name" => $row["rms_name"],
                 "quantity" => $row["quantity"],
                 "rate" => $row["rate"],
                 "description" => $row["description"],
@@ -213,7 +217,7 @@ where id = :id";
 
             $statement = $this->connection->prepare($sql);
             $statement->execute([
-                "code" => $data["code"],
+                "code" => $data["code"] ?? null,
                 "date" => $data["date"] ?? null,
                 "our_purchase_order_id" => $data["our_purchase_order_id"] ?? null,
                 "supplier_id" => $data["supplier_id"] ?? null,

@@ -28,7 +28,7 @@ const refreshProductionMasterForm = async ()=>{
 
 const refreshProductionMasterTable = async ()=>{
 
-    let productionList = await getAllInvoiceService();
+    let productionList = await getAllProductionService();
     console.log("productions",productionList);
 
     const tableBody = document.getElementById("invoiceMasterTableTbody");

@@ -16,6 +16,7 @@ class OurPoMaster {
 
 header.id,
 header.code,
+header.date,
 header.reference_quotation,
 header.status,
 header.added_date_time,
@@ -49,6 +50,7 @@ left join raw_material_master as rm on details.raw_material_master_id = rm.id wh
                 $ourPo[$ourPoId] = [
                     "id" => $row["id"],
                     "code" => $row["code"],
+                    "date" => $row["date"],
                     "reference_quotation" => $row["reference_quotation"],
                     "status" => $row["status"],
                     "added_date_time" => $row["added_date_time"],
@@ -151,10 +153,10 @@ description
             foreach ($data["rawMaterials"] as $rawMaterial) {
                 $satement->execute([
                     ":our_purchase_order_id" => $lastOurPo,
-                    ":raw_material_master_id" => $rawMaterial["raw_material_master_id"],
-                    ":quantity" => $rawMaterial["quantity"],
-                    ":rate" => $rawMaterial["rate"],
-                    ":description" => $rawMaterial["description"]
+                    ":raw_material_master_id" => $rawMaterial["raw_material_master_id"] ?? null,
+                    ":quantity" => $rawMaterial["quantity"] ?? null,
+                    ":rate" => $rawMaterial["rate"] ?? null,
+                    ":description" => $rawMaterial["description"] ?? null,
                 ]);
             }
 
@@ -215,10 +217,10 @@ description
             foreach ($data["rawMaterials"] as $rawMaterial) {
                 $statement->execute([
                     ":our_purchase_order_id" => $id,
-                    ":raw_material_master_id" => $rawMaterial["raw_material_master_id"],
-                    ":quantity" => $rawMaterial["quantity"],
-                    ":rate" => $rawMaterial["rate"],
-                    ":description" => $rawMaterial["description"],
+                    ":raw_material_master_id" => $rawMaterial["raw_material_master_id"] ?? null,
+                    ":quantity" => $rawMaterial["quantity"] ?? null,
+                    ":rate" => $rawMaterial["rate"] ?? null,
+                    ":description" => $rawMaterial["description"] ?? null,
                 ]);
             }
 
@@ -245,6 +247,17 @@ description
         }catch (Throwable $th) {
             throw $th;
         }
+    }
+
+
+    public function getIdFromOurPoMasterCode($code) {
+
+        $sql = "select id from our_purchase_order where code=:code and status=1";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ":code" => $code,
+        ]);
+        return $statement->fetchColumn();
     }
 
 

@@ -92,6 +92,18 @@ class OurPoMasterController {
     }
 
 
+    public function getAllOurPoMasterIDFromCode($code) {
+        try {
+            $poList = $this->ourPoMaster->getIdFromOurPoMasterCode($code);
+            header("Content-type: application/json");
+            echo json_encode($poList);
+        } catch (Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+
+
 }
 
 $controller = new OurPoMasterController($ourPoMaster);
@@ -100,6 +112,11 @@ switch ($method) {
 
     case "findAll":
         $controller->getAllOurPoMaster();
+        break;
+
+
+    case "getAllOurPoMasterIDFromCode":
+        $controller->getAllOurPoMasterIDFromCode($_GET["code"]);
         break;
 
     case "create":

@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/server/models/AssetMaster.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/server/models/EmployeeMaster.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/server/models/GrnMaster.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/server/models/IssueNoteMaster.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/server/models/JobMaster.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/server/models/ProductionMaster.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/server/models/RawMaterialMaster.php" dialect="GenericSQL" />

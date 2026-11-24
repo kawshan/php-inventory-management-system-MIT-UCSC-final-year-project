@@ -32,8 +32,9 @@
   <script src="../static/controllerJS/issueNoteMaster.js"></script>
 
   <!--    service files link-->
-  <script src="../static/services/itemMasterService.js"></script>
-  <script src="../static/services/productionMasterService.js"></script>
+  <script src="../static/services/rawmaterialMasterService.js"></script>
+  <script src="../static/services/issueNoteMasterService.js"></script>
+  <script src="../static/services/jobMasterService.js"></script>
 
   <!--    helping files link-->
   <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -73,7 +74,9 @@
         </div>
 
         <div class="col-md-3 mb-3">
-
+          <label class="form-label" for="textJob">Job Code</label>
+          <input type="text" id="textJob" class="form-control fw-bold" style="height: 60px" onkeyup="textValidator(this,'','issueNoteMaster','job_master_id'); getIdFromJobCode();">
+          <div class="valid-feedback">Looks good!</div><div class="invalid-feedback">Please enter a valid Job Code</div>
         </div>
 
         <div class="col-md-3 mb-3">
@@ -159,8 +162,8 @@
     <div class="col-md-3 mt-4">
       <div class="flex justify-between">
         <button type="button" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
-        <button type="button" id="btnUpdate" onclick="updateProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
-        <button type="button" id="btnSave" onclick="saveProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
+        <button type="button" id="btnUpdate" onclick="updateIssueNoteMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+        <button type="button" id="btnSave" onclick="saveIssueNoteMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
       </div>
     </div>
 
@@ -173,7 +176,7 @@
 
 <!--  production master table start-->
   <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
-    <table class="table table-bordered table-striped" id="productionMasterTable">
+    <table class="table table-bordered table-striped" id="issueNoteMasterTable">
       <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
       <tr>
         <th scope="col" class="px-6 py-3 font-medium text-center">#</th>
@@ -185,7 +188,7 @@
 
       </tr>
       </thead>
-      <tbody id="invoiceMasterTableTbody">
+      <tbody id="issueNoteMasterTableTbody">
 
       </tbody>
     </table>

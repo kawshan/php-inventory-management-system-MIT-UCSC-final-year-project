@@ -75,6 +75,18 @@ class JobMasterController {
     }
 
 
+
+    public function getJobMasterIDFromCode($code) {
+        try {
+            $jobId = $this->jobMaster->getIdFromJobMasterCode($code);
+            header("Content-type: application/json");
+            echo json_encode($jobId);
+        } catch (Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+
 }
 
 
@@ -84,6 +96,11 @@ $method = $_GET['method'] ?? "";
 switch ($method) {
     case "findAll":
         $controller->findAll();
+        break;
+
+
+    case "getJobMasterIDFromCode":
+        $controller->getJobMasterIDFromCode($_GET["code"]);
         break;
 
     case "create":

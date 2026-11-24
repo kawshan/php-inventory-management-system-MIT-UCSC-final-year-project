@@ -10,6 +10,20 @@ async function getAllJobService() {
 
 
 
+async function getJobIdByCodeService(code) {
+    let baseURL = "../../server/controller/JobMasterController.php";
+
+    const response = await fetch(`${baseURL}?method=getJobMasterIDFromCode&code=${encodeURIComponent(code)}`);
+
+    if (!response.ok) {
+        throw new Error("Failed to get job id");
+    } else {
+        return await response.json();
+    }
+}
+
+
+
 async function saveJobMasterService(data) {
     let baseURL = "../../server/controller/JobMasterController.php";
     const response = await fetch(`${baseURL}?method=create`,

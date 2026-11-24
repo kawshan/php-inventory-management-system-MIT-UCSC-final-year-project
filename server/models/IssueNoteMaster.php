@@ -189,8 +189,8 @@ class IssueNoteMaster {
 
             values(
 
-                :issue_note_date,
-                :issue_note_code,
+                :date,
+                :code,
                 :status,
                 :added_date_time,
                 :modify_date_time,
@@ -209,23 +209,23 @@ class IssueNoteMaster {
 
             $statement->execute([
 
-                ":issue_note_date" => $data["issue_note_master_date"] ?? null,
+                ":date" => $data["date"] ?? null,
 
-                ":issue_note_code" => $issueNoteCode,
+                ":code" => $issueNoteCode,
 
-                ":status" => $data["issue_note_master_status"] ?? 1,
+                ":status" => $data["status"] ?? 1,
 
                 ":added_date_time" => date("Y-m-d H:i:s"),
 
-                ":modify_date_time" => $data["issue_note_master_modify_date_time"] ?? null,
+                ":modify_date_time" => $data["modify_date_time"] ?? null,
 
-                ":delete_date_time" => $data["issue_note_master_delete_date_time"] ?? null,
+                ":delete_date_time" => $data["delete_date_time"] ?? null,
 
-                ":added_user" => $data["issue_note_master_added_user"] ?? null,
+                ":added_user" => $data["added_user"] ?? null,
 
-                ":modify_user" => $data["issue_note_master_modify_user"] ?? null,
+                ":modify_user" => $data["modify_user"] ?? null,
 
-                ":delete_user" => $data["issue_note_master_delete_user"] ?? null,
+                ":delete_user" => $data["delete_user"] ?? null,
 
                 ":job_master_id" => $data["job_master_id"] ?? null
 
@@ -311,9 +311,9 @@ class IssueNoteMaster {
 
             update issue_note_header set
 
-                date = :issue_note_date,
+                date = :date,
 
-                code = :issue_note_code,
+                code = :code,
 
                 status = :status,
 
@@ -340,23 +340,23 @@ class IssueNoteMaster {
 
             $statement->execute([
 
-                ":issue_note_date" => $data["issue_note_master_date"] ?? null,
+                ":date" => $data["date"] ?? null,
 
-                ":issue_note_code" => $data["issue_note_master_code"] ?? null,
+                ":code" => $data["code"] ?? null,
 
-                ":status" => $data["issue_note_master_status"] ?? 1,
+                ":status" => $data["status"] ?? 1,
 
-                ":added_date_time" => $data["issue_note_master_added_date_time"] ?? null,
+                ":added_date_time" => $data["added_date_time"] ?? null,
 
                 ":modify_date_time" => date("Y-m-d H:i:s"),
 
-                ":delete_date_time" => $data["issue_note_master_delete_date_time"] ?? null,
+                ":delete_date_time" => $data["delete_date_time"] ?? null,
 
-                ":added_user" => $data["issue_note_master_added_user"] ?? null,
+                ":added_user" => $data["added_user"] ?? null,
 
-                ":modify_user" => $data["issue_note_master_modify_user"] ?? null,
+                ":modify_user" => $data["modify_user"] ?? null,
 
-                ":delete_user" => $data["issue_note_master_delete_user"] ?? null,
+                ":delete_user" => $data["delete_user"] ?? null,
 
                 ":job_master_id" => $data["job_master_id"] ?? null,
 
@@ -480,7 +480,7 @@ class IssueNoteMaster {
 
                 ":delete_date_time" => date("Y-m-d H:i:s"),
 
-                ":delete_user" => $data["issue_note_master_delete_user"] ?? null,
+                ":delete_user" => $data["delete_user"] ?? null,
 
                 ":status" => 0,
 
@@ -499,6 +499,15 @@ class IssueNoteMaster {
         }
 
     }
+
+
+
+
+
+
+
+
+
 
 
 }

@@ -230,6 +230,18 @@ description
 
 
 
+    public function getIdFromJobMasterCode($code) {
+
+        $sql = "select id from job_master where code=:code and status=1";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ":code" => $code,
+        ]);
+        return $statement->fetchColumn();
+    }
+
+
+
 
 }
 

@@ -33,7 +33,8 @@
 
     <!--    service files link-->
     <script src="../static/services/itemMasterService.js"></script>
-    <script src="../static/services/productionMasterService.js"></script>
+    <script src="../static/services/jobMasterService.js"></script>
+    <script src="../static/services/itemMasterService.js"></script>
 
     <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -154,8 +155,8 @@
         <div class="col-md-3 mt-4">
             <div class="flex justify-between">
                 <button type="button" onclick="window.location.reload()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Reset</button>
-                <button type="button" id="btnUpdate" onclick="updateProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
-                <button type="button" id="btnSave" onclick="saveProductionMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
+                <button type="button" id="btnUpdate" onclick="updateJobMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black">Update</button>
+                <button type="button" id="btnSave" onclick="saveJobMaster()" class="rounded bg-emerald-800 px-3 py-2 text-neutral-50 hover:bg-black" >Save</button>
             </div>
         </div>
 
@@ -168,7 +169,7 @@
 
     <!--  production master table start-->
     <div class="relative overflow-x-auto shadow-xs rounded-base border border-default mt-5">
-        <table class="table table-bordered table-striped" id="disposeMasterTable">
+        <table class="table table-bordered table-striped" id="jobMasterTable">
             <thead class="text-sm text-body bg-emerald-600 border-b rounded-base border-default">
             <tr>
                 <th scope="col" class="px-6 py-3 font-medium text-center">#</th>
@@ -180,7 +181,7 @@
 
             </tr>
             </thead>
-            <tbody id="disposeMasterTableTbody">
+            <tbody id="jobMasterTableTbody">
 
             </tbody>
         </table>

@@ -17,18 +17,18 @@ class IssueNoteMaster {
 
         select
 
-        inh.id as issue_note_master_id,
-        inh.date as issue_note_master_date,
-        inh.code as issue_note_master_code,
-        inh.status as issue_note_master_status,
+        inh.id,
+        inh.date,
+        inh.code,
+        inh.status,
 
-        inh.added_date_time as issue_note_master_added_date_time,
-        inh.modify_date_time as issue_note_master_modify_date_time,
-        inh.delete_date_time as issue_note_master_delete_date_time,
+        inh.added_date_time,
+        inh.modify_date_time,
+        inh.delete_date_time,
 
-        inh.added_user as issue_note_master_added_user,
-        inh.modify_user as issue_note_master_modify_user,
-        inh.delete_user as issue_note_master_delete_user,
+        inh.added_user,
+        inh.modify_user,
+        inh.delete_user,
 
         inh.job_master_id,
 
@@ -42,7 +42,6 @@ class IssueNoteMaster {
         rm.name as raw_material_name,
         rm.code as raw_material_code,
 
-        job.id as job_id,
         job.code as job_code
 
         from issue_note_header as inh
@@ -76,24 +75,24 @@ class IssueNoteMaster {
 
         foreach ($rows as $row) {
 
-            $issueNoteId = $row['issue_note_master_id'];
+            $issueNoteId = $row['id'];
 
             if (!isset($issueNotes[$issueNoteId])) {
 
                 $issueNotes[$issueNoteId] = [
 
-                    "issue_note_master_id" => $row['issue_note_master_id'],
-                    "issue_note_master_date" => $row['issue_note_master_date'],
-                    "issue_note_master_code" => $row['issue_note_master_code'],
-                    "issue_note_master_status" => $row['issue_note_master_status'],
+                    "id" => $row['id'],
+                    "date" => $row['date'],
+                    "code" => $row['code'],
+                    "status" => $row['status'],
 
-                    "issue_note_master_added_date_time" => $row['issue_note_master_added_date_time'],
-                    "issue_note_master_modify_date_time" => $row['issue_note_master_modify_date_time'],
-                    "issue_note_master_delete_date_time" => $row['issue_note_master_delete_date_time'],
+                    "added_date_time" => $row['added_date_time'],
+                    "modify_date_time" => $row['modify_date_time'],
+                    "delete_date_time" => $row['delete_date_time'],
 
-                    "issue_note_master_added_user" => $row['issue_note_master_added_user'],
-                    "issue_note_master_modify_user" => $row['issue_note_master_modify_user'],
-                    "issue_note_master_delete_user" => $row['issue_note_master_delete_user'],
+                    "added_user" => $row['added_user'],
+                    "modify_user" => $row['modify_user'],
+                    "delete_user" => $row['delete_user'],
 
                     "job_master_id" => $row['job_master_id'],
                     "job_code" => $row['job_code'],

@@ -70,6 +70,15 @@ async function deletePurchaseOrderMasterService(id){
 
 
 
+async function getCodeFromIdService(id) {
+    let baseURL = "../../server/controller/ourPoMasterController.php";
+    const response = await fetch(`${baseURL}?method=getCodeFromId&id=${encodeURIComponent(id)}`);
+    if (!response.ok) {
+        throw new Error("Failed to get code")
+    } else {
+        return await response.json();
+    }
+}
 
 
 

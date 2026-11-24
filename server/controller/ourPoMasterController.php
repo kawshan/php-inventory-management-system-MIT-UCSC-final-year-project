@@ -104,6 +104,22 @@ class OurPoMasterController {
 
 
 
+
+    public function getCodeFromId($id) {
+        try {
+            $result = $this->ourPoMaster->getCodeFromId($id);
+            header("Content-type: application/json");
+            echo json_encode($result);
+        } catch (Throwable $th) {
+            echo $th->getMessage();
+        }
+    }
+
+
+
+
+
+
 }
 
 $controller = new OurPoMasterController($ourPoMaster);
@@ -118,6 +134,11 @@ switch ($method) {
     case "getAllOurPoMasterIDFromCode":
         $controller->getAllOurPoMasterIDFromCode($_GET["code"]);
         break;
+
+    case "getCodeFromId":
+        $controller->getCodeFromId($_GET["id"]);
+        break;
+
 
     case "create":
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

@@ -23,21 +23,6 @@ const refreshAssignToPeopleMasterTable = ()=>{}
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // inner functions starts from here
 const refreshInnerForm = ()=>{
     assignAsset = new Object();

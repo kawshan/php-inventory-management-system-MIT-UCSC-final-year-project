@@ -248,6 +248,8 @@ const refillIssueNoteMaster = (obj) => {
 
     selectStatus.value = issueNoteMaster.status;
 
+    textJob.value = issueNoteMaster.job_code
+
     refreshInnerTable();
 
 }
@@ -687,7 +689,7 @@ const issueNoteMasterDuplicateCheck = async () => {
 
 
 
-
+// helping functions start from here
 const getIdFromJobCode = async () => {
     const jobField = document.getElementById("textJob");
     const val = jobField.value;
@@ -706,4 +708,32 @@ const getIdFromJobCode = async () => {
         console.log(serverResponse);
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

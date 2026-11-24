@@ -261,6 +261,19 @@ description
     }
 
 
+
+
+    public function getCodeFromId($id) {
+
+        $sql = "select code from our_purchase_order where id=:id";
+        $statement = $this->connection->prepare($sql);
+        $statement->execute([
+            ":id" => $id,
+        ]);
+        return $statement->fetchColumn();
+    }
+
+
 }
 
 

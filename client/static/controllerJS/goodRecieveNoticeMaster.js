@@ -162,14 +162,14 @@ const checkErrorsGrnMaster = () => {
 
     }
 
-    if (grnMaster.supplier_id == null || grnMaster.supplier_id == "") {
-
-        errors += "Supplier Cannot Be Empty \n";
-
-        selectSupplier.classList.add("is-invalid");
-        selectSupplier.style.border = "1px solid red";
-
-    }
+    // if (grnMaster.supplier_id == null || grnMaster.supplier_id == "") {
+    //
+    //     errors += "Supplier Cannot Be Empty \n";
+    //
+    //     selectSupplier.classList.add("is-invalid");
+    //     selectSupplier.style.border = "1px solid red";
+    //
+    // }
 
     if (grnMaster.status == null || grnMaster.status == "") {
 
@@ -254,6 +254,8 @@ const refillGrnMaster = async (obj) => {
     selectStatus.value = grnMaster.status;
 
     await refreshInnerTable();
+
+    await getCodeFromPurchaseOrderID();
 
 }
 
@@ -718,7 +720,35 @@ const getIdFromOurPurchaseOrderCode = async () => {
 };
 
 
+const getCodeFromPurchaseOrderID = async () => {
 
+        let ourPoField = document.getElementById("textOurPurchaseOrder");
+        let val = ourPoField.value;
+    if (val!=""){
+        let idHolder = ourPoField.value; //id eka hold karan inna variable eka
+
+        const serverResponse = await getCodeFromIdService(val);
+
+        if (serverResponse) {
+            // value eka change venwa kiyala pennanna thama meka damme. mokada user wada karanna one code ekath ekka.. id ekath ekka neme
+            setTimeout(()=>{
+                ourPoField.value = serverResponse;
+                grnMaster.our_purchase_order_id = idHolder;
+                ourPoField.classList.remove("is-invalid");
+                ourPoField.classList.add("is-valid");
+                console.log(serverResponse)
+            },500)
+        } else {
+            grnMaster.our_purchase_order_id = null;
+
+            ourPoField.classList.remove("is-valid");
+            ourPoField.classList.add("is-invalid");
+            console.log(serverResponse)
+        }
+    }else {
+    //     our purchase order ekak naththam mukuth karanne na
+    }
+};
 
 
 

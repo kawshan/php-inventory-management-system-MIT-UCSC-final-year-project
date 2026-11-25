@@ -33,7 +33,10 @@
 
     <!--    service files link-->
     <script src="../static/services/itemMasterService.js"></script>
-    <script src="../static/services/productionMasterService.js"></script>
+    <script src="../static/services/departmentService.js"></script>
+    <script src="../static/services/locationMasterService.js"></script>
+    <script src="../static/services/assertAssignmentService.js"></script>
+    <script src="../static/services/assetMasterService.js"></script>
 
     <!--    helping files link-->
     <script src="../static/commonJS/dropDownGenerator.js"></script>
@@ -93,7 +96,7 @@
                     <h4><u>Add Items here</u></h4>
 
 
-                    <div class="col-2">
+                    <div class="col-4">
                         <label class="form-label" for="selectItem">Asset<i class="text-danger">*</i> </label>
                         <input type="text" class="form-control" id="selectItem" list="dataListItem">
                         <datalist id="dataListItem"></datalist>
@@ -117,10 +120,10 @@
                     </div>
 
 
-                    <div class="col-2">
-                        <label class="form-label" for="selectEmployee">Assign To </label>
-                        <select class="form-select" id="selectEmployee"  onchange="dropdownValidatorWTtoolTip(this,'assignAsset','employee_id')"></select>
-                    </div>
+<!--                    <div class="col-2">-->
+<!--                        <label class="form-label" for="selectEmployee">Assign To </label>-->
+<!--                        <select class="form-select" id="selectEmployee"  onchange="dropdownValidatorWTtoolTip(this,'assignAsset','employee_id')"></select>-->
+<!--                    </div>-->
 
 
                     <div class="col-2 mt-4">
@@ -140,7 +143,7 @@
                             <th scope="col" class="px-6 py-3 font-medium">From Location</th>
                             <th scope="col" class="px-6 py-3 font-medium">To Location</th>
                             <th scope="col" class="px-6 py-3 font-medium">Department</th>
-                            <th scope="col" class="px-6 py-3 font-medium">Assign to</th>
+<!--                            <th scope="col" class="px-6 py-3 font-medium">Assign to</th>-->
                             <th scope="col" class="px-6 py-3 font-medium">Actions</th>
 
                         </tr>

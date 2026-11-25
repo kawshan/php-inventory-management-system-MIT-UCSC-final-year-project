@@ -40,7 +40,9 @@ class AssertAssignmentMaster {
         details.employee_id,
 
         dep.name as department_name,
-        emp.employee_name
+        emp.employee_name,
+        
+        asset.name as asset_name
 
         from assert_assignment as assign
 
@@ -52,6 +54,9 @@ class AssertAssignmentMaster {
 
         left join employee as emp
         on details.employee_id = emp.id
+        
+        left join asset_master as asset
+        on details.asset_master_id = asset.id
 
         where assign.status = 1
 
@@ -120,7 +125,9 @@ class AssertAssignmentMaster {
 
                     "department_name" => $row["department_name"],
 
-                    "employee_name" => $row["employee_name"]
+                    "employee_name" => $row["employee_name"],
+
+                    "asset_name" => $row["asset_name"],
 
                 ];
 
